@@ -17,15 +17,15 @@ export default class Service {
     @Column({ default: 'available', nullable: false })
     status: string;
 
-    @ManyToOne(() => Resident, (resident) => resident.services)
+    @ManyToOne(() => Resident, (resident: Resident) => resident.services)
     resident: Resident;
 
-    @ManyToOne(() => Category, (category) => category.services)
+    @ManyToOne(() => Category, (category: Category) => category.services)
     category: Category;
 
     @ManyToOne(
         () => ServiceProvider,
-        (serviceProvider) => serviceProvider.services,
+        (serviceProvider: ServiceProvider) => serviceProvider.services,
     )
     serviceProvider: ServiceProvider;
 }
