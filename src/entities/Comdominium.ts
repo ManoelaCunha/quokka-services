@@ -9,6 +9,7 @@ import {
 
 import Resident from './Resident';
 import Category from './Category';
+import CondominiumServiceProvider from './CondominiumServiceProviders';
 
 @Entity('condominiums')
 export default class Condominium {
@@ -44,6 +45,13 @@ export default class Condominium {
 
     @OneToMany(() => Resident, (resident: Resident) => resident.condominium)
     residents: Resident[];
+
+    @OneToMany(
+        () => CondominiumServiceProvider,
+        (condominiumServiceProvider: CondominiumServiceProvider) =>
+            condominiumServiceProvider.condominium,
+    )
+    condominiumServiceProviders: CondominiumServiceProvider[];
 
     @ManyToMany(() => Category)
     @JoinTable()
