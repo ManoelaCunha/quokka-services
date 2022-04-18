@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import CondominiumServiceProvider from './CondominiumServiceProviders';
+import Service from './Service';
 
 @Entity('service_providers')
 export default class ServiceProvider {
@@ -33,4 +34,7 @@ export default class ServiceProvider {
             condominiumServiceProviders.serviceProvider,
     )
     condominiumServiceProviders: CondominiumServiceProvider[];
+
+    @OneToMany(() => Service, (services: Service) => services.serviceProvider)
+    services: Service[];
 }
