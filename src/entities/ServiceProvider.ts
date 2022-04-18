@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import CondominiumServiceProvider from './CondominiumServiceProviders';
 
 @Entity('service_providers')
-export class ServiceProvider {
+export default class ServiceProvider {
     @PrimaryGeneratedColumn('uuid')
     serviceProviderId: string;
 
@@ -25,4 +26,11 @@ export class ServiceProvider {
 
     @Column({ nullable: false })
     occupation: string;
+
+    @OneToMany(
+        () => CondominiumServiceProvider,
+        (CondominiumServiceProviders) =>
+            CondominiumServiceProviders.serviceProvider,
+    )
+    CondominiumServiceProviders: CondominiumServiceProvider[];
 }
