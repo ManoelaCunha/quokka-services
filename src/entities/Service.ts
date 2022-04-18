@@ -1,12 +1,12 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Resident } from './Resident';
-import { Category } from './Category';
-import { ServiceProvider } from './ServiceProvider';
+import Resident from './Resident';
+import Category from './Category';
+import ServiceProvider from './ServiceProvider';
 
 @Entity('services')
-export class Service {
+export default class Service {
     @PrimaryGeneratedColumn('uuid')
-    service_id: string;
+    serviceId: string;
 
     @Column({ nullable: false })
     title: string;
@@ -17,15 +17,15 @@ export class Service {
     @Column({ default: 'available', nullable: false })
     status: string;
 
-    @ManyToOne(() => Resident, (resident: Resident) => resident.services)
+    @ManyToOne(() => Resident, (resident) => resident.services)
     resident: Resident;
 
-    @ManyToOne(() => Category, (category: Category) => category.services)
+    @ManyToOne(() => Category, (category) => category.services)
     category: Category;
 
     @ManyToOne(
         () => ServiceProvider,
-        (serviceProvider: ServiceProvider) => serviceProvider.services,
+        (serviceProvider) => serviceProvider.services,
     )
     serviceProvider: ServiceProvider;
 }
