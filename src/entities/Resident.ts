@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import Condominium from './Condominium.ts';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    ManyToOne,
+    OneToMany,
+} from 'typeorm';
+import Condominium from './Condominium';
+import Service from './Service';
 
 @Entity('residents')
 export default class Resident {
@@ -27,6 +34,12 @@ export default class Resident {
     @Column({ type: 'boolean', default: false })
     isAuth: boolean;
 
-    @ManyToOne(() => Condominium, (condominiums) => condominiums.condominiumId)
-    condominiumId = Condominium;
+    @ManyToOne(
+        () => Condominium,
+        (condominium: Condominium) => condominium.residents,
+    )
+    condominium: Condominium[];
+
+    @OneToMany(() => Service, (service: Service) => service.resident)
+    services: Service[];
 }
