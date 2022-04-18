@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import Condominium from './Comdominium';
+import Condominium from './Condominium';
 import ServiceProvider from './ServiceProvider';
 
 @Entity('condominiums_service_providers')
@@ -12,7 +12,7 @@ export default class CondominiumServiceProvider {
 
     @ManyToOne(
         () => Condominium,
-        (condominum: Condominium) => condominum.condominiumServiceProviders,
+        (condominium: Condominium) => condominium.condominiumServiceProviders,
     )
     condominium: Condominium;
 
