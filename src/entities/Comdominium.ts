@@ -1,4 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    OneToMany,
+    ManyToMany,
+    JoinTable,
+} from 'typeorm';
+
+import Resident from './Resident';
+import Category from './Category';
 
 @Entity('condominiums')
 export default class Condominium {
@@ -31,4 +41,11 @@ export default class Condominium {
 
     @Column({ nullable: false })
     trusteePassword: string;
+
+    @OneToMany(() => Resident, (resident: Resident) => resident.condominium)
+    residents: Resident[];
+
+    @ManyToMany(() => Category)
+    @JoinTable()
+    categories: Category[];
 }
