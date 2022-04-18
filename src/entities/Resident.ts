@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Condominiums } from './Condominiums.ts';
+import Condominium from './Condominium.ts';
 
 @Entity('residents')
-export class Residents {
+export default class Resident {
     @PrimaryGeneratedColumn('uuid')
     residentId: string;
 
@@ -27,6 +27,6 @@ export class Residents {
     @Column({ type: 'boolean', default: false })
     isAuth: boolean;
 
-    @ManyToOne(() => Condominiums, (condominium) => condominium.condominium_id)
-    condominiumId = Condominiums;
+    @ManyToOne(() => Condominium, (condominiums) => condominiums.condominiumId)
+    condominiumId = Condominium;
 }
