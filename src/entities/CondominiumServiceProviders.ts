@@ -5,7 +5,7 @@ import ServiceProvider from './ServiceProvider';
 @Entity('condominiums_service_providers')
 export default class CondominiumServiceProvider {
     @PrimaryGeneratedColumn('uuid')
-    condoServiceProvidersId: number;
+    condoServiceProvidersId: string;
 
     @Column({ default: false })
     isApproved: boolean;
