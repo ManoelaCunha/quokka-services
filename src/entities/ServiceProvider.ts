@@ -29,8 +29,8 @@ export default class ServiceProvider {
 
     @OneToMany(
         () => CondominiumServiceProvider,
-        (CondominiumServiceProviders) =>
-            CondominiumServiceProviders.serviceProvider,
+        (condominiumServiceProviders: CondominiumServiceProvider) =>
+            condominiumServiceProviders.serviceProvider,
     )
-    CondominiumServiceProviders: CondominiumServiceProvider[];
+    condominiumServiceProviders: CondominiumServiceProvider[];
 }
