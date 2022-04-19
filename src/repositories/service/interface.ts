@@ -1,16 +1,11 @@
-interface IService {
-    serviceId: string;
-    title: string;
-    description: string;
-    status: string;
-}
+import Service from '../../entities/Service';
 
 interface IServiceRepository {
-    saveService(data: IService): Promise<IService>;
-    findServices(): Promise<IService[]>;
-    findServiceById(uuid: string): Promise<IService>;
-    updateService(uuid: string, data: Partial<IService>): Promise<IService>;
+    saveService(data: Service): Promise<Service>;
+    findServices(): Promise<Service[]>;
+    findServiceById(uuid: string): Promise<Service>;
+    updateService(uuid: string, data: Partial<Service>): Promise<Service>;
     deleteService(uuid: string): Promise<void>;
 }
 
-export { IService, IServiceRepository };
+export { IServiceRepository };

@@ -1,7 +1,7 @@
 import { Repository, getRepository } from 'typeorm';
 
 import Service from '../../entities/Service';
-import { IService, IServiceRepository } from './interface';
+import { IServiceRepository } from './interface';
 
 class ServiceRepository implements IServiceRepository {
     private ormRepo: Repository<Service>;
@@ -10,7 +10,7 @@ class ServiceRepository implements IServiceRepository {
         this.ormRepo = getRepository(Service);
     }
 
-    saveService = async (data: IService) => {
+    saveService = async (data: Service) => {
         return await this.ormRepo.save(data);
     };
 
@@ -22,7 +22,7 @@ class ServiceRepository implements IServiceRepository {
         return await this.ormRepo.findOne(uuid);
     };
 
-    updateService = async (uuid: string, data: Partial<IService>) => {
+    updateService = async (uuid: string, data: Partial<Service>) => {
         await this.ormRepo.update(uuid, data);
         return await this.ormRepo.findOne(uuid);
     };
