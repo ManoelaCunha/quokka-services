@@ -1,4 +1,5 @@
 import createCondominium from './condominium/create.shape';
+import loginCondominium from './condominium/login.shape';
 import createShape from './serviceProvider/create.shape';
 import loginShape from './serviceProvider/login.shape';
 import createSuperAdminShape from './SuperAdmin/create.shape';
@@ -14,6 +15,7 @@ export {
     loginSuperAdminShape,
     createServiceShape,
     createCondominium,
+    loginCondominium,
     createResidentShape,
     loginResidentShape,
 };
