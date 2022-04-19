@@ -4,6 +4,7 @@ import { UpdateResult, DeleteResult } from 'typeorm';
 interface ISuperAdminRepository {
     saveSuperAdmin: (data: SuperAdmin) => Promise<SuperAdmin>;
     findAll: () => Promise<SuperAdmin[]>;
+    findByEmail: (email: string) => Promise<SuperAdmin>;
     updateSuperAdmin: (
         uuid: string,
         data: Partial<SuperAdmin>,
