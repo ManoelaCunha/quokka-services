@@ -1,15 +1,25 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import config from '../configs/jwt.config';
-
 import { NextFunction, Request, Response } from 'express';
+import jsonwebtoken, { JwtPayload } from 'jsonwebtoken';
 
-const validateToken = (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-): Response => {
-    try {
-        const token = req.headers.authorization?.split(' ')[1];
+import config from '../configs/jwt.config';
+import {
+    CondominiumRepository,
+    ICondominiumRepository,
+    ResidentRepository,
+    ServiceProviderRepository,
+    SuperAdminRepository,
+} from '../repositories';
+
+// type RepositoriesTypes =
+//     | CondominiumRepository
+//     | ResidentRepository
+//     | SuperAdminRepository
+//     | ServiceProviderRepository;
+
+const validateToken =
+    (Repository: any) =>
+    async (req: Request, res: Response, next: NextFunction) => {
+        const token = req.header('Authorization')?.split(' ')[1];
 
         if (!token) {
             return res
@@ -17,20 +27,26 @@ const validateToken = (
                 .json({ message: 'Missing authorization headers' });
         }
 
-        jwt.verify(token, config.secret, (err, decoded) => {
-            if (err) {
-                return res
-                    .status(401)
-                    .json({ message: 'Missing authorization headers' });
-            }
+        jsonwebtoken.verify(
+            token,
+            config.secret,
+            async (err, decoded: JwtPayload) => {
+                if (err) {
+                    return res.status(401).json({ message: err.message });
+                }
 
-            req.decoded = decoded as JwtPayload;
+                const existent = await new Repository().findUserByEmail(
+                    Object.values(decoded)[0].email,
+                );
 
-            return next();
-        });
-    } catch (err) {
-        return res.status(400).json({ error: err.errors });
-    }
-};
+                if (!existent) {
+                    return res.status(404).json({ message: 'Token invalid' });
+                }
+
+                req.decoded = existent;
+                return next();
+            },
+        );
+    };
 
 export default validateToken;
