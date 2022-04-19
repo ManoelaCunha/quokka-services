@@ -12,6 +12,8 @@ export default class SuperAdminRepository implements ISuperAdminRepository {
     saveSuperAdmin = async (data: SuperAdmin) =>
         await this.ormRepository.save(data);
     findAll = async () => await this.ormRepository.find();
+    findByEmail = async (email) =>
+        await this.ormRepository.findOne({ where: { email } });
     updateSuperAdmin = async (uuid: string, data: Partial<SuperAdmin>) =>
         await this.ormRepository.update(uuid, data);
     deleteSuperAdmin = async (uuid: string) =>
