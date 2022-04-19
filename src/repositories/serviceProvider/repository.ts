@@ -18,6 +18,12 @@ class ServiceProviderRepository implements ServiceProviderRepo {
         return await this.ormRepository.findOne({ where: { uuid } });
     };
 
+    findByEmail = async (email: string) => {
+        return await this.ormRepository.findOne({
+            where: { email },
+        });
+    };
+
     updateProvider = async (uuid: string, data: Partial<Provider>) => {
         return await this.ormRepository.update(uuid, data);
     };
