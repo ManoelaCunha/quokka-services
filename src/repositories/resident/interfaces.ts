@@ -5,10 +5,10 @@ interface ResidentRepo {
     saveResident: (resident: Resident) => Promise<Resident>;
     findResident: () => Promise<Resident[]>;
     findResidentById: (uuid: string) => Promise<Resident>;
-    findResidentByEmail: (email: string) => Promise<Resident>;
+    findByEmail: (email: string) => Promise<Resident>;
     updateResident: (
         uuid: string,
-        item: Partial<Resident>,
+        data: Partial<Resident>,
     ) => Promise<UpdateResult>;
     deleteResident: (uuid: string) => Promise<DeleteResult>;
 }
