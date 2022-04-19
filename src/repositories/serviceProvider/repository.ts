@@ -2,7 +2,7 @@ import { Repository, getRepository } from 'typeorm';
 import Provider from '../../entities/ServiceProvider';
 import ServiceProviderRepo from './interfaces';
 
-class ServiceProviderRespository implements ServiceProviderRepo {
+class ServiceProviderRepository implements ServiceProviderRepo {
     private ormRepository: Repository<Provider>;
 
     constructor() {
@@ -26,4 +26,4 @@ class ServiceProviderRespository implements ServiceProviderRepo {
         await this.ormRepository.delete(uuid);
 }
 
-export default ServiceProviderRespository;
+export default ServiceProviderRepository;
