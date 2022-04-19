@@ -10,10 +10,10 @@ export default class ServiceProvider {
     @Column({ length: 11, nullable: false })
     phone: string;
 
-    @Column()
+    @Column({ nullable: true })
     socialMedia: string;
 
-    @Column()
+    @Column({ nullable: false })
     name: string;
 
     @Column({ unique: true, nullable: false })
