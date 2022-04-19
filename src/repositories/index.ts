@@ -9,6 +9,7 @@ import {
 } from './categories/repository';
 
 import ResidentRepository from './resident/repository';
+import ServiceProviderRepository from './serviceProvider/repository';
 
 import { ServiceRepository } from './service/repository';
 
@@ -19,5 +20,6 @@ export {
     CategoryRepository,
     ICategoryRepository,
     ResidentRepository,
+    ServiceProviderRepository,
     ServiceRepository,
 };
