@@ -17,15 +17,24 @@ export default class Service {
     @Column({ default: 'available', nullable: false })
     status: string;
 
-    @ManyToOne(() => Resident, (resident: Resident) => resident.services)
+    @ManyToOne(() => Resident, (resident: Resident) => resident.services, {
+        nullable: false,
+        onDelete: 'CASCADE',
+    })
     resident: Resident;
 
-    @ManyToOne(() => Category, (category: Category) => category.services)
+    @ManyToOne(() => Category, (category: Category) => category.services, {
+        nullable: false,
+        onDelete: 'CASCADE',
+    })
     category: Category;
 
     @ManyToOne(
         () => ServiceProvider,
         (serviceProvider: ServiceProvider) => serviceProvider.services,
+        {
+            onDelete: 'SET NULL',
+        },
     )
     serviceProvider: ServiceProvider;
 }
