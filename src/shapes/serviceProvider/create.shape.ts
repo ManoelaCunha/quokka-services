@@ -3,8 +3,7 @@ import * as yup from 'yup';
 
 const phoneRegex: RegExp =
     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,7}$/g;
-const cpfRegex: RegExp =
-    /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/g;
+const cpfRegex: RegExp = /([0-9]{11})/g;
 
 const createShape = yup.object().shape({
     phone: yup
