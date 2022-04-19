@@ -13,30 +13,31 @@ export default class Resident {
     @PrimaryGeneratedColumn('uuid')
     residentId: string;
 
-    @Column()
+    @Column({ nullable: false })
     name: string;
 
     @Column({ nullable: false, unique: true })
     email: string;
 
-    @Column()
+    @Column({ nullable: false })
     password: string;
 
     @Column({ length: 14, nullable: false, unique: true })
     cpf: string;
 
-    @Column()
+    @Column({ nullable: true })
     apartmentBlock: string;
 
-    @Column({ type: 'integer' })
+    @Column({ type: 'integer', nullable: true })
     apartmentNumber: number;
 
-    @Column({ type: 'boolean', default: false })
+    @Column({ type: 'boolean', default: false, nullable: false })
     isAuth: boolean;
 
     @ManyToOne(
         () => Condominium,
         (condominium: Condominium) => condominium.residents,
+        { onDelete: 'CASCADE' },
     )
     condominium: Condominium[];
 
