@@ -3,5 +3,11 @@ import {
     ICondominium,
     ICondominiumRepository,
 } from './condominium/repository';
+import ResidentRepository from './resident/repository';
 
-export { CondominiumRepository, ICondominium, ICondominiumRepository };
+export {
+    CondominiumRepository,
+    ICondominium,
+    ICondominiumRepository,
+    ResidentRepository,
+};
