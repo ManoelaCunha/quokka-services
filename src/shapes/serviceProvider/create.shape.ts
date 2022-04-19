@@ -6,7 +6,7 @@ const phoneRegex: RegExp =
 const cpfRegex: RegExp =
     /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/g;
 
-const createUserShape = yup.object().shape({
+const createShape = yup.object().shape({
     phone: yup
         .string()
         .matches(
@@ -34,4 +34,4 @@ const createUserShape = yup.object().shape({
         .required('Campo de cpf obrigatório'),
 });
 
-export default createUserShape;
+export default createShape;
