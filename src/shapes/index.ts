@@ -14,9 +14,6 @@ export {
     loginSuperAdminShape,
     createServiceShape,
     createCondominium,
-<<<<<<< HEAD
     loginCondominium,
-=======
     createResidentShape,
->>>>>>> 57a3079a88ab11e079645ed05b860eeca83426d3
 };
