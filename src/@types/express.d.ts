@@ -10,6 +10,7 @@ declare global {
         interface Request {
             decoded: JwtPayload;
             validated: validatedTypes;
+            token: string;
         }
     }
 }
