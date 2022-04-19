@@ -1,3 +1,3 @@
-import createServiceShape from './createService.Shape';
+import createServiceShape from './service/createService.Shape';
 
 export { createServiceShape };
