@@ -52,8 +52,4 @@ export default class Condominium {
             condominiumServiceProvider.condominium,
     )
     condominiumServiceProviders: CondominiumServiceProvider[];
-
-    @ManyToMany(() => Category)
-    @JoinTable()
-    categories: Category[];
 }

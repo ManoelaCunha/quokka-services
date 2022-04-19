@@ -5,12 +5,12 @@ export default class SuperAdmin {
     @PrimaryGeneratedColumn('uuid')
     superAdminId: string;
 
-    @Column()
+    @Column({ nullable: false })
     name: string;
 
     @Column({ nullable: false, unique: true })
     email: string;
 
-    @Column()
+    @Column({ nullable: false })
     password: string;
 }
