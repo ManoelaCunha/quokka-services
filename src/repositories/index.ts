@@ -6,6 +6,8 @@ import {
 import ResidentRepository from './resident/repository';
 
 import { ServiceRepository } from './service/repository';
+import ISuperAdminRepository from './superAdmin/interfaces';
+import SuperAdminRepository from './superAdmin/repository';
 
 export {
     CondominiumRepository,
@@ -13,4 +15,6 @@ export {
     ICondominiumRepository,
     ResidentRepository,
     ServiceRepository,
+    SuperAdminRepository,
+    ISuperAdminRepository,
 };
