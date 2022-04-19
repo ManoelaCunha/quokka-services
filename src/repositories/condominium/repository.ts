@@ -26,6 +26,14 @@ class CondominiumRepository implements ICondominiumRepository {
         return await this.ormRepository.findOne(condominium_id);
     };
 
+    findByEmail = async (condominium_email: string): Promise<ICondominium> => {
+        return await this.ormRepository.findOne({
+            where: {
+                email: condominium_email,
+            },
+        });
+    };
+
     updateCondominium = async (
         condominium: ICondominium,
     ): Promise<ICondominium> => {
