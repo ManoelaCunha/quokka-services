@@ -1,11 +1,12 @@
 import 'reflect-metadata';
 
-import { describe, it } from '@jest/globals';
-import request from 'supertest';
-import app from './../../app';
-import { v4 } from 'uuid';
-import connection from '../../database';
+import { describe, it, expect } from '@jest/globals';
 import { getConnection } from 'typeorm';
+import request from 'supertest';
+import { v4 } from 'uuid';
+
+import app from './../../app';
+import connection from '../../database';
 
 const superadm = {
     name: 'Super Administrator',
@@ -21,8 +22,11 @@ describe('Create Super Admin', () => {
 
     it('should be able to register a SUPER ADMIN', async () => {
         const response = await request(app).post(`/super_adm`).send(superadm);
+        const { body } = response;
 
-        console.log(response.body);
+        expect(response.statusCode).toBe(201);
+        expect(body.name).toBe(superadm.name);
+        expect(body.email).toBe(superadm.email);
     });
 
     afterAll(async () => {
