@@ -12,6 +12,7 @@ import {
     retrieveSuperAdminById,
     updateSuperAdmin,
     deleteSuperAdmin,
+    getAllSuperAdmin,
 } from '../../controllers';
 
 import {
@@ -37,6 +38,13 @@ const superAdminRoutes = (app: Application) => {
         validateShape(loginSuperAdminShape),
         authToken(SuperAdminRepository),
         loginSuperAdmin,
+    );
+
+    router.get(
+        '/super_adm',
+        validateToken(SuperAdminRepository),
+        verifySuperAdmin,
+        getAllSuperAdmin,
     );
 
     router.get(
