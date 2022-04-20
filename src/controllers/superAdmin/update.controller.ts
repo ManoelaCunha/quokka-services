@@ -18,7 +18,7 @@ const updateSuperAdmin = async (req: Request, res: Response) => {
 
         return res.json(rest);
     } catch (error) {
-        return res.json(error.errors);
+        return res.status(400).json(error.errors);
     }
 };
 

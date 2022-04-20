@@ -1,23 +1,59 @@
-import { Router } from 'express';
-import { createSuperAdmin } from '../../controllers';
-import updateSuperAdmin from '../../controllers/superAdmin/update.controller';
-import { validateShape, verifySuperAdmin } from '../../middlewares';
-import { createSuperAdminShape, updateSuperAdminShape } from '../../shapes';
+import { Application, Router } from 'express';
+
+import {
+    createSuperAdminShape,
+    loginSuperAdminShape,
+    updateSuperAdminShape,
+} from '../../shapes';
+
+import {
+    createSuperAdmin,
+    loginSuperAdmin,
+    retrieveSuperAdminById,
+    updateSuperAdmin,
+    deleteSuperAdmin,
+} from '../../controllers';
+
+import {
+    authToken,
+    validateShape,
+    validateToken,
+    verifySuperAdmin,
+} from '../../middlewares';
+
+import { SuperAdminRepository } from '../../repositories';
 
 const router = Router();
 
-const superAdminRoutes = (app: any) => {
+const superAdminRoutes = (app: Application) => {
     router.post(
-        '/superadmin',
+        '/super_adm',
         validateShape(createSuperAdminShape),
         createSuperAdmin,
     );
 
+    router.post(
+        '/super_adm/login',
+        validateShape(loginSuperAdminShape),
+        authToken(SuperAdminRepository),
+        loginSuperAdmin,
+    );
+
+    router.get(
+        '/super_adm/:id',
+        authToken(SuperAdminRepository),
+        retrieveSuperAdminById,
+    );
+
     router.patch(
-        '/superadmin/:uuid',
+        '/super_adm/:uuid',
         validateShape(updateSuperAdminShape),
+        validateToken(SuperAdminRepository),
         updateSuperAdmin,
     );
+
+    router.delete('/super_adm/:uuid', deleteSuperAdmin);
+
     app.use(router);
 };
 
