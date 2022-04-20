@@ -2,19 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import jsonwebtoken, { JwtPayload } from 'jsonwebtoken';
 
 import config from '../configs/jwt.config';
-import {
-    CondominiumRepository,
-    ICondominiumRepository,
-    ResidentRepository,
-    ServiceProviderRepository,
-    SuperAdminRepository,
-} from '../repositories';
-
-// type RepositoriesTypes =
-//     | CondominiumRepository
-//     | ResidentRepository
-//     | SuperAdminRepository
-//     | ServiceProviderRepository;
 
 const validateToken =
     (Repository: any) =>
@@ -35,7 +22,7 @@ const validateToken =
                     return res.status(401).json({ message: err.message });
                 }
 
-                const existent = await new Repository().findUserByEmail(
+                const existent = await new Repository().findByEmail(
                     Object.values(decoded)[0].email,
                 );
 
