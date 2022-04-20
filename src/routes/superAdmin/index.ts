@@ -52,7 +52,12 @@ const superAdminRoutes = (app: Application) => {
         updateSuperAdmin,
     );
 
-    router.delete('/super_adm/:uuid', deleteSuperAdmin);
+    router.delete(
+        '/super_adm/:id',
+        validateToken(SuperAdminRepository),
+        verifySuperAdmin,
+        deleteSuperAdmin,
+    );
 
     app.use(router);
 };
