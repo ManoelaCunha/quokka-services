@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { SuperAdminRepository } from '../../repositories';
 
 const deleteSuperAdmin = async (req: Request, res: Response) => {
-    const { uuid } = req.params;
+    const { id } = req.params;
 
-    await new SuperAdminRepository().deleteSuperAdmin(uuid);
+    const superAdm = await new SuperAdminRepository().deleteSuperAdmin(id);
 
     return res.status(204).send();
 };
