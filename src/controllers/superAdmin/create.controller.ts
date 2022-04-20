@@ -7,18 +7,24 @@ import { v4 } from 'uuid';
 const createSuperAdmin = async (req: Request, res: Response) => {
     const body = req.body;
     const hashedPass = await bcrypt.hash(body.password, 10);
-    const superAdm: SuperAdmin =
-        await new SuperAdminRepository().saveSuperAdmin({
-            name: body.name,
-            email: body.email,
-            password: hashedPass,
-            superAdminId: v4(),
-        });
+    try {
+        const superAdm: SuperAdmin =
+            await new SuperAdminRepository().saveSuperAdmin({
+                name: body.name,
+                email: body.email,
+                password: hashedPass,
+                superAdminId: v4(),
+            });
 
-    const userWithoutPass: SuperAdmin = JSON.parse(JSON.stringify(superAdm));
-    delete userWithoutPass.password;
+        const userWithoutPass: SuperAdmin = JSON.parse(
+            JSON.stringify(superAdm),
+        );
+        delete userWithoutPass.password;
 
-    return res.status(201).json(userWithoutPass);
+        return res.status(201).json(userWithoutPass);
+    } catch (error) {
+        return res.status(409).json({ message: 'email already exists' });
+    }
 };
 
 export default createSuperAdmin;
