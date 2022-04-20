@@ -43,6 +43,6 @@
         "dev": "ts-node-dev --files src/server.ts",
         "start": "ts-node --files src/server.ts --watch ./*",
         "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js -f src/database/ormconfig.ts",
-        "test": "NODE_ENV=test jest"
+        "test": "NODE_ENV=test jest --detectOpenHandles"
     }
 }

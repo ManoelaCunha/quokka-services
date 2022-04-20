@@ -1,11 +1,9 @@
 import 'reflect-metadata';
 
-import { describe, it, test } from '@jest/globals';
+import { describe, it } from '@jest/globals';
 import request from 'supertest';
 import app from './../../app';
 import { v4 } from 'uuid';
-import { Response, Request } from 'express';
-import { createSuperAdmin } from '../../controllers';
 import connection from '../../database';
 import { getConnection } from 'typeorm';
 
