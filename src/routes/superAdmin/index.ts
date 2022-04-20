@@ -1,8 +1,17 @@
 import { Application, Router } from 'express';
 
-import { createSuperAdmin, retrieveSuperAdminById, updateSuperAdmin, deleteSuperAdmin } from '../../controllers';
+import { createSuperAdminShape, loginSuperAdminShape } from '../../shapes';
 
 import {
+    createSuperAdmin,
+    loginSuperAdmin,
+    retrieveSuperAdminById,
+    updateSuperAdmin,
+    deleteSuperAdmin,
+} from '../../controllers';
+
+import {
+    authToken,
     validateShape,
     validateToken,
     verifySuperAdmin,
@@ -10,19 +19,20 @@ import {
 
 import { SuperAdminRepository } from '../../repositories';
 
-import { createSuperAdminShape } from '../../shapes';
-
-import authToken from '../../middlewares/authToken.middleware';
-
-import updateSuperAdmin from '../../controllers/superAdmin/update.controller';
-
 const router = Router();
 
 const superAdminRoutes = (app: Application) => {
     router.post(
-        '/superadmin',
+        '/super_adm',
         validateShape(createSuperAdminShape),
         createSuperAdmin,
+    );
+
+    router.post(
+        '/super_adm/login',
+        validateShape(loginSuperAdminShape),
+        authToken(SuperAdminRepository),
+        loginSuperAdmin,
     );
 
     router.get(
@@ -36,9 +46,9 @@ const superAdminRoutes = (app: Application) => {
         validateShape(createSuperAdminShape),
         updateSuperAdmin,
     );
-  
+
     router.delete('/super_adm/:uuid', deleteSuperAdmin);
-      
+
     app.use(router);
 };
 
