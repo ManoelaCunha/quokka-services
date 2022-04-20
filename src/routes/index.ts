@@ -1,8 +1,8 @@
 import morgan from 'morgan';
-import express from 'express';
+import express, { Application } from 'express';
 import superAdminRoutes from './superAdmin';
 
-const routes = (app: any) => {
+const routes = (app: Application) => {
     app.use(express.json());
     app.use(morgan('tiny'));
     superAdminRoutes(app);
