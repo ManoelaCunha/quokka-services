@@ -1,6 +1,10 @@
 import { Application, Router } from 'express';
 
-import { createSuperAdminShape, loginSuperAdminShape } from '../../shapes';
+import {
+    createSuperAdminShape,
+    loginSuperAdminShape,
+    updateSuperAdminShape,
+} from '../../shapes';
 
 import {
     createSuperAdmin,
@@ -42,8 +46,9 @@ const superAdminRoutes = (app: Application) => {
     );
 
     router.patch(
-        '/superadmin/:uuid',
-        validateShape(createSuperAdminShape),
+        '/super_adm/:id',
+        validateShape(updateSuperAdminShape),
+        validateToken(SuperAdminRepository),
         updateSuperAdmin,
     );
 
