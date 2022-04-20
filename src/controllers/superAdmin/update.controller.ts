@@ -4,15 +4,15 @@ import SuperAdmin from '../../entities/SuperAdmin';
 import { SuperAdminRepository } from '../../repositories';
 
 const updateSuperAdmin = async (req: Request, res: Response) => {
-    const { uuid } = req.params;
+    const { id } = req.params;
 
     const data: SuperAdmin = req.validated as SuperAdmin;
 
     try {
-        await new SuperAdminRepository().updateSuperAdmin(uuid, data);
+        await new SuperAdminRepository().updateSuperAdmin(id, data);
 
         const updatedData: SuperAdmin = await getRepository(SuperAdmin).findOne(
-            uuid,
+            id,
         );
         const { superAdminId, password, ...rest } = updatedData;
 

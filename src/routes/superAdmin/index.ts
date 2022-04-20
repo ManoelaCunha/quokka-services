@@ -46,7 +46,7 @@ const superAdminRoutes = (app: Application) => {
     );
 
     router.patch(
-        '/super_adm/:uuid',
+        '/super_adm/:id',
         validateShape(updateSuperAdminShape),
         validateToken(SuperAdminRepository),
         updateSuperAdmin,
