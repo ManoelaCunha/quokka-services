@@ -27,4 +27,17 @@ const devConfig = {
     },
 } as ConnectionOptions;
 
-export default devConfig;
+const prodConfig = {
+    type: 'postgres',
+    url: process.env.DATABASE_URL,
+    logging: false,
+    ssl: { rejectUnauthorized: false },
+    entities: [path.join(__dirname, '../entities/**/*.*')],
+    migrations: [path.join(__dirname, '../migrations/**/*.*')],
+    cli: {
+        entitiesDir: path.join(__dirname, '../entities'),
+        migrationsDir: path.join(__dirname, '../migrations'),
+    },
+} as ConnectionOptions;
+
+export default process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
