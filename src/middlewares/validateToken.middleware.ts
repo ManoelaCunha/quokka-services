@@ -35,7 +35,7 @@ const validateToken =
                     return res.status(401).json({ message: err.message });
                 }
 
-                const existent = await new Repository().findUserByEmail(
+                const existent = await new Repository().findByEmail(
                     Object.values(decoded)[0].email,
                 );
 
