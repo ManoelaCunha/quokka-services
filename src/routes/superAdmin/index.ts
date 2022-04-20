@@ -1,22 +1,29 @@
-import { Router } from 'express';
+import { Application, Router } from 'express';
 
-import { createSuperAdmin, retrieveSuperAdminById } from '../../controllers';
-import { validateShape, verifySuperAdmin } from '../../middlewares';
+import { createSuperAdmin, retrieveSuperAdminById, updateSuperAdmin, deleteSuperAdmin } from '../../controllers';
+
+import {
+    validateShape,
+    validateToken,
+    verifySuperAdmin,
+} from '../../middlewares';
+
 import { SuperAdminRepository } from '../../repositories';
+
 import { createSuperAdminShape } from '../../shapes';
 
 import authToken from '../../middlewares/authToken.middleware';
+
 import updateSuperAdmin from '../../controllers/superAdmin/update.controller';
 
 const router = Router();
 
-const superAdminRoutes = (app: any) => {
+const superAdminRoutes = (app: Application) => {
     router.post(
         '/superadmin',
         validateShape(createSuperAdminShape),
         createSuperAdmin,
     );
-
 
     router.get(
         '/super_adm/:id',
@@ -29,6 +36,8 @@ const superAdminRoutes = (app: any) => {
         validateShape(createSuperAdminShape),
         updateSuperAdmin,
     );
+  
+    router.delete('/super_adm/:uuid', deleteSuperAdmin);
       
     app.use(router);
 };

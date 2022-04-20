@@ -1,7 +1,7 @@
-import express, { Router } from 'express';
+import express, { Application, Router } from 'express';
 import superAdminRoutes from './superAdmin';
 
-const routes = (app: any) => {
+const routes = (app: Application) => {
     superAdminRoutes(app);
 };
 
