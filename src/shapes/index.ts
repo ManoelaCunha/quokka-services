@@ -5,7 +5,7 @@ import loginCondominium from './condominium/login.shape';
 import createResidentShape from './resident/create.shape';
 import loginResidentShape from './resident/login.shape';
 import createSuperAdminShape from './SuperAdmin/create.shape';
-import loginSuperAdminShape from './SuperAdmin/create.shape';
+import loginSuperAdminShape from './SuperAdmin/login.shape';
 import updateSuperAdminShape from './SuperAdmin/update.shape';
 import createServiceShape from './service/create.shape';
 
