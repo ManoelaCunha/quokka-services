@@ -1,19 +1,15 @@
 import 'reflect-metadata';
 
 import { describe, it, expect } from '@jest/globals';
-import { getConnection } from 'typeorm';
+import { getConnection, QueryRunner } from 'typeorm';
 import request from 'supertest';
 import { v4 } from 'uuid';
 
 import app from './../../app';
 import connection from '../../database';
+import { generateSuperAdm } from '../utils/generateSuperAdmin';
 
-const superadm = {
-    name: 'Super Administrator',
-    email: 'super_adm@email.com',
-    password: '1234',
-    superAdminId: v4(),
-};
+const superadm = generateSuperAdm();
 
 describe('Create Super Admin', () => {
     beforeAll(async () => {

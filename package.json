@@ -6,6 +6,7 @@
     "author": "Manoela Cunha <manoela_fg@hotmail.com>",
     "license": "MIT",
     "dependencies": {
+        "@faker-js/faker": "^6.1.2",
         "bcrypt": "^5.0.1",
         "dotenv": "^16.0.0",
         "express": "^4.17.3",
