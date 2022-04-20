@@ -8,7 +8,7 @@ const verifySuperAdmin = async (
     res: Response,
     next: NextFunction,
 ) => {
-    const { email } = req.validated as SuperAdmin;
+    const { email } = req.decoded as SuperAdmin;
 
     const superAdmin = await new SuperAdminRepository().findByEmail(email);
 

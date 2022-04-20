@@ -1,17 +1,42 @@
-import { Router } from 'express';
-import { createSuperAdmin, retrieveSuperAdminById } from '../../controllers';
-import { validateShape } from '../../middlewares';
-import authToken from '../../middlewares/authToken.middleware';
+import { Application, Router } from 'express';
+
+import {
+    createSuperAdminShape,
+    loginSuperAdminShape,
+    updateSuperAdminShape,
+} from '../../shapes';
+
+import {
+    createSuperAdmin,
+    loginSuperAdmin,
+    retrieveSuperAdminById,
+    updateSuperAdmin,
+    deleteSuperAdmin,
+} from '../../controllers';
+
+import {
+    authToken,
+    validateShape,
+    validateToken,
+    verifySuperAdmin,
+} from '../../middlewares';
+
 import { SuperAdminRepository } from '../../repositories';
-import { createSuperAdminShape } from '../../shapes';
 
 const router = Router();
 
-const superAdminRoutes = (app: any) => {
+const superAdminRoutes = (app: Application) => {
     router.post(
-        '/superadmin',
+        '/super_adm',
         validateShape(createSuperAdminShape),
         createSuperAdmin,
+    );
+
+    router.post(
+        '/super_adm/login',
+        validateShape(loginSuperAdminShape),
+        authToken(SuperAdminRepository),
+        loginSuperAdmin,
     );
 
     router.get(
@@ -19,6 +44,21 @@ const superAdminRoutes = (app: any) => {
         authToken(SuperAdminRepository),
         retrieveSuperAdminById,
     );
+
+    router.patch(
+        '/super_adm/:id',
+        validateShape(updateSuperAdminShape),
+        validateToken(SuperAdminRepository),
+        updateSuperAdmin,
+    );
+
+    router.delete(
+        '/super_adm/:id',
+        validateToken(SuperAdminRepository),
+        verifySuperAdmin,
+        deleteSuperAdmin,
+    );
+
     app.use(router);
 };
 

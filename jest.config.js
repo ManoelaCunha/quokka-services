@@ -3,7 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
-export default {
+module.exports = {
     // All imported modules in your tests should be mocked automatically
     // automock: false,
 
@@ -146,7 +146,7 @@ export default {
     // testLocationInResults: false,
 
     // The glob patterns Jest uses to detect test files
-    testMatch: ['**/**/*.spec.ts'],
+    testMatch: ['**/**/*.test.ts'],
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
     // testPathIgnorePatterns: [
@@ -173,8 +173,9 @@ export default {
 
     // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
     // transformIgnorePatterns: [
-    //   "/node_modules/",
-    //   "\\.pnp\\.[^\\/]+$"
+    //     '/node_modules/',
+    //     '\\.pnp\\.[^\\/]+$',
+    //     'node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)',
     // ],
 
     // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
