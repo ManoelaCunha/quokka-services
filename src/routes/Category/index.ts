@@ -1,5 +1,9 @@
 import { Application, Router } from 'express';
-import { createCategory, getAllCategories } from '../../controllers';
+import {
+    createCategory,
+    getAllCategories,
+    getCategoryById,
+} from '../../controllers';
 
 import { validateToken, verifySuperAdmin } from '../../middlewares';
 
@@ -20,6 +24,13 @@ const categoryRoutes = (app: Application) => {
         validateToken(CategoryRepository),
         verifySuperAdmin,
         getAllCategories,
+    );
+
+    router.get(
+        '/categories/:id',
+        validateToken(CategoryRepository),
+        verifySuperAdmin,
+        getCategoryById,
     );
 
     app.use(router);
