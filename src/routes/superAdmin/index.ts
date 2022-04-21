@@ -49,7 +49,7 @@ const superAdminRoutes = (app: Application) => {
 
     router.get(
         '/super_adm/:id',
-        authToken(SuperAdminRepository),
+        validateToken(SuperAdminRepository),
         retrieveSuperAdminById,
     );
 
