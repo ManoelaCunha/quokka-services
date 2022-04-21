@@ -6,6 +6,7 @@ import updateSuperAdmin from './superAdmin/update.controller';
 import deleteSuperAdmin from './superAdmin/delete.controller';
 import createCondomonium from './condominiums/create.controller';
 import createCategory from './categories/create.controller';
+import getAllCategories from './categories/getAll.controllers';
 
 export {
     createSuperAdmin,
@@ -16,4 +17,5 @@ export {
     deleteSuperAdmin,
     createCondomonium,
     createCategory,
+    getAllCategories,
 };
