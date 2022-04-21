@@ -5,6 +5,7 @@ import retrieveSuperAdminById from './superAdmin/getById.controller';
 import updateSuperAdmin from './superAdmin/update.controller';
 import deleteSuperAdmin from './superAdmin/delete.controller';
 import createCondomonium from './condominiums/create.controller';
+import retrieveCondominiumById from './condominiums/getById.controller';
 
 export {
     createSuperAdmin,
@@ -14,4 +15,5 @@ export {
     updateSuperAdmin,
     deleteSuperAdmin,
     createCondomonium,
+    retrieveCondominiumById,
 };
