@@ -1,10 +1,14 @@
 import { Router, Application } from 'express';
-import { createCondomonium, retrieveCondominiumById } from '../../controllers';
+
+import { createCondomonium, retrieveCondominiumById, getAllCondominiums } from '../../controllers';
+
 import { validateShape, validateToken } from '../../middlewares';
+
 import {
     CondominiumRepository,
     SuperAdminRepository,
 } from '../../repositories';
+
 import { createCondominium as createCondominiumShape } from '../../shapes';
 
 const router = Router();
@@ -15,6 +19,12 @@ const condominiumRoutes = (app: Application) => {
         validateToken(SuperAdminRepository),
         validateShape(createCondominiumShape),
         createCondomonium,
+    );
+  
+    router.get(
+        '/condominiums',
+        validateToken(SuperAdminRepository),
+        getAllCondominiums,
     );
 
     router.get(
