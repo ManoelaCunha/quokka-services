@@ -8,6 +8,7 @@ import createCondomonium from './condominiums/create.controller';
 import getAllCondominiums from './condominiums/getAll.controller';
 import retrieveCondominiumById from './condominiums/getById.controller';
 import createCategory from './categories/create.controller';
+import getAllCategories from './categories/getAll.controllers';
 
 export {
     createSuperAdmin,
@@ -20,4 +21,5 @@ export {
     getAllCondominiums,
     retrieveCondominiumById,
     createCategory,
+    getAllCategories,
 };
