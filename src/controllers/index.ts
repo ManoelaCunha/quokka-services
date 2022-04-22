@@ -9,6 +9,8 @@ import getAllCondominiums from './condominiums/getAll.controller';
 import retrieveCondominiumById from './condominiums/getById.controller';
 import createCategory from './categories/create.controller';
 import getAllCategories from './categories/getAll.controllers';
+import getCategoryById from './categories/getById.controller';
+import deleteCategory from './categories/delete.controller';
 
 export {
     createSuperAdmin,
@@ -22,4 +24,6 @@ export {
     retrieveCondominiumById,
     createCategory,
     getAllCategories,
+    getCategoryById,
+    deleteCategory,
 };
