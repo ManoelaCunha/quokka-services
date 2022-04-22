@@ -1,10 +1,19 @@
 import { Router, Application } from 'express';
-import { createCondomonium, loginCondominium } from '../../controllers';
-import { authToken, validateShape, validateToken } from '../../middlewares';
+
 import {
-    SuperAdminRepository,
+    createCondomonium,
+    loginCondominium,
+    retrieveCondominiumById,
+    getAllCondominiums,
+} from '../../controllers';
+
+import { authToken, validateShape, validateToken } from '../../middlewares';
+
+import {
     CondominiumRepository,
+    SuperAdminRepository,
 } from '../../repositories';
+
 import {
     createCondominium as createCondominiumShape,
     loginCondominium as loginCondominiumShape,
@@ -25,6 +34,18 @@ const condominiumRoutes = (app: Application) => {
         validateShape(loginCondominiumShape),
         authToken(CondominiumRepository),
         loginCondominium,
+    );
+
+    router.get(
+        '/condominiums',
+        validateToken(SuperAdminRepository),
+        getAllCondominiums,
+    );
+
+    router.get(
+        '/condominiums/:id',
+        validateToken(CondominiumRepository),
+        retrieveCondominiumById,
     );
 
     app.use(router);
