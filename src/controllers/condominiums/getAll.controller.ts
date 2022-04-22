@@ -3,7 +3,7 @@ import Condominium from '../../entities/Condominium';
 import { CondominiumRepository } from '../../repositories';
 
 const getAllCondominiums = async (req: Request, res: Response) => {
-    const condominiums = await new CondominiumRepository().findCondominium();
+    const condominiums = await new CondominiumRepository().findCondominiums();
 
     const newCondominiums: Array<Partial<Condominium>> = [];
 
