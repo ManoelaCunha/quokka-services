@@ -12,6 +12,7 @@ import createCategory from './categories/create.controller';
 import getAllCategories from './categories/getAll.controllers';
 import getCategoryById from './categories/getById.controller';
 import deleteCategory from './categories/delete.controller';
+import createResident from './residents/create.controller';
 
 export {
     createSuperAdmin,
@@ -28,4 +29,5 @@ export {
     getAllCategories,
     getCategoryById,
     deleteCategory,
+    createResident,
 };
