@@ -26,7 +26,7 @@ const authToken =
 
             if (
                 !existent ||
-                !compareSync(req.validated[passwordKey], existent.password)
+                !compareSync(req.validated[passwordKey], existent[passwordKey])
             ) {
                 return res
                     .status(401)

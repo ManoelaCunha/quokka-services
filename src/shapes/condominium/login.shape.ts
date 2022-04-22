@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 
 const loginCondominium = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
+    trusteeEmail: yup.string().email().required(),
+    trusteePassword: yup.string().required(),
 });
 
 export default loginCondominium;
