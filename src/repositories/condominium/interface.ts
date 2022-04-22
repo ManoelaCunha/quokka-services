@@ -1,3 +1,6 @@
+import { UpdateResult } from 'typeorm';
+import Condominium from '../../entities/Condominium';
+
 interface ICondominium {
     condominiumId: string;
     condominiumName: string;
@@ -13,10 +16,13 @@ interface ICondominium {
 
 interface ICondominiumRepository {
     saveCondominium(condominium: ICondominium): Promise<ICondominium>;
-    findCondominium(): Promise<ICondominium[]>;
-    findCondominiumById(condominium_id: string): Promise<ICondominium>;
+    findCondominiums(): Promise<ICondominium[]>;
+    findById(condominium_id: string): Promise<ICondominium>;
     findByEmail(condominium_email: string): Promise<ICondominium>;
-    updateCondominium(condominium: ICondominium): Promise<ICondominium>;
+    updateCondominium(
+        uuid: string,
+        data: Partial<ICondominium>,
+    ): Promise<UpdateResult>;
     deleteCondominium(condominium_id: string): Promise<void>;
 }
 

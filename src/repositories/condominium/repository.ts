@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, UpdateResult } from 'typeorm';
 
 import Condominium from '../../entities/Condominium';
 import { ICondominium, ICondominiumRepository } from './interface';
@@ -16,13 +16,11 @@ class CondominiumRepository implements ICondominiumRepository {
         return await this.ormRepository.save(condominium);
     };
 
-    findCondominium = async (): Promise<ICondominium[]> => {
+    findCondominiums = async (): Promise<ICondominium[]> => {
         return await this.ormRepository.find();
     };
 
-    findCondominiumById = async (
-        condominium_id: string,
-    ): Promise<ICondominium> => {
+    findById = async (condominium_id: string): Promise<ICondominium> => {
         return await this.ormRepository.findOne(condominium_id);
     };
 
@@ -35,9 +33,10 @@ class CondominiumRepository implements ICondominiumRepository {
     };
 
     updateCondominium = async (
-        condominium: ICondominium,
-    ): Promise<ICondominium> => {
-        return await this.ormRepository.save(condominium);
+        uuid: string,
+        data: Partial<ICondominium>,
+    ): Promise<UpdateResult> => {
+        return await this.ormRepository.update(uuid, data);
     };
 
     deleteCondominium = async (condominium_id: string): Promise<void> => {
