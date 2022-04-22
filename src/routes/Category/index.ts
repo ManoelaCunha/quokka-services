@@ -7,28 +7,28 @@ import {
 
 import { validateToken, verifySuperAdmin } from '../../middlewares';
 
-import { CategoryRepository } from '../../repositories';
+import { SuperAdminRepository } from '../../repositories';
 
 const router = Router();
 
 const categoryRoutes = (app: Application) => {
     router.post(
         '/categories',
-        validateToken(CategoryRepository),
+        validateToken(SuperAdminRepository),
         verifySuperAdmin,
         createCategory,
     );
 
     router.get(
         '/categories',
-        validateToken(CategoryRepository),
+        validateToken(SuperAdminRepository),
         verifySuperAdmin,
         getAllCategories,
     );
 
     router.get(
         '/categories/:id',
-        validateToken(CategoryRepository),
+        validateToken(SuperAdminRepository),
         verifySuperAdmin,
         getCategoryById,
     );
