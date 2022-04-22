@@ -41,7 +41,7 @@ const authToken =
 
             return next();
         } catch (err) {
-            return res.status(400).json({ error: err.errors });
+            return res.status(400).json({ error: err });
         }
     };
 
