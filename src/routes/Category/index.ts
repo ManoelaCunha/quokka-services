@@ -3,6 +3,7 @@ import {
     createCategory,
     getAllCategories,
     getCategoryById,
+    deleteCategory,
 } from '../../controllers';
 
 import { validateToken, verifySuperAdmin } from '../../middlewares';
@@ -31,6 +32,13 @@ const categoryRoutes = (app: Application) => {
         validateToken(SuperAdminRepository),
         verifySuperAdmin,
         getCategoryById,
+    );
+
+    router.delete(
+        '/categories/:id',
+        validateToken(SuperAdminRepository),
+        verifySuperAdmin,
+        deleteCategory,
     );
 
     app.use(router);
