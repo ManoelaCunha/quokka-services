@@ -3,6 +3,6 @@ import { Request, Response } from 'express';
 const loginCondominium = async (
     req: Request,
     res: Response,
-): Promise<Response> => await res.status(200).json({ msg: 'its work' });
+): Promise<Response> => res.status(200).json({ token: req.token });
 
 export default loginCondominium;
