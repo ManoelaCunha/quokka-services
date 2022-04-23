@@ -1,6 +1,7 @@
 import { Application, Router } from 'express';
-import { createResident } from '../../controllers';
-import { validateShape } from '../../middlewares';
+import { createResident, retrieveResidentById } from '../../controllers';
+import { validateShape, validateToken } from '../../middlewares';
+import { ResidentRepository } from '../../repositories';
 import { createResidentShape } from '../../shapes';
 
 const router = Router();
@@ -10,6 +11,12 @@ const residentsRoutes = (app: Application) => {
         '/residents',
         validateShape(createResidentShape),
         createResident,
+    );
+
+    router.get(
+        '/residents/:id',
+        validateToken(ResidentRepository),
+        retrieveResidentById,
     );
 
     app.use(router);
