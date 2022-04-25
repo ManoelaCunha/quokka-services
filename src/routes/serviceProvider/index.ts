@@ -1,11 +1,12 @@
 import { Application, Router } from 'express';
 import {
     createServiceProvider,
+    loginServiceProvider,
     getAllServiceProviders,
 } from '../../controllers';
-import { validateShape, validateToken } from '../../middlewares';
+import { authToken, validateShape, validateToken } from '../../middlewares';
 import { ServiceProviderRepository } from '../../repositories';
-import { createProviderShape } from '../../shapes';
+import { createProviderShape, loginProviderShape } from '../../shapes';
 
 const router = Router();
 
@@ -14,6 +15,13 @@ const serviceProvidersRoutes = (app: Application) => {
         '/service_providers',
         validateShape(createProviderShape),
         createServiceProvider,
+    );
+
+    router.post(
+        '/service_providers/login',
+        validateShape(loginProviderShape),
+        authToken(ServiceProviderRepository),
+        loginServiceProvider,
     );
 
     router.get(
