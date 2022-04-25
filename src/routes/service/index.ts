@@ -1,5 +1,9 @@
 import { Application, Router } from 'express';
-import { createService, getAllServices } from '../../controllers';
+import {
+    createService,
+    getAllServices,
+    getServiceById,
+} from '../../controllers';
 import { validateShape, validateToken } from '../../middlewares';
 import {
     CondominiumRepository,
@@ -20,8 +24,14 @@ const serviceRoutes = (app: Application) => {
 
     router.get(
         '/services',
-        // validateToken(ServiceProviderRepository),
+        validateToken(ServiceProviderRepository),
         getAllServices,
+    );
+
+    router.get(
+        '/services/:id',
+        validateToken(ResidentRepository),
+        getServiceById,
     );
 
     app.use(router);
