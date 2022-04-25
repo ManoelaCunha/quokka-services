@@ -14,8 +14,10 @@ class ServiceProviderRepository implements ServiceProviderRepo {
 
     findAllProviders = async () => await this.ormRepository.find();
 
-    findProviderById = async (uuid: string) => {
-        return await this.ormRepository.findOne({ where: { uuid } });
+    findById = async (uuid: string) => {
+        return await this.ormRepository.findOne({
+            where: { serviceProviderId: uuid },
+        });
     };
 
     findByEmail = async (email: string) => {
