@@ -16,6 +16,7 @@ import createResident from './residents/create.controller';
 import loginResident from './residents/login.controller';
 import getAllResidents from './residents/getAll.controller';
 import retrieveResidentById from './residents/getById.controller';
+import updateCategory from './categories/update.controller';
 
 export {
     createSuperAdmin,
@@ -36,4 +37,5 @@ export {
     loginResident,
     getAllResidents,
     retrieveResidentById,
+    updateCategory,
 };
