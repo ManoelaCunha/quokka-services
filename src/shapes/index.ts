@@ -2,6 +2,7 @@ import createProviderShape from './serviceProvider/create.shape';
 import loginProviderShape from './serviceProvider/login.shape';
 import createCondominium from './condominium/create.shape';
 import loginCondominium from './condominium/login.shape';
+import updateCondominium from './condominium/update.shape';
 import createResidentShape from './resident/create.shape';
 import loginResidentShape from './resident/login.shape';
 import createSuperAdminShape from './SuperAdmin/create.shape';
@@ -14,6 +15,7 @@ export {
     loginProviderShape,
     createCondominium,
     loginCondominium,
+    updateCondominium,
     createResidentShape,
     loginResidentShape,
     createSuperAdminShape,
