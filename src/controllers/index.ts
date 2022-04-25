@@ -13,6 +13,7 @@ import getAllCategories from './categories/getAll.controllers';
 import getCategoryById from './categories/getById.controller';
 import deleteCategory from './categories/delete.controller';
 import createResident from './residents/create.controller';
+import loginResident from './residents/login.controller';
 import retrieveResidentById from './residents/getById.controller';
 
 export {
@@ -31,5 +32,6 @@ export {
     getCategoryById,
     deleteCategory,
     createResident,
+    loginResident,
     retrieveResidentById,
 };
