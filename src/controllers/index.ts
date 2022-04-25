@@ -13,16 +13,17 @@ import getAllCategories from './categories/getAll.controllers';
 import getCategoryById from './categories/getById.controller';
 import updateCategory from './categories/update.controller';
 import deleteCategory from './categories/delete.controller';
+import createService from './service/create.controller';
+import getAllServices from './service/getAll.controller';
+import getServiceById from './service/getById.controller';
 import createResident from './residents/create.controller';
 import loginResident from './residents/login.controller';
-import createService from './service/create.controller';
 import getAllResidents from './residents/getAll.controller';
 import retrieveResidentById from './residents/getById.controller';
 import deleteResident from './residents/delete.controller';
 import createServiceProvider from './serviceProvider/create.controller';
-import getAllServiceProviders from './serviceProvider/getAll.controller';
 import loginServiceProvider from './serviceProvider/login.controller';
-import getServiceById from './service/getById.controller';
+import getAllServiceProviders from './serviceProvider/getAll.controller';
 
 export {
     createSuperAdmin,
@@ -40,14 +41,15 @@ export {
     getCategoryById,
     updateCategory,
     deleteCategory,
+    createService,
+    getAllServices,
+    getServiceById,
     createResident,
     loginResident,
-    createService,
     getAllResidents,
     retrieveResidentById,
     deleteResident,
     createServiceProvider,
-    getAllServiceProviders,
     loginServiceProvider,
-    getServiceById,
+    getAllServiceProviders,
 };
