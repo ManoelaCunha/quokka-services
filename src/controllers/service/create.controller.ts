@@ -20,9 +20,7 @@ const createService = async (req: Request, res: Response) => {
             decoded.email,
         );
         try {
-            const category = await new CategoryRepository().findCategoryById(
-                uuid,
-            );
+            const category = await new CategoryRepository().findById(uuid);
 
             newService.resident = resident;
             newService.category = category;

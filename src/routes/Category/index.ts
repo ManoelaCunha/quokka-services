@@ -4,6 +4,7 @@ import {
     getAllCategories,
     getCategoryById,
     deleteCategory,
+    updateCategory,
 } from '../../controllers';
 
 import { validateToken, verifySuperAdmin } from '../../middlewares';
@@ -32,6 +33,13 @@ const categoryRoutes = (app: Application) => {
         validateToken(SuperAdminRepository),
         verifySuperAdmin,
         getCategoryById,
+    );
+
+    router.patch(
+        '/categories/:id',
+        validateToken(SuperAdminRepository),
+        verifySuperAdmin,
+        updateCategory,
     );
 
     router.delete(
