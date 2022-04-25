@@ -4,10 +4,16 @@ import {
     createResident,
     deleteResident,
     loginResident,
+    getAllResidents,
     retrieveResidentById,
 } from '../../controllers';
 
-import { authToken, validateShape, validateToken } from '../../middlewares';
+import {
+    authToken,
+    validateShape,
+    validateToken,
+    verifyAdmin,
+} from '../../middlewares';
 
 import { ResidentRepository } from '../../repositories';
 
@@ -28,6 +34,8 @@ const residentsRoutes = (app: Application) => {
         authToken(ResidentRepository),
         loginResident,
     );
+
+    router.get('/residents', verifyAdmin, getAllResidents);
 
     router.get(
         '/residents/:id',
