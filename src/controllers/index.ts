@@ -20,6 +20,7 @@ import getAllResidents from './residents/getAll.controller';
 import retrieveResidentById from './residents/getById.controller';
 import deleteResident from './residents/delete.controller';
 import createServiceProvider from './serviceProvider/create.controller';
+import getAllServiceProviders from './serviceProvider/getAll.controller';
 import loginServiceProvider from './serviceProvider/login.controller';
 import getServiceById from './service/getById.controller';
 
@@ -46,6 +47,7 @@ export {
     retrieveResidentById,
     deleteResident,
     createServiceProvider,
+    getAllServiceProviders,
     loginServiceProvider,
     getServiceById,
 };
