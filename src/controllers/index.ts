@@ -15,10 +15,13 @@ import updateCategory from './categories/update.controller';
 import deleteCategory from './categories/delete.controller';
 import createResident from './residents/create.controller';
 import loginResident from './residents/login.controller';
+import createService from './service/create.controller';
 import getAllResidents from './residents/getAll.controller';
 import retrieveResidentById from './residents/getById.controller';
 import deleteResident from './residents/delete.controller';
 import createServiceProvider from './serviceProvider/create.controller';
+import loginServiceProvider from './serviceProvider/login.controller';
+import getServiceById from './service/getById.controller';
 
 export {
     createSuperAdmin,
@@ -38,8 +41,11 @@ export {
     deleteCategory,
     createResident,
     loginResident,
+    createService,
     getAllResidents,
     retrieveResidentById,
     deleteResident,
     createServiceProvider,
+    loginServiceProvider,
+    getServiceById,
 };

@@ -4,6 +4,7 @@ import superAdminRoutes from './superAdmin';
 import condominiumRoutes from './condominium';
 import categoryRoutes from './Category';
 import residentsRoutes from './residents';
+import serviceRoutes from './service';
 import serviceProvidersRoutes from './serviceProvider';
 
 const routes = (app: Application) => {
@@ -15,6 +16,7 @@ const routes = (app: Application) => {
     residentsRoutes(app);
     serviceProvidersRoutes(app);
     categoryRoutes(app);
+    serviceRoutes(app);
 };
 
 export default routes;
