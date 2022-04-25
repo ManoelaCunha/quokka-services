@@ -3,6 +3,7 @@ import {
     createServiceProvider,
     loginServiceProvider,
     getAllServiceProviders,
+    getServiceProviderById,
 } from '../../controllers';
 import { authToken, validateShape, validateToken } from '../../middlewares';
 import { ServiceProviderRepository } from '../../repositories';
@@ -28,6 +29,12 @@ const serviceProvidersRoutes = (app: Application) => {
         '/service_providers',
         validateToken(ServiceProviderRepository),
         getAllServiceProviders,
+    );
+
+    router.get(
+        '/service_providers/:id',
+        validateToken(ServiceProviderRepository),
+        getServiceProviderById,
     );
 
     app.use(router);
