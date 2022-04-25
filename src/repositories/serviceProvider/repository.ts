@@ -12,7 +12,7 @@ class ServiceProviderRepository implements ServiceProviderRepo {
     saveProvider = async (provider: Provider) =>
         await this.ormRepository.save(provider);
 
-    findProvider = async () => await this.ormRepository.find();
+    findAllProviders = async () => await this.ormRepository.find();
 
     findProviderById = async (uuid: string) => {
         return await this.ormRepository.findOne({ where: { uuid } });
