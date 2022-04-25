@@ -22,8 +22,12 @@ const validateToken =
                     return res.status(401).json({ message: err.message });
                 }
 
+                let emailKey = Object.keys(Object.values(decoded)[0]).find(
+                    (key) => key.toLowerCase().includes('email'),
+                );
+
                 const existent = await new Repository().findByEmail(
-                    Object.values(decoded)[0].email,
+                    Object.values(decoded)[0][emailKey],
                 );
 
                 if (!existent) {
