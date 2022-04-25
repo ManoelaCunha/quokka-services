@@ -14,6 +14,7 @@ import getCategoryById from './categories/getById.controller';
 import deleteCategory from './categories/delete.controller';
 import createResident from './residents/create.controller';
 import loginResident from './residents/login.controller';
+import createService from './service/create.controller';
 
 export {
     createSuperAdmin,
@@ -32,4 +33,5 @@ export {
     deleteCategory,
     createResident,
     loginResident,
+    createService,
 };
