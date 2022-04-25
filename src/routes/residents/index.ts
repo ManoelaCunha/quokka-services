@@ -1,7 +1,11 @@
 import { Application, Router } from 'express';
-import { createResident, loginResident } from '../../controllers';
-import { authToken, validateShape } from '../../middlewares';
+
+import { createResident, loginResident, retrieveResidentById } from '../../controllers';
+
+import { authToken, validateShape, validateToken } from '../../middlewares';
+
 import { ResidentRepository } from '../../repositories';
+
 import { createResidentShape, loginResidentShape } from '../../shapes';
 
 const router = Router();
@@ -12,7 +16,7 @@ const residentsRoutes = (app: Application) => {
         validateShape(createResidentShape),
         createResident,
     );
-
+  
     router.post(
         '/residents/login',
         validateShape(loginResidentShape),
@@ -20,6 +24,12 @@ const residentsRoutes = (app: Application) => {
         loginResident,
     );
 
+    router.get(
+        '/residents/:id',
+        validateToken(ResidentRepository),
+        retrieveResidentById,
+    );
+    
     app.use(router);
 };
 

@@ -12,8 +12,10 @@ class ResidentRepository implements ResidentRepo {
     saveResident = async (resident: Resident) =>
         await this.ormRepository.save(resident);
     findResident = async () => await this.ormRepository.find();
-    findResidentById = async (uuid: string) => {
-        return await this.ormRepository.findOne({ where: { uuid } });
+    findById = async (uuid: string) => {
+        return await this.ormRepository.findOne({
+            where: { residentId: uuid },
+        });
     };
     findByEmail = async (email: string) => {
         return await this.ormRepository.findOne({ where: { email } });
