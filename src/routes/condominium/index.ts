@@ -7,7 +7,14 @@ import {
     getAllCondominiums,
 } from '../../controllers';
 
-import { authToken, validateShape, validateToken } from '../../middlewares';
+import updateCondominium from '../../controllers/condominiums/update.controller';
+
+import {
+    authToken,
+    validateShape,
+    validateToken,
+    verifySuperAdmin,
+} from '../../middlewares';
 
 import {
     CondominiumRepository,
@@ -17,6 +24,7 @@ import {
 import {
     createCondominium as createCondominiumShape,
     loginCondominium as loginCondominiumShape,
+    updateCondominium as updateCondominiumShape,
 } from '../../shapes';
 
 const router = Router();
@@ -46,6 +54,14 @@ const condominiumRoutes = (app: Application) => {
         '/condominiums/:id',
         validateToken(CondominiumRepository),
         retrieveCondominiumById,
+    );
+
+    router.patch(
+        '/condominiums/:id',
+        validateShape(updateCondominiumShape),
+        validateToken(SuperAdminRepository),
+        verifySuperAdmin,
+        updateCondominium,
     );
 
     app.use(router);
