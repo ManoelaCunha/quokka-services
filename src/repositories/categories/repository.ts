@@ -14,7 +14,7 @@ class CategoryRepository implements ICategoryRepository {
 
     findAllCategories = async () => await this.ormRepository.find();
 
-    findCategoryById = async (uuid: string) => {
+    findById = async (uuid: string) => {
         return await this.ormRepository.findOne(uuid);
     };
 
