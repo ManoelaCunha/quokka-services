@@ -1,5 +1,5 @@
 import { Application, Router } from 'express';
-import { createService } from '../../controllers';
+import { createService, getServiceById } from '../../controllers';
 import { validateShape, validateToken } from '../../middlewares';
 import { ResidentRepository } from '../../repositories';
 import { createServiceShape } from '../../shapes';
@@ -12,6 +12,12 @@ const serviceRoutes = (app: Application) => {
         validateToken(ResidentRepository),
         validateShape(createServiceShape),
         createService,
+    );
+
+    router.get(
+        '/services/:id',
+        validateToken(ResidentRepository),
+        getServiceById,
     );
 
     app.use(router);

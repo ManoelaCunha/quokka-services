@@ -19,7 +19,7 @@ class ServiceRepository implements IServiceRepository {
     };
 
     findServiceById = async (uuid: string) => {
-        return await this.ormRepo.findOne(uuid);
+        return await this.ormRepo.findOne({ where: { serviceId: uuid } });
     };
 
     updateService = async (uuid: string, data: Partial<Service>) => {
