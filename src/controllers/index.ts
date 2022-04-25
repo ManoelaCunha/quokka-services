@@ -11,12 +11,13 @@ import retrieveCondominiumById from './condominiums/getById.controller';
 import createCategory from './categories/create.controller';
 import getAllCategories from './categories/getAll.controllers';
 import getCategoryById from './categories/getById.controller';
+import updateCategory from './categories/update.controller';
 import deleteCategory from './categories/delete.controller';
 import createResident from './residents/create.controller';
 import loginResident from './residents/login.controller';
 import getAllResidents from './residents/getAll.controller';
 import retrieveResidentById from './residents/getById.controller';
-import updateCategory from './categories/update.controller';
+import createServiceProvider from './serviceProvider/create.controller';
 
 export {
     createSuperAdmin,
@@ -32,10 +33,11 @@ export {
     createCategory,
     getAllCategories,
     getCategoryById,
+    updateCategory,
     deleteCategory,
     createResident,
     loginResident,
     getAllResidents,
     retrieveResidentById,
-    updateCategory,
+    createServiceProvider,
 };
