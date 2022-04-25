@@ -10,6 +10,8 @@ const validateShape =
                 stripUnknown: true,
             });
 
+            console.log('LUL');
+
             req.validated = validated;
 
             return next();

@@ -7,7 +7,7 @@ const getCategoryById = async (
 ): Promise<Response> => {
     const { id } = req.params;
 
-    const category = await new CategoryRepository().findCategoryById(id);
+    const category = await new CategoryRepository().findById(id);
 
     return res.status(200).json(category);
 };
