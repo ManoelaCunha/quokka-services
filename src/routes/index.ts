@@ -12,6 +12,7 @@ const routes = (app: Application) => {
     superAdminRoutes(app);
     condominiumRoutes(app);
     residentsRoutes(app);
+    superAdminRoutes(app);
     categoryRoutes(app);
 };
 
