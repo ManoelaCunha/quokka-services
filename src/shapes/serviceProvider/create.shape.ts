@@ -13,7 +13,7 @@ const createShape = yup.object().shape({
             'Número de telefone inválido, coloque seu telefone com DDD, digite 9 e seu número sem traços!',
         )
         .required('Campo de telefone obrigatório'),
-    social_media: yup.string().optional(),
+    socialMedia: yup.string().optional(),
     name: yup.string().required('Campo de nome obrigatório'),
     email: yup
         .string()
@@ -31,6 +31,7 @@ const createShape = yup.object().shape({
             'Cpf com formato inválido, verifique o dado e tente novamente!',
         )
         .required('Campo de cpf obrigatório'),
+    occupation: yup.string().required(),
 });
 
 export default createShape;

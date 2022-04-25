@@ -1,14 +1,19 @@
 import { Request, Response } from 'express';
-import { SuperAdminRepository } from '../../repositories';
+import ServiceProvider from '../../entities/ServiceProvider';
+import { ServiceProviderRepository } from '../../repositories';
 
 const createServiceProvider = async (req: Request, res: Response) => {
     const { validated } = req;
-    const serviceProviderAttributes: any = { ...validated } as any;
+    const serviceProviderAttributes: ServiceProvider = {
+        ...validated,
+    } as ServiceProvider;
 
     delete serviceProviderAttributes.password;
 
     try {
-        await new SuperAdminRepository().saveSuperAdmin(validated as any);
+        await new ServiceProviderRepository().saveProvider(
+            validated as ServiceProvider,
+        );
 
         return res.status(201).json(serviceProviderAttributes);
     } catch (error) {

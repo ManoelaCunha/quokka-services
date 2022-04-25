@@ -5,7 +5,7 @@ import { createProviderShape } from '../../shapes';
 
 const router = Router();
 
-const serviceProvidersRouter = (app: Application) => {
+const serviceProvidersRoutes = (app: Application) => {
     router.post(
         '/service_providers',
         validateShape(createProviderShape),
@@ -15,4 +15,4 @@ const serviceProvidersRouter = (app: Application) => {
     app.use(router);
 };
 
-export default serviceProvidersRouter;
+export default serviceProvidersRoutes;
