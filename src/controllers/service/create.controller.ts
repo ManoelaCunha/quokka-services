@@ -7,10 +7,6 @@ const createService = async (req: Request, res: Response) => {
     const { validated, decoded } = req;
     const { uuid } = req.params;
 
-    if (!uuid) {
-        return res.status(400).json({ message: 'Missing uuid' });
-    }
-
     try {
         const service = getRepository(Service);
 
