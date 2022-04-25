@@ -7,7 +7,7 @@ const getAllServiceProviders = async (
     res: Response,
 ): Promise<Response> => {
     const serviceProviders =
-        await new ServiceProviderRepository().findProvider();
+        await new ServiceProviderRepository().findAllProviders();
     const serviceProvidersWithoutPassword: Array<Partial<ServiceProvider>> = [];
 
     serviceProviders.forEach((serviceProvider: ServiceProvider) => {
