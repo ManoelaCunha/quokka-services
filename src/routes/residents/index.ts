@@ -2,6 +2,7 @@ import { Application, Router } from 'express';
 
 import {
     createResident,
+    deleteResident,
     loginResident,
     getAllResidents,
     retrieveResidentById,
@@ -14,7 +15,7 @@ import {
     verifyAdmin,
 } from '../../middlewares';
 
-import { ResidentRepository } from '../../repositories';
+import { ResidentRepository, CondominiumRepository } from '../../repositories';
 
 import { createResidentShape, loginResidentShape } from '../../shapes';
 
@@ -24,6 +25,7 @@ const residentsRoutes = (app: Application) => {
     router.post(
         '/residents',
         validateShape(createResidentShape),
+        validateToken(CondominiumRepository),
         createResident,
     );
 
@@ -34,12 +36,23 @@ const residentsRoutes = (app: Application) => {
         loginResident,
     );
 
-    router.get('/residents', verifyAdmin, getAllResidents);
+    router.get(
+        '/residents',
+        validateToken(CondominiumRepository),
+        verifyAdmin,
+        getAllResidents,
+    );
 
     router.get(
         '/residents/:id',
         validateToken(ResidentRepository),
         retrieveResidentById,
+    );
+
+    router.delete(
+        '/residents/:id',
+        validateToken(CondominiumRepository),
+        deleteResident,
     );
 
     app.use(router);
