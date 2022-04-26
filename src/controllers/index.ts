@@ -16,6 +16,7 @@ import deleteCategory from './categories/delete.controller';
 import createService from './service/create.controller';
 import getAllServices from './service/getAll.controller';
 import getServiceById from './service/getById.controller';
+import deleteService from './service/delete.controller';
 import createResident from './residents/create.controller';
 import loginResident from './residents/login.controller';
 import getAllResidents from './residents/getAll.controller';
@@ -45,6 +46,7 @@ export {
     createService,
     getAllServices,
     getServiceById,
+    deleteService,
     createResident,
     loginResident,
     getAllResidents,
