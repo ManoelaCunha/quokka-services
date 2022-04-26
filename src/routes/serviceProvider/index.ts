@@ -16,6 +16,7 @@ import {
 } from '../../middlewares';
 import { ServiceProviderRepository } from '../../repositories';
 import { createProviderShape, loginProviderShape } from '../../shapes';
+import updateProviderShape from '../../shapes/serviceProvider/update.shape';
 
 const router = Router();
 
@@ -35,6 +36,7 @@ const serviceProvidersRoutes = (app: Application) => {
 
     router.patch(
         '/service_providers/:id',
+        validateShape(updateProviderShape),
         validateToken(ServiceProviderRepository),
         verifyId,
         updateProvider,
