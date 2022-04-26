@@ -29,6 +29,7 @@ import getServiceProviderById from './serviceProvider/getById.controller';
 import updateProvider from './serviceProvider/update.controller';
 import deleteServiceProvider from './serviceProvider/delete.controller';
 import updateService from './service/update.controller';
+import deleteCondominium from './condominiums/delete.controller';
 
 export {
     createSuperAdmin,
@@ -62,4 +63,5 @@ export {
     updateProvider,
     deleteServiceProvider,
     updateService,
+    deleteCondominium,
 };
