@@ -25,6 +25,7 @@ import createServiceProvider from './serviceProvider/create.controller';
 import loginServiceProvider from './serviceProvider/login.controller';
 import getAllServiceProviders from './serviceProvider/getAll.controller';
 import getServiceProviderById from './serviceProvider/getById.controller';
+import updateProvider from './serviceProvider/update.controller';
 import deleteServiceProvider from './serviceProvider/delete.controller';
 
 export {
@@ -55,5 +56,6 @@ export {
     loginServiceProvider,
     getAllServiceProviders,
     getServiceProviderById,
+    updateProvider,
     deleteServiceProvider,
 };

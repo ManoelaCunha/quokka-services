@@ -4,12 +4,14 @@ import {
     loginServiceProvider,
     getAllServiceProviders,
     getServiceProviderById,
+    updateProvider,
     deleteServiceProvider,
 } from '../../controllers';
 import {
     authToken,
     validateShape,
     validateToken,
+    verifyId,
     verifySuperAdmin,
 } from '../../middlewares';
 import { ServiceProviderRepository } from '../../repositories';
@@ -29,6 +31,13 @@ const serviceProvidersRoutes = (app: Application) => {
         validateShape(loginProviderShape),
         authToken(ServiceProviderRepository),
         loginServiceProvider,
+    );
+
+    router.patch(
+        '/service_providers/:id',
+        validateToken(ServiceProviderRepository),
+        verifyId,
+        updateProvider,
     );
 
     router.get(
