@@ -3,6 +3,7 @@ import {
     createService,
     getAllServices,
     getServiceById,
+    updateService,
 } from '../../controllers';
 import { validateShape, validateToken } from '../../middlewares';
 import {
@@ -10,7 +11,7 @@ import {
     ResidentRepository,
     ServiceProviderRepository,
 } from '../../repositories';
-import { createServiceShape } from '../../shapes';
+import { createServiceShape, updateServiceShape } from '../../shapes';
 
 const router = Router();
 
@@ -34,7 +35,12 @@ const serviceRoutes = (app: Application) => {
         getServiceById,
     );
 
+    router.patch(
+        '/services/:id',
+        validateToken(ResidentRepository),
+        validateShape(updateServiceShape),
+        updateService,
+    );
+
     app.use(router);
 };
-
-export default serviceRoutes;

@@ -9,6 +9,7 @@ import createSuperAdminShape from './SuperAdmin/create.shape';
 import loginSuperAdminShape from './SuperAdmin/login.shape';
 import updateSuperAdminShape from './SuperAdmin/update.shape';
 import createServiceShape from './service/create.shape';
+import updateServiceShape from './service/update.shape';
 
 export {
     createProviderShape,
@@ -22,4 +23,5 @@ export {
     loginSuperAdminShape,
     updateSuperAdminShape,
     createServiceShape,
+    updateServiceShape,
 };
