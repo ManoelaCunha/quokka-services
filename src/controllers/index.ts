@@ -26,6 +26,7 @@ import loginServiceProvider from './serviceProvider/login.controller';
 import getAllServiceProviders from './serviceProvider/getAll.controller';
 import getServiceProviderById from './serviceProvider/getById.controller';
 import deleteServiceProvider from './serviceProvider/delete.controller';
+import updateService from './service/update.controller';
 
 export {
     createSuperAdmin,
@@ -56,4 +57,5 @@ export {
     getAllServiceProviders,
     getServiceProviderById,
     deleteServiceProvider,
+    updateService,
 };

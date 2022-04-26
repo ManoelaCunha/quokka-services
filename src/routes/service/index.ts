@@ -44,3 +44,5 @@ const serviceRoutes = (app: Application) => {
 
     app.use(router);
 };
+
+export default serviceRoutes;
