@@ -6,10 +6,11 @@ const createCondomonium = async (req: Request, res: Response) => {
     const { validated } = req;
 
     try {
-        const condominium = await new CondominiumRepository().saveCondominium(
-            validated as Condominium,
-        );
-        return res.status(201).json(condominium);
+        const { trusteePassword, ...rest } =
+            await new CondominiumRepository().saveCondominium(
+                validated as Condominium,
+            );
+        return res.status(201).json(rest);
     } catch (error) {
         return res.status(400).json({ message: error.driverError.detail });
     }
