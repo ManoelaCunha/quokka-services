@@ -20,12 +20,14 @@ export default class Service {
     @ManyToOne(() => Resident, (resident: Resident) => resident.services, {
         nullable: false,
         onDelete: 'CASCADE',
+        eager: true,
     })
     resident: Resident;
 
     @ManyToOne(() => Category, (category: Category) => category.services, {
         nullable: false,
         onDelete: 'CASCADE',
+        eager: true,
     })
     category: Category;
 
@@ -34,6 +36,7 @@ export default class Service {
         (serviceProvider: ServiceProvider) => serviceProvider.services,
         {
             onDelete: 'SET NULL',
+            eager: true,
         },
     )
     serviceProvider: ServiceProvider;

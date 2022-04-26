@@ -16,6 +16,7 @@ import deleteCategory from './categories/delete.controller';
 import createService from './service/create.controller';
 import getAllServices from './service/getAll.controller';
 import getServiceById from './service/getById.controller';
+import deleteService from './service/delete.controller';
 import createResident from './residents/create.controller';
 import loginResident from './residents/login.controller';
 import getAllResidents from './residents/getAll.controller';
@@ -25,6 +26,9 @@ import createServiceProvider from './serviceProvider/create.controller';
 import loginServiceProvider from './serviceProvider/login.controller';
 import getAllServiceProviders from './serviceProvider/getAll.controller';
 import getServiceProviderById from './serviceProvider/getById.controller';
+import updateProvider from './serviceProvider/update.controller';
+import deleteServiceProvider from './serviceProvider/delete.controller';
+import updateService from './service/update.controller';
 
 export {
     createSuperAdmin,
@@ -45,6 +49,7 @@ export {
     createService,
     getAllServices,
     getServiceById,
+    deleteService,
     createResident,
     loginResident,
     getAllResidents,
@@ -54,4 +59,7 @@ export {
     loginServiceProvider,
     getAllServiceProviders,
     getServiceProviderById,
+    updateProvider,
+    deleteServiceProvider,
+    updateService,
 };
