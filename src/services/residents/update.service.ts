@@ -3,6 +3,7 @@ import Resident from '../../entities/Resident';
 import { QueryFailedError } from 'typeorm';
 import { Request, Response } from 'express';
 import { CondominiumRepository, ResidentRepository } from '../../repositories';
+import Condominium from '../../entities/Condominium';
 
 const updateResidentService = async (
     req: Request,
@@ -10,7 +11,8 @@ const updateResidentService = async (
 ): Promise<Resident | Response> => {
     try {
         const { id } = req.params;
-        const { condominiumId, residentId } = req.decoded;
+        const { condominiumId } = req.decoded as Condominium;
+        const { residentId } = req.decoded as Resident;
 
         const data = req.body;
         const auth = req.query.auth;
@@ -21,14 +23,14 @@ const updateResidentService = async (
                 .json({ message: "Unauthorized update on 'residentId' key" });
         }
 
-        if ('isAuth' in data && (residentId as string)) {
+        if ('isAuth' in data && residentId) {
             return res
                 .status(401)
                 .json({ message: "Unauthorized update on 'isAuth' key" });
         }
 
         const condominium = await new CondominiumRepository().findById(
-            condominiumId as string,
+            condominiumId,
         );
 
         if (condominium && auth) {

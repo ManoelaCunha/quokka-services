@@ -26,7 +26,6 @@ const residentsRoutes = (app: Application) => {
     router.post(
         '/residents',
         validateShape(createResidentShape),
-        //validateToken(CondominiumRepository),
         createResident,
     );
 
