@@ -25,6 +25,7 @@ import deleteResident from './residents/delete.controller';
 import createServiceProvider from './serviceProvider/create.controller';
 import loginServiceProvider from './serviceProvider/login.controller';
 import getAllServiceProviders from './serviceProvider/getAll.controller';
+import getServiceProviderById from './serviceProvider/getById.controller';
 
 export {
     createSuperAdmin,
@@ -54,4 +55,5 @@ export {
     createServiceProvider,
     loginServiceProvider,
     getAllServiceProviders,
+    getServiceProviderById,
 };
