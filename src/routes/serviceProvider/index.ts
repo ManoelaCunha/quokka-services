@@ -5,12 +5,14 @@ import {
     getAllServiceProviders,
     getServiceProviderById,
     updateProvider,
+    deleteServiceProvider,
 } from '../../controllers';
 import {
     authToken,
     validateShape,
     validateToken,
     verifyId,
+    verifySuperAdmin,
 } from '../../middlewares';
 import { ServiceProviderRepository } from '../../repositories';
 import { createProviderShape, loginProviderShape } from '../../shapes';
@@ -48,6 +50,12 @@ const serviceProvidersRoutes = (app: Application) => {
         '/service_providers/:id',
         validateToken(ServiceProviderRepository),
         getServiceProviderById,
+    );
+
+    router.delete(
+        '/service_providers/:id',
+        validateToken(ServiceProviderRepository),
+        deleteServiceProvider,
     );
 
     app.use(router);
