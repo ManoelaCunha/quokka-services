@@ -6,6 +6,7 @@ import {
     loginResident,
     getAllResidents,
     retrieveResidentById,
+    updateResident,
 } from '../../controllers';
 
 import {
@@ -47,6 +48,12 @@ const residentsRoutes = (app: Application) => {
         '/residents/:id',
         validateToken(ResidentRepository),
         retrieveResidentById,
+    );
+
+    router.patch(
+        '/residents/:id',
+        validateToken(ResidentRepository || CondominiumRepository),
+        updateResident,
     );
 
     router.delete(
