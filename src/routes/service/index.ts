@@ -3,11 +3,11 @@ import {
     createService,
     getAllServices,
     getServiceById,
+    deleteService,
     updateService,
 } from '../../controllers';
 import { validateShape, validateToken } from '../../middlewares';
 import {
-    CondominiumRepository,
     ResidentRepository,
     ServiceProviderRepository,
 } from '../../repositories';
@@ -33,6 +33,12 @@ const serviceRoutes = (app: Application) => {
         '/services/:id',
         validateToken(ResidentRepository),
         getServiceById,
+    );
+
+    router.delete(
+        '/services/:id',
+        validateToken(ResidentRepository),
+        deleteService,
     );
 
     router.patch(
