@@ -16,7 +16,7 @@ describe('Create Super Admin', () => {
         await connection();
     });
 
-    it('should be able to register a SUPER ADMIN', async () => {
+    it.only('should be able to register a SUPER ADMIN', async () => {
         const response = await request(app).post(`/super_adm`).send(superadm);
         const { body } = response;
 
