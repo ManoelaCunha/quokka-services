@@ -9,9 +9,9 @@ const updateResident = async (
 ): Promise<Response> => {
     const updateResident = await updateResidentService(req, res);
 
-    //const { password, ...residentWithoutPassword } = updateResident as Resident;
+    const { password, ...residentWithoutPassword } = updateResident as Resident;
 
-    return res.status(200).json(updateResident);
+    return res.status(200).json(residentWithoutPassword);
 };
 
 export default updateResident;

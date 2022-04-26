@@ -26,7 +26,7 @@ const residentsRoutes = (app: Application) => {
     router.post(
         '/residents',
         validateShape(createResidentShape),
-        validateToken(CondominiumRepository),
+        //validateToken(CondominiumRepository),
         createResident,
     );
 
@@ -52,7 +52,14 @@ const residentsRoutes = (app: Application) => {
 
     router.patch(
         '/residents/:id',
-        validateToken(ResidentRepository || CondominiumRepository),
+        validateToken(ResidentRepository),
+        updateResident,
+    );
+
+    router.patch(
+        '/residents/update_status/:id',
+        validateToken(CondominiumRepository),
+        verifyAdmin,
         updateResident,
     );
 

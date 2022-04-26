@@ -10,35 +10,25 @@ const updateResidentService = async (
 ): Promise<Resident | Response> => {
     try {
         const { id } = req.params;
-        console.log(id);
-
-        const auth = req.query.auth;
-        console.log(auth);
-
-        const { condominiumId, residentId }: any = req.decoded;
-        console.log(req.decoded);
+        const { condominiumId, residentId } = req.decoded;
 
         const data = req.body;
-        console.log(data);
+        const auth = req.query.auth;
 
         if ('residentId' in data) {
             return res
                 .status(401)
-                .json({ message: 'residentId key cannot be updated' });
+                .json({ message: "Unauthorized update on 'residentId' key" });
         }
 
-        if ('isAuth' in data && residentId) {
+        if ('isAuth' in data && (residentId as string)) {
             return res
                 .status(401)
-                .json({ message: 'isAuth key cannot be updated' });
+                .json({ message: "Unauthorized update on 'isAuth' key" });
         }
 
-        // if (id !== residentId) {
-        //     return res.status(401).json({ message: 'Missing permission' });
-        // }
-
         const condominium = await new CondominiumRepository().findById(
-            condominiumId,
+            condominiumId as string,
         );
 
         if (condominium && auth) {
