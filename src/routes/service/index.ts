@@ -25,7 +25,7 @@ const serviceRoutes = (app: Application) => {
 
     router.get(
         '/services',
-        // validateToken(ServiceProviderRepository),
+        validateToken(ServiceProviderRepository),
         getAllServices,
     );
 
