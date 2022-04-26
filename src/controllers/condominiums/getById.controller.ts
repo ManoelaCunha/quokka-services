@@ -6,9 +6,18 @@ const retrieveCondominiumById = async (req: Request, res: Response) => {
         req.params.id,
     );
 
-    const { trusteePassword, ...condominiumWithouPasword } = condominiums;
+    const {
+        trusteePassword,
+        residents,
+        condominiumServiceProviders,
+        ...condominiumWithouPasword
+    } = condominiums;
 
-    return res.status(200).json(condominiumWithouPasword);
+    return res.status(200).json({
+        ...condominiumWithouPasword,
+        residents,
+        serviceProviders: condominiumServiceProviders,
+    });
 };
 
 export default retrieveCondominiumById;
