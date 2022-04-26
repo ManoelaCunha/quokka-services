@@ -6,6 +6,7 @@ import {
     getServiceProviderById,
     updateProvider,
     deleteServiceProvider,
+    postServiceProviderInCondominium,
 } from '../../controllers';
 import {
     authToken,
@@ -58,6 +59,12 @@ const serviceProvidersRoutes = (app: Application) => {
         '/service_providers/:id',
         validateToken(ServiceProviderRepository),
         deleteServiceProvider,
+    );
+
+    router.post(
+        '/service_providers/condominium/:id',
+        validateToken(ServiceProviderRepository),
+        postServiceProviderInCondominium,
     );
 
     app.use(router);
