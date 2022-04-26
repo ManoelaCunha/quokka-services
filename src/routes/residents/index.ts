@@ -18,7 +18,11 @@ import {
 
 import { ResidentRepository, CondominiumRepository } from '../../repositories';
 
-import { createResidentShape, loginResidentShape } from '../../shapes';
+import {
+    createResidentShape,
+    loginResidentShape,
+    updateResidentShape,
+} from '../../shapes';
 
 const router = Router();
 
@@ -51,6 +55,7 @@ const residentsRoutes = (app: Application) => {
 
     router.patch(
         '/residents/:id',
+        validateShape(updateResidentShape),
         validateToken(ResidentRepository),
         updateResident,
     );

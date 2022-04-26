@@ -1,9 +1,9 @@
 import Resident from '../../entities/Resident';
+import Condominium from '../../entities/Condominium';
 
 import { QueryFailedError } from 'typeorm';
 import { Request, Response } from 'express';
-import { CondominiumRepository, ResidentRepository } from '../../repositories';
-import Condominium from '../../entities/Condominium';
+import { ResidentRepository } from '../../repositories';
 
 const updateResidentService = async (
     req: Request,
@@ -11,30 +11,36 @@ const updateResidentService = async (
 ): Promise<Resident | Response> => {
     try {
         const { id } = req.params;
-        const { condominiumId } = req.decoded as Condominium;
-        const { residentId } = req.decoded as Resident;
 
-        const data = req.body;
         const auth = req.query.auth;
 
-        if ('residentId' in data) {
-            return res
-                .status(401)
-                .json({ message: "Unauthorized update on 'residentId' key" });
+        const { condominiumId } = req.decoded as Condominium;
+
+        if (condominiumId) {
+            const data = { isAuth: auth === 'true' ? true : false };
+
+            await new ResidentRepository().updateResident(
+                id,
+                data as Partial<Resident>,
+            );
+
+            const updateResident = await new ResidentRepository().findById(id);
+
+            if (Object.keys(req.body).length !== 0) {
+                return res.status(401).json({ error: 'Update unauthorized' });
+            }
+
+            return updateResident as Resident;
         }
 
-        if ('isAuth' in data && residentId) {
-            return res
-                .status(401)
-                .json({ message: "Unauthorized update on 'isAuth' key" });
-        }
+        const { residentId } = req.decoded as Resident;
 
-        const condominium = await new CondominiumRepository().findById(
-            condominiumId,
-        );
+        const data = req.validated as Partial<Resident>;
 
-        if (condominium && auth) {
-            data.isAuth = auth;
+        if ('residentId' in data || 'isAuth' in data || (auth && residentId)) {
+            return res.status(401).json({
+                error: "Unauthorized update on 'isAuth/residentId' key",
+            });
         }
 
         await new ResidentRepository().updateResident(
@@ -47,7 +53,7 @@ const updateResidentService = async (
         return updateResident as Resident;
     } catch (error: any) {
         if (error instanceof QueryFailedError) {
-            return res.status(400).json({ message: error.driverError.detail });
+            return res.status(400).json({ error: error.driverError.detail });
         }
     }
 };
