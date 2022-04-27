@@ -1,4 +1,5 @@
 import { Application, Router } from 'express';
+
 import {
     createServiceProvider,
     loginServiceProvider,
@@ -9,6 +10,7 @@ import {
     updateStatus,
     postServiceProviderInCondominium,
 } from '../../controllers';
+
 import {
     authToken,
     validateShape,
@@ -16,12 +18,15 @@ import {
     verifyBody,
     verifyId,
 } from '../../middlewares';
+
 import {
     CondominiumRepository,
     ServiceProviderRepository,
     SuperAdminRepository,
 } from '../../repositories';
+
 import { createProviderShape, loginProviderShape } from '../../shapes';
+
 import updateProviderShape from '../../shapes/serviceProvider/update.shape';
 
 const router = Router();
@@ -40,15 +45,6 @@ const serviceProvidersRoutes = (app: Application) => {
         loginServiceProvider,
     );
 
-    router.patch(
-        '/service_providers/:id',
-        verifyBody,
-        validateShape(updateProviderShape),
-        validateToken(ServiceProviderRepository),
-        verifyId,
-        updateProvider,
-    );
-
     router.get(
         '/service_providers',
         validateToken(SuperAdminRepository),
@@ -60,10 +56,18 @@ const serviceProvidersRoutes = (app: Application) => {
         validateToken(ServiceProviderRepository),
         getServiceProviderById,
     );
+    
+    router.patch(
+        '/service_providers/:id',
+        verifyBody,
+        validateShape(updateProviderShape),
+        validateToken(ServiceProviderRepository),
+        verifyId,
+        updateProvider,
+    );
 
     router.patch(
         '/service_providers/update_status/:id',
-        verifyBody,
         validateToken(CondominiumRepository),
         updateStatus,
     );
