@@ -14,7 +14,7 @@ const createResident = async (req: Request, res: Response) => {
 
         return res.status(201).json(residentAttributes);
     } catch (error) {
-        return res.status(400).json({ message: error.driverError.detail });
+        return res.status(400).json({ error: error.driverError.detail });
     }
 };
 

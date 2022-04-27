@@ -31,9 +31,7 @@ const authToken =
             if (
                 !compareSync(req.validated[passwordKey], existent[passwordKey])
             ) {
-                return res
-                    .status(401)
-                    .json({ message: 'Wrong email/password' });
+                return res.status(401).json({ error: 'Wrong email/password' });
             }
 
             const token: string = sign({ existent }, config.secret, {

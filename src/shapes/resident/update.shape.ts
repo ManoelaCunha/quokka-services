@@ -12,7 +12,7 @@ const updateResidentShape = yup.object().shape({
         .string()
         .matches(
             cpfRegex,
-            'Cpf com formato inválido, verifique o dado e tente novamente!',
+            'invalid format on cpf field, verify and send again!',
         ),
     apartmentBlock: yup.string(),
     apartmentNumber: yup.number(),

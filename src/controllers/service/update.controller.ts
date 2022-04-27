@@ -18,7 +18,7 @@ const updateService = async (req: Request, res: Response) => {
                 category as string,
             );
         } catch (error) {
-            return res.status(404).json({ message: 'Category not found' });
+            return res.status(404).json({ error: 'Category not found' });
         }
     }
 
@@ -49,7 +49,7 @@ const updateService = async (req: Request, res: Response) => {
             return res.json(error);
         }
     } catch (error) {
-        return res.status(404).json({ message: 'Service not found' });
+        return res.status(404).json({ error: 'Service not found' });
     }
 };
 

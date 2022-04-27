@@ -7,7 +7,7 @@ const deleteCondominium = async (req: Request, res: Response) => {
     try {
         const foundCondo = await new CondominiumRepository().findById(id);
         if (!foundCondo) {
-            return res.status(404).json({ message: 'Condominium not found' });
+            return res.status(404).json({ error: 'Condominium not found' });
         }
     } catch (error) {
         return res.status(400).json(error);
