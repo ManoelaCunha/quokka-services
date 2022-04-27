@@ -1,4 +1,5 @@
 import { Repository, getRepository } from 'typeorm';
+import Condominium from '../../entities/Condominium';
 import Resident from '../../entities/Resident';
 import ResidentRepo from './interfaces';
 
@@ -9,8 +10,13 @@ class ResidentRepository implements ResidentRepo {
         this.ormRepository = getRepository(Resident);
     }
 
-    saveResident = async (resident: Resident) =>
-        await this.ormRepository.save(resident);
+    saveResident = async (resident: Resident, condominium: Condominium) => {
+        const newResident = await this.ormRepository.create({
+            ...resident,
+            condominium,
+        });
+        return await this.ormRepository.save(newResident);
+    };
     findResident = async () => await this.ormRepository.find();
     findById = async (uuid: string) => {
         return await this.ormRepository.findOne({

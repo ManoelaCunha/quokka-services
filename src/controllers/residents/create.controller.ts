@@ -1,21 +1,17 @@
-import { Request, Response } from 'express';
 import Resident from '../../entities/Resident';
-import { ResidentRepository } from '../../repositories';
-import { IResident } from '../../repositories/resident/interfaces';
 
-const createResident = async (req: Request, res: Response) => {
-    const { validated } = req;
-    const residentAttributes: IResident = { ...validated } as IResident;
+import { Request, Response } from 'express';
+import { createResidentService } from '../../services';
 
-    delete residentAttributes.password;
+const createResident = async (
+    req: Request,
+    res: Response,
+): Promise<Response> => {
+    const newResident = await createResidentService(req, res);
 
-    try {
-        await new ResidentRepository().saveResident(validated as Resident);
+    const { password, ...residentWithoutPassword } = newResident as Resident;
 
-        return res.status(201).json(residentAttributes);
-    } catch (error) {
-        return res.status(400).json({ error: error.driverError.detail });
-    }
+    return res.status(201).json(residentWithoutPassword);
 };
 
 export default createResident;
