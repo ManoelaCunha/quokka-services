@@ -6,6 +6,7 @@ import {
     getServiceProviderById,
     updateProvider,
     deleteServiceProvider,
+    updateStatus,
 } from '../../controllers';
 import {
     authToken,
@@ -51,6 +52,8 @@ const serviceProvidersRoutes = (app: Application) => {
         validateToken(ServiceProviderRepository),
         getServiceProviderById,
     );
+
+    router.patch('/service_providers/update_status/:id', updateStatus);
 
     router.delete(
         '/service_providers/:id',

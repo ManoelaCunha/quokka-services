@@ -32,6 +32,7 @@ export default class ServiceProvider {
         () => CondominiumServiceProvider,
         (condominiumServiceProviders: CondominiumServiceProvider) =>
             condominiumServiceProviders.serviceProvider,
+        { eager: true },
     )
     condominiumServiceProviders: CondominiumServiceProvider[];
 
