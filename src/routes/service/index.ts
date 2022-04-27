@@ -1,4 +1,5 @@
 import { Application, Router } from 'express';
+
 import {
     createService,
     getAllServices,
@@ -7,17 +8,20 @@ import {
     updateService,
     updateServiceStatus,
 } from '../../controllers';
+
 import {
     validateShape,
     validateToken,
     verifyBody,
     verifyId,
 } from '../../middlewares';
+
 import {
     CondominiumRepository,
     ResidentRepository,
     ServiceProviderRepository,
 } from '../../repositories';
+
 import { createServiceShape, updateServiceShape } from '../../shapes';
 
 const router = Router();
@@ -54,7 +58,6 @@ const serviceRoutes = (app: Application) => {
 
     router.patch(
         '/services/update_status/:id',
-        verifyBody,
         validateToken(ServiceProviderRepository),
         updateServiceStatus,
     );
