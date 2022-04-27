@@ -20,6 +20,7 @@ import {
     validateShape,
     validateToken,
     verifyId,
+    verifyBody,
     verifySuperAdmin,
 } from '../../middlewares';
 
@@ -56,6 +57,7 @@ const superAdminRoutes = (app: Application) => {
 
     router.patch(
         '/super_adm/:id',
+        verifyBody,
         validateShape(updateSuperAdminShape),
         validateToken(SuperAdminRepository),
         verifyId,
