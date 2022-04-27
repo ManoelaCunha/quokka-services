@@ -11,7 +11,7 @@ const validateToken =
         if (!token) {
             return res
                 .status(401)
-                .json({ message: 'Missing authorization headers' });
+                .json({ meserrorsage: 'Missing authorization headers' });
         }
 
         jsonwebtoken.verify(
@@ -19,7 +19,7 @@ const validateToken =
             config.secret,
             async (err, decoded: JwtPayload) => {
                 if (err) {
-                    return res.status(401).json({ message: err.message });
+                    return res.status(401).json({ error: err.message });
                 }
 
                 let emailKey = Object.keys(Object.values(decoded)[0]).find(
@@ -31,7 +31,7 @@ const validateToken =
                 );
 
                 if (!existent) {
-                    return res.status(404).json({ message: 'Token invalid' });
+                    return res.status(404).json({ error: 'Token invalid' });
                 }
 
                 req.decoded = existent;

@@ -5,9 +5,11 @@ import {
     getServiceById,
     deleteService,
     updateService,
+    updateServiceStatus,
 } from '../../controllers';
-import { validateShape, validateToken } from '../../middlewares';
+import { validateShape, validateToken, verifyId } from '../../middlewares';
 import {
+    CondominiumRepository,
     ResidentRepository,
     ServiceProviderRepository,
 } from '../../repositories';
@@ -42,6 +44,12 @@ const serviceRoutes = (app: Application) => {
         validateToken(ResidentRepository),
         validateShape(updateServiceShape),
         updateService,
+    );
+
+    router.patch(
+        '/services/update_status/:id',
+        validateToken(ServiceProviderRepository),
+        updateServiceStatus,
     );
 
     app.use(router);

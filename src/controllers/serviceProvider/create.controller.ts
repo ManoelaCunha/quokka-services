@@ -17,7 +17,7 @@ const createServiceProvider = async (req: Request, res: Response) => {
 
         return res.status(201).json(serviceProviderAttributes);
     } catch (error) {
-        return res.status(400).json({ message: error.driverError.detail });
+        return res.status(400).json({ error: error.driverError.detail });
     }
 };
 

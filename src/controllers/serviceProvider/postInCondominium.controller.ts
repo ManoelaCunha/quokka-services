@@ -8,19 +8,40 @@ const postServiceProviderInCondominium = async (
     req: Request,
     res: Response,
 ) => {
-    const condominium = await new CondominiumRepository().findById(
-        req.params.id,
-    );
+    try {
+        const condominium = await new CondominiumRepository().findById(
+            req.params.id,
+        );
 
-    const newProviderInCondominium = await getRepository(
-        CondominiumServiceProvider,
-    ).create({ condominium, serviceProvider: req.decoded as ServiceProvider });
+        const relation = await getRepository(
+            CondominiumServiceProvider,
+        ).findOne({
+            where: { condominium, serviceProvider: req.decoded },
+        });
 
-    await getRepository(CondominiumServiceProvider).save(
-        newProviderInCondominium,
-    );
+        if (relation) {
+            return res
+                .status(409)
+                .json({ error: 'Service Provider already in Condominium' });
+        }
 
-    return res.status(200).json({ message: 'Request sent successfully' });
+        const newProviderInCondominium = await getRepository(
+            CondominiumServiceProvider,
+        ).create({
+            condominium,
+            serviceProvider: req.decoded as ServiceProvider,
+        });
+
+        await getRepository(CondominiumServiceProvider).save(
+            newProviderInCondominium,
+        );
+
+        return res.status(200).json({ message: 'Request sent successfully' });
+    } catch (error) {
+        return res.status(400).json({
+            error: 'Resquest failed. Please check the parameters and tyr again',
+        });
+    }
 };
 
 export default postServiceProviderInCondominium;
