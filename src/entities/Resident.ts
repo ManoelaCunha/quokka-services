@@ -37,9 +37,9 @@ export default class Resident {
     @ManyToOne(
         () => Condominium,
         (condominium: Condominium) => condominium.residents,
-        { onDelete: 'CASCADE' },
+        { onDelete: 'CASCADE', lazy: true },
     )
-    condominium: Condominium[];
+    condominium: Condominium;
 
     @OneToMany(() => Service, (service: Service) => service.resident)
     services: Service[];

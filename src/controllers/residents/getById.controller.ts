@@ -3,10 +3,20 @@ import { ResidentRepository } from '../../repositories';
 
 const retrieveResidentById = async (req: Request, res: Response) => {
     const { params } = req;
-    const { password, ...residentWithoutPassword } =
-        await new ResidentRepository().findById(params.id);
+    const resident = await new ResidentRepository().findById(params.id);
 
-    return res.status(200).json(residentWithoutPassword);
+    const { __condominium__, __has_condominium__, password, ...rest } =
+        Object(resident);
+
+    const resultSchema = { ...rest };
+
+    if (resident.isAuth) {
+        const condominium = await resident.condominium;
+
+        resultSchema['condominium'] = condominium;
+    }
+
+    return res.status(200).json(resultSchema);
 };
 
 export default retrieveResidentById;
