@@ -12,7 +12,7 @@ const createCondomonium = async (req: Request, res: Response) => {
             );
         return res.status(201).json(rest);
     } catch (error) {
-        return res.status(400).json({ message: error.driverError.detail });
+        return res.status(400).json({ error: error.driverError.detail });
     }
 };
 

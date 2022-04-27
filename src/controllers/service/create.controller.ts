@@ -39,10 +39,10 @@ const createService = async (req: Request, res: Response) => {
                 serviceProvider: null,
             });
         } catch (error) {
-            return res.status(404).json({ message: 'Category not found' });
+            return res.status(404).json({ error: 'Category not found' });
         }
     } catch (error) {
-        return res.status(400).json({ message: error.driverError.detail });
+        return res.status(400).json({ error: error.driverError.detail });
     }
 };
 

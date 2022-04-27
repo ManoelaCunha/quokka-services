@@ -9,7 +9,7 @@ const verifyAdmin = async (req: Request, res: Response, next: NextFunction) => {
     const admin = await new CondominiumRepository().findByEmail(trusteeEmail);
 
     if (!admin) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ error: 'Unauthorized' });
     }
 
     next();

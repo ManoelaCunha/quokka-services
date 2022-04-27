@@ -14,7 +14,7 @@ const createCategory = async (req: Request, res: Response) => {
     );
 
     if (categoryExists) {
-        return res.status(409).json({ message: 'Category already exists!' });
+        return res.status(409).json({ error: 'Category already exists!' });
     }
 
     const newCategory = await new CategoryRepository().saveCategory(
