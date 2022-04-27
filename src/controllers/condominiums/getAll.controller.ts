@@ -8,7 +8,12 @@ const getAllCondominiums = async (req: Request, res: Response) => {
     const newCondominiums: Array<Partial<Condominium>> = [];
 
     condominiums.map((condominium: Condominium) => {
-        const { trusteePassword, ...condominiumWithoutPassword } = condominium;
+        const {
+            trusteePassword,
+            residents,
+            condominiumServiceProviders,
+            ...condominiumWithoutPassword
+        } = condominium;
 
         newCondominiums.push(condominiumWithoutPassword);
     });
