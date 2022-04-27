@@ -2,7 +2,7 @@ import morgan from 'morgan';
 import express, { Application } from 'express';
 import superAdminRoutes from './superAdmin';
 import condominiumRoutes from './condominium';
-import categoryRoutes from './Category';
+import categoryRoutes from './category';
 import residentsRoutes from './residents';
 import serviceRoutes from './service';
 import serviceProvidersRoutes from './serviceProvider';
