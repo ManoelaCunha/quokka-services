@@ -19,6 +19,7 @@ import {
     authToken,
     validateShape,
     validateToken,
+    verifyId,
     verifySuperAdmin,
 } from '../../middlewares';
 
@@ -57,6 +58,7 @@ const superAdminRoutes = (app: Application) => {
         '/super_adm/:id',
         validateShape(updateSuperAdminShape),
         validateToken(SuperAdminRepository),
+        verifyId,
         updateSuperAdmin,
     );
 
@@ -64,6 +66,7 @@ const superAdminRoutes = (app: Application) => {
         '/super_adm/:id',
         validateToken(SuperAdminRepository),
         verifySuperAdmin,
+        verifyId,
         deleteSuperAdmin,
     );
 
