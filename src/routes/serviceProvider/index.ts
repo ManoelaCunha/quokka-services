@@ -16,7 +16,10 @@ import {
     verifyId,
     verifySuperAdmin,
 } from '../../middlewares';
-import { ServiceProviderRepository } from '../../repositories';
+import {
+    CondominiumRepository,
+    ServiceProviderRepository,
+} from '../../repositories';
 import { createProviderShape, loginProviderShape } from '../../shapes';
 import updateProviderShape from '../../shapes/serviceProvider/update.shape';
 
@@ -56,7 +59,11 @@ const serviceProvidersRoutes = (app: Application) => {
         getServiceProviderById,
     );
 
-    router.patch('/service_providers/update_status/:id', updateStatus);
+    router.patch(
+        '/service_providers/update_status/:id',
+        validateToken(CondominiumRepository),
+        updateStatus,
+    );
 
     router.delete(
         '/service_providers/:id',
