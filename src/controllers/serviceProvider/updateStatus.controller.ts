@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, QueryFailedError } from 'typeorm';
 import CondominiumServiceProvider from '../../entities/CondominiumServiceProviders';
 import { ServiceProviderRepository } from '../../repositories';
 
@@ -17,19 +17,33 @@ const updateStatus = async (req: Request, res: Response) => {
                 .status(404)
                 .json({ error: `Requested user for the id ${req.params.id}` });
         }
+        if (
+            queryParam.toLowerCase() !== 'true' &&
+            queryParam.toLowerCase() !== 'false'
+        ) {
+            return res.status(400).json({
+                error: `Query param 'approved' only accepts 'true' or 'false' but it received '${queryParam}'`,
+            });
+        }
+        const requestCondominiumServiceProvider =
+            requestedProvider.condominiumServiceProviders;
+        if (!requestCondominiumServiceProvider) {
+            return res.status(400).json({
+                error: 'Cannot update current service provider status. Please check if this provider currently exists in the requested condominium.',
+            });
+        }
         const stringToBoolean = queryParam.toLowerCase() === 'true';
-        await getRepository(CondominiumServiceProvider).update(
-            requestedProvider.condominiumServiceProviders[0]
-                .condoServiceProvidersId,
-            { isApproved: stringToBoolean },
+        requestCondominiumServiceProvider.isApproved = stringToBoolean;
+        await getRepository(CondominiumServiceProvider).save(
+            requestedProvider.condominiumServiceProviders,
         );
-
-        const dataToReturn = await new ServiceProviderRepository().findById(
-            userId,
-        );
-
-        return res.status(201).json(dataToReturn);
+        return res.status(201).json(requestedProvider);
     } catch (err) {
+        if (err instanceof QueryFailedError) {
+            return res.status(400).json({
+                error: 'Request failed, please check the parameters and try again. ',
+            });
+        }
         return res.status(400).json({ error: err });
     }
 };
