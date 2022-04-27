@@ -29,11 +29,7 @@ const serviceRoutes = (app: Application) => {
         getAllServices,
     );
 
-    router.get(
-        '/services/:id',
-        validateToken(ResidentRepository),
-        getServiceById,
-    );
+    router.get('/services/:id', getServiceById);
 
     router.delete(
         '/services/:id',
