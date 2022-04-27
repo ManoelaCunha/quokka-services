@@ -2,6 +2,7 @@ import * as yup from 'yup';
 import bcrypt from 'bcrypt';
 
 const updateCondominium = yup.object().shape({
+    condominiumId: yup.string(),
     condominiumName: yup.string(),
     zipCode: yup.string().min(8).max(8),
     district: yup.string(),

@@ -17,6 +17,14 @@ const updateCondominiumService = async (
             return res
                 .status(401)
                 .json({ error: 'condominiumId key cannot be updated' });
+
+        }
+
+        if (Object.keys(req.body).length === 0) {
+            return res
+                .status(400)
+                .json({ error: 'This route needs request body!' });
+
         }
 
         await new CondominiumRepository().updateCondominium(
@@ -31,7 +39,9 @@ const updateCondominiumService = async (
         return updateCondominium as Condominium;
     } catch (error: any) {
         if (error instanceof QueryFailedError) {
-            return res.status(400).json({ error: error.driverError.detail });
+
+            return res.status(400).json({ error: error.driverError });
+
         }
     }
 };
