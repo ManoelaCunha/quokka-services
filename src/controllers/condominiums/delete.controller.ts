@@ -7,17 +7,15 @@ const deleteCondominium = async (req: Request, res: Response) => {
     try {
         const foundCondo = await new CondominiumRepository().findById(id);
         if (!foundCondo) {
-            return res.status(404).json({ error: 'Condominium not found' });
+            return res
+                .status(404)
+                .json({ error: 'Condominium doest not exist' });
         }
-    } catch (error) {
-        return res.status(400).json(error);
-    }
 
-    try {
         await new CondominiumRepository().deleteCondominium(id);
         return res.status(204).send();
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(404).json({ error: 'Condominium not found' });
     }
 };
 
