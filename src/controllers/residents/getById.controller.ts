@@ -11,7 +11,13 @@ const retrieveResidentById = async (req: Request, res: Response) => {
     const resultSchema = { ...rest };
 
     if (resident.isAuth) {
-        const condominium = await resident.condominium;
+        const {
+            trusteeCpf,
+            trusteePassword,
+            residents,
+            condominiumServiceProviders,
+            ...condominium
+        } = await resident.condominium;
 
         resultSchema['condominium'] = condominium;
     }
