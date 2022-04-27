@@ -1,7 +1,7 @@
 import { Repository, getRepository, UpdateResult } from 'typeorm';
 
 import Condominium from '../../entities/Condominium';
-import { ICondominium, ICondominiumRepository } from './interface';
+import { ICondominiumRepository } from './interface';
 
 class CondominiumRepository implements ICondominiumRepository {
     private ormRepository: Repository<Condominium>;
@@ -11,20 +11,20 @@ class CondominiumRepository implements ICondominiumRepository {
     }
 
     saveCondominium = async (
-        condominium: ICondominium,
-    ): Promise<ICondominium> => {
+        condominium: Condominium,
+    ): Promise<Condominium> => {
         return await this.ormRepository.save(condominium);
     };
 
-    findCondominiums = async (): Promise<ICondominium[]> => {
+    findCondominiums = async (): Promise<Condominium[]> => {
         return await this.ormRepository.find();
     };
 
-    findById = async (condominium_id: string): Promise<ICondominium> => {
+    findById = async (condominium_id: string): Promise<Condominium> => {
         return await this.ormRepository.findOne(condominium_id);
     };
 
-    findByEmail = async (condominium_email: string): Promise<ICondominium> => {
+    findByEmail = async (condominium_email: string): Promise<Condominium> => {
         return await this.ormRepository.findOne({
             where: { trusteeEmail: condominium_email },
         });
@@ -32,7 +32,7 @@ class CondominiumRepository implements ICondominiumRepository {
 
     updateCondominium = async (
         uuid: string,
-        data: Partial<ICondominium>,
+        data: Partial<Condominium>,
     ): Promise<UpdateResult> => {
         return await this.ormRepository.update(uuid, data);
     };
@@ -42,4 +42,4 @@ class CondominiumRepository implements ICondominiumRepository {
     };
 }
 
-export { CondominiumRepository, ICondominiumRepository, ICondominium };
+export { CondominiumRepository, ICondominiumRepository };

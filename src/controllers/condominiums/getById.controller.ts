@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CondominiumRepository } from '../../repositories';
+import { getCondominiumByIdService } from '../../services';
 
 const retrieveCondominiumById = async (req: Request, res: Response) => {
     const condominiums = await new CondominiumRepository().findById(
@@ -8,7 +9,9 @@ const retrieveCondominiumById = async (req: Request, res: Response) => {
 
     const { trusteePassword, ...condominiumWithouPasword } = condominiums;
 
-    return res.status(200).json(condominiumWithouPasword);
+    getCondominiumByIdService(condominiumWithouPasword);
+
+    return res.status(200).json({ ...condominiumWithouPasword });
 };
 
 export default retrieveCondominiumById;

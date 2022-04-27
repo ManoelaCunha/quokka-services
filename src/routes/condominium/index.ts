@@ -5,6 +5,7 @@ import {
     loginCondominium,
     retrieveCondominiumById,
     getAllCondominiums,
+    deleteCondominium,
 } from '../../controllers';
 
 import updateCondominium from '../../controllers/condominiums/update.controller';
@@ -44,11 +45,7 @@ const condominiumRoutes = (app: Application) => {
         loginCondominium,
     );
 
-    router.get(
-        '/condominiums',
-        validateToken(SuperAdminRepository),
-        getAllCondominiums,
-    );
+    router.get('/condominiums', getAllCondominiums);
 
     router.get(
         '/condominiums/:id',
@@ -62,6 +59,12 @@ const condominiumRoutes = (app: Application) => {
         validateToken(SuperAdminRepository),
         verifySuperAdmin,
         updateCondominium,
+    );
+
+    router.delete(
+        '/condominiums/:id',
+        validateToken(SuperAdminRepository),
+        deleteCondominium,
     );
 
     app.use(router);
