@@ -2,10 +2,18 @@ import { Request, Response } from 'express';
 import { SuperAdminRepository } from '../../repositories';
 
 const retrieveSuperAdminById = async (req: Request, res: Response) => {
-    const { password, ...superAdminWithouPasword } =
-        await new SuperAdminRepository().findById(req.params.id);
+    try {
+        const { password, ...superAdminWithouPasword } =
+            await new SuperAdminRepository().findById(req.params.id);
 
-    return res.status(200).json(superAdminWithouPasword);
+        return res.status(200).json(superAdminWithouPasword);
+    } catch (error) {
+        return res
+            .status(400)
+            .json({
+                message: 'Requisition failed, verify the id and try again',
+            });
+    }
 };
 
 export default retrieveSuperAdminById;
