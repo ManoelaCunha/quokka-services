@@ -29,7 +29,7 @@ const router = Router();
 
 const residentsRoutes = (app: Application) => {
     router.post(
-        '/residents',
+        '/residents/:condominiumId',
         validateShape(createResidentShape),
         createResident,
     );
