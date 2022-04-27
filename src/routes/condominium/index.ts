@@ -14,6 +14,7 @@ import {
     authToken,
     validateShape,
     validateToken,
+    verifyBody,
     verifySuperAdmin,
 } from '../../middlewares';
 
@@ -55,6 +56,7 @@ const condominiumRoutes = (app: Application) => {
 
     router.patch(
         '/condominiums/:id',
+        verifyBody,
         validateShape(updateCondominiumShape),
         validateToken(SuperAdminRepository),
         verifySuperAdmin,
