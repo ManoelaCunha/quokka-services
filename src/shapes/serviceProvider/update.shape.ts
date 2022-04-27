@@ -10,7 +10,7 @@ const updateProviderShape = yup.object().shape({
         .string()
         .matches(
             phoneRegex,
-            'Número de telefone inválido, coloque seu telefone com DDD, digite 9 e seu número sem traços!',
+            'phone invalid, the correct format is: (99)999999999!',
         ),
     socialMedia: yup.string().optional(),
     name: yup.string(),
@@ -20,7 +20,7 @@ const updateProviderShape = yup.object().shape({
         .string()
         .matches(
             cpfRegex,
-            'Cpf com formato inválido, verifique o dado e tente novamente!',
+            'invalid format on cpf field, verify and send again!',
         ),
     occupation: yup.string(),
 });

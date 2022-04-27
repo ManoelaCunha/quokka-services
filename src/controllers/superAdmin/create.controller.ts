@@ -23,7 +23,7 @@ const createSuperAdmin = async (req: Request, res: Response) => {
 
         return res.status(201).json(userWithoutPass);
     } catch (error) {
-        return res.status(409).json({ message: 'email already exists' });
+        return res.status(409).json({ error: 'email already exists' });
     }
 };
 

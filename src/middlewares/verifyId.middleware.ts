@@ -8,25 +8,25 @@ const verifyId = (req: Request, res: Response, next: NextFunction) => {
 
     if (residentId) {
         if (id !== residentId) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ error: 'Unauthorized' });
         }
     }
 
     if (serviceProviderId) {
         if (id !== serviceProviderId) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ error: 'Unauthorized' });
         }
     }
 
     if (condominiumId) {
         if (id !== condominiumId) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ error: 'Unauthorized' });
         }
     }
 
     if (superAdminId) {
         if (id !== superAdminId) {
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ error: 'Unauthorized' });
         }
     }
 

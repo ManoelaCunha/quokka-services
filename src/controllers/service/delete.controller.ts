@@ -11,11 +11,11 @@ const deleteService = async (
     const serviceToDelete = await new ServiceRepository().findServiceById(id);
 
     if (!serviceToDelete) {
-        return res.status(404).json({ message: 'service not founded!' });
+        return res.status(404).json({ error: 'service not founded!' });
     }
 
     if (serviceToDelete.resident.residentId !== residentId) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ error: 'Unauthorized' });
     }
 
     await new ServiceRepository().deleteService(id);

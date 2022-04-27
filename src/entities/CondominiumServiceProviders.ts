@@ -13,7 +13,7 @@ export default class CondominiumServiceProvider {
     @ManyToOne(
         () => Condominium,
         (condominium: Condominium) => condominium.condominiumServiceProviders,
-        { onDelete: 'CASCADE' },
+        { onDelete: 'CASCADE', lazy: true },
     )
     condominium: Condominium;
 

@@ -14,11 +14,11 @@ import {
     validateShape,
     validateToken,
     verifyId,
-    verifySuperAdmin,
 } from '../../middlewares';
 import {
     CondominiumRepository,
     ServiceProviderRepository,
+    SuperAdminRepository,
 } from '../../repositories';
 import { createProviderShape, loginProviderShape } from '../../shapes';
 import updateProviderShape from '../../shapes/serviceProvider/update.shape';
@@ -49,7 +49,7 @@ const serviceProvidersRoutes = (app: Application) => {
 
     router.get(
         '/service_providers',
-        validateToken(ServiceProviderRepository),
+        validateToken(SuperAdminRepository),
         getAllServiceProviders,
     );
 
@@ -68,6 +68,7 @@ const serviceProvidersRoutes = (app: Application) => {
     router.delete(
         '/service_providers/:id',
         validateToken(ServiceProviderRepository),
+        verifyId,
         deleteServiceProvider,
     );
 
