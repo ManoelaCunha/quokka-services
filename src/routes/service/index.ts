@@ -6,7 +6,7 @@ import {
     deleteService,
     updateService,
 } from '../../controllers';
-import { validateShape, validateToken } from '../../middlewares';
+import { validateShape, validateToken, verifyId } from '../../middlewares';
 import {
     ResidentRepository,
     ServiceProviderRepository,
