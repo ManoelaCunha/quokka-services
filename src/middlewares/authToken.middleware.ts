@@ -24,8 +24,11 @@ const authToken =
                 key.includes('assword'),
             );
 
+            if (!existent) {
+                return res.status(404).json({ error: 'Email not found!' });
+            }
+
             if (
-                !existent ||
                 !compareSync(req.validated[passwordKey], existent[passwordKey])
             ) {
                 return res
