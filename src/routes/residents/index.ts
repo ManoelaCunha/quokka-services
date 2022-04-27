@@ -14,6 +14,7 @@ import {
     validateShape,
     validateToken,
     verifyAdmin,
+    verifyBody,
     verifyId,
 } from '../../middlewares';
 
@@ -29,7 +30,7 @@ const router = Router();
 
 const residentsRoutes = (app: Application) => {
     router.post(
-        '/residents',
+        '/residents/:condominiumId',
         validateShape(createResidentShape),
         createResident,
     );
@@ -56,6 +57,7 @@ const residentsRoutes = (app: Application) => {
 
     router.patch(
         '/residents/:id',
+        verifyBody,
         validateShape(updateResidentShape),
         validateToken(ResidentRepository),
         verifyId,
