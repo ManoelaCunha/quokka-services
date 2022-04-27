@@ -21,6 +21,7 @@ import createResident from './residents/create.controller';
 import loginResident from './residents/login.controller';
 import getAllResidents from './residents/getAll.controller';
 import retrieveResidentById from './residents/getById.controller';
+import updateResident from './residents/update.controller';
 import deleteResident from './residents/delete.controller';
 import createServiceProvider from './serviceProvider/create.controller';
 import loginServiceProvider from './serviceProvider/login.controller';
@@ -30,6 +31,7 @@ import updateProvider from './serviceProvider/update.controller';
 import deleteServiceProvider from './serviceProvider/delete.controller';
 import updateService from './service/update.controller';
 import deleteCondominium from './condominiums/delete.controller';
+import postServiceProviderInCondominium from './serviceProvider/postInCondominium.controller';
 
 export {
     createSuperAdmin,
@@ -55,6 +57,7 @@ export {
     loginResident,
     getAllResidents,
     retrieveResidentById,
+    updateResident,
     deleteResident,
     createServiceProvider,
     loginServiceProvider,
@@ -64,4 +67,5 @@ export {
     deleteServiceProvider,
     updateService,
     deleteCondominium,
+    postServiceProviderInCondominium,
 };

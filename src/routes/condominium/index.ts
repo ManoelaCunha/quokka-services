@@ -45,11 +45,7 @@ const condominiumRoutes = (app: Application) => {
         loginCondominium,
     );
 
-    router.get(
-        '/condominiums',
-        validateToken(SuperAdminRepository),
-        getAllCondominiums,
-    );
+    router.get('/condominiums', getAllCondominiums);
 
     router.get(
         '/condominiums/:id',
