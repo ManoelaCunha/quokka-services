@@ -43,13 +43,16 @@ export default class Condominium {
     @Column({ nullable: false })
     trusteePassword: string;
 
-    @OneToMany(() => Resident, (resident: Resident) => resident.condominium)
+    @OneToMany(() => Resident, (resident: Resident) => resident.condominium, {
+        eager: true,
+    })
     residents: Resident[];
 
     @OneToMany(
         () => CondominiumServiceProvider,
         (condominiumServiceProvider: CondominiumServiceProvider) =>
             condominiumServiceProvider.condominium,
+        { eager: true },
     )
     condominiumServiceProviders: CondominiumServiceProvider[];
 }

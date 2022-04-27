@@ -1,6 +1,5 @@
 import {
     CondominiumRepository,
-    ICondominium,
     ICondominiumRepository,
 } from './condominium/repository';
 import {
@@ -17,7 +16,6 @@ import SuperAdminRepository from './superAdmin/repository';
 
 export {
     CondominiumRepository,
-    ICondominium,
     ICondominiumRepository,
     CategoryRepository,
     ICategoryRepository,

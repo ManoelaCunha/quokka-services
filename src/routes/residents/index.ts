@@ -6,6 +6,7 @@ import {
     loginResident,
     getAllResidents,
     retrieveResidentById,
+    updateResident,
 } from '../../controllers';
 
 import {
@@ -13,11 +14,16 @@ import {
     validateShape,
     validateToken,
     verifyAdmin,
+    verifyId,
 } from '../../middlewares';
 
 import { ResidentRepository, CondominiumRepository } from '../../repositories';
 
-import { createResidentShape, loginResidentShape } from '../../shapes';
+import {
+    createResidentShape,
+    loginResidentShape,
+    updateResidentShape,
+} from '../../shapes';
 
 const router = Router();
 
@@ -25,7 +31,6 @@ const residentsRoutes = (app: Application) => {
     router.post(
         '/residents',
         validateShape(createResidentShape),
-        validateToken(CondominiumRepository),
         createResident,
     );
 
@@ -49,9 +54,25 @@ const residentsRoutes = (app: Application) => {
         retrieveResidentById,
     );
 
+    router.patch(
+        '/residents/:id',
+        validateShape(updateResidentShape),
+        validateToken(ResidentRepository),
+        verifyId,
+        updateResident,
+    );
+
+    router.patch(
+        '/residents/update_status/:id',
+        validateToken(CondominiumRepository),
+        verifyAdmin,
+        updateResident,
+    );
+
     router.delete(
         '/residents/:id',
-        validateToken(CondominiumRepository),
+        validateToken(ResidentRepository),
+        verifyId,
         deleteResident,
     );
 

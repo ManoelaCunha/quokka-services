@@ -5,10 +5,16 @@ import { CategoryRepository } from '../../repositories';
 const updateCategory = async (req: Request, res: Response) => {
     const { id } = req.params;
 
-    const data: Category = req.decoded as Category;
-
     try {
-        await new CategoryRepository().updateCategory(id, data);
+        const category = await new CategoryRepository().findById(id);
+
+        if (!category) {
+            return res.status(404).json({ error: 'Category not found' });
+        }
+
+        await new CategoryRepository().updateCategory(id, {
+            name: req.body.name,
+        });
 
         const updatedData: Category = await new CategoryRepository().findById(
             id,
@@ -16,7 +22,9 @@ const updateCategory = async (req: Request, res: Response) => {
 
         return res.json(updatedData);
     } catch (error) {
-        return res.status(400).json(error.errors);
+        return res.status(400).json({
+            error: 'Requisition failed, verify the parameters and try again',
+        });
     }
 };
 
