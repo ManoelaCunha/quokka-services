@@ -13,6 +13,7 @@ import {
     authToken,
     validateShape,
     validateToken,
+    verifyBody,
     verifyId,
 } from '../../middlewares';
 import {
@@ -41,6 +42,7 @@ const serviceProvidersRoutes = (app: Application) => {
 
     router.patch(
         '/service_providers/:id',
+        verifyBody,
         validateShape(updateProviderShape),
         validateToken(ServiceProviderRepository),
         verifyId,
@@ -61,6 +63,7 @@ const serviceProvidersRoutes = (app: Application) => {
 
     router.patch(
         '/service_providers/update_status/:id',
+        verifyBody,
         validateToken(CondominiumRepository),
         updateStatus,
     );

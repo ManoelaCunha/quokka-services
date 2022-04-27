@@ -4,6 +4,7 @@ import validateToken from './validateToken.middleware';
 import verifyAdmin from './verifyAdmin.middleware';
 import verifySuperAdmin from './verifySuperAdmin.middleware';
 import verifyId from './verifyId.middleware';
+import verifyBody from './verifyBody.middleware';
 
 export {
     authToken,
@@ -12,4 +13,5 @@ export {
     verifyAdmin,
     verifySuperAdmin,
     verifyId,
+    verifyBody,
 };

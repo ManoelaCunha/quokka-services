@@ -7,7 +7,12 @@ import {
     updateService,
     updateServiceStatus,
 } from '../../controllers';
-import { validateShape, validateToken, verifyId } from '../../middlewares';
+import {
+    validateShape,
+    validateToken,
+    verifyBody,
+    verifyId,
+} from '../../middlewares';
 import {
     CondominiumRepository,
     ResidentRepository,
@@ -41,6 +46,7 @@ const serviceRoutes = (app: Application) => {
 
     router.patch(
         '/services/:id',
+        verifyBody,
         validateToken(ResidentRepository),
         validateShape(updateServiceShape),
         updateService,
@@ -48,6 +54,7 @@ const serviceRoutes = (app: Application) => {
 
     router.patch(
         '/services/update_status/:id',
+        verifyBody,
         validateToken(ServiceProviderRepository),
         updateServiceStatus,
     );
