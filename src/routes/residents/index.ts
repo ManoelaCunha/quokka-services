@@ -14,6 +14,7 @@ import {
     validateShape,
     validateToken,
     verifyAdmin,
+    verifyId,
 } from '../../middlewares';
 
 import { ResidentRepository, CondominiumRepository } from '../../repositories';
@@ -57,6 +58,7 @@ const residentsRoutes = (app: Application) => {
         '/residents/:id',
         validateShape(updateResidentShape),
         validateToken(ResidentRepository),
+        verifyId,
         updateResident,
     );
 
@@ -69,7 +71,8 @@ const residentsRoutes = (app: Application) => {
 
     router.delete(
         '/residents/:id',
-        validateToken(CondominiumRepository),
+        validateToken(ResidentRepository),
+        verifyId,
         deleteResident,
     );
 
