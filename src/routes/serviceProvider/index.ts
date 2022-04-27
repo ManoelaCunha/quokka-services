@@ -6,6 +6,7 @@ import {
     getServiceProviderById,
     updateProvider,
     deleteServiceProvider,
+    updateStatus,
     postServiceProviderInCondominium,
 } from '../../controllers';
 import {
@@ -15,6 +16,7 @@ import {
     verifyId,
 } from '../../middlewares';
 import {
+    CondominiumRepository,
     ServiceProviderRepository,
     SuperAdminRepository,
 } from '../../repositories';
@@ -55,6 +57,12 @@ const serviceProvidersRoutes = (app: Application) => {
         '/service_providers/:id',
         validateToken(ServiceProviderRepository),
         getServiceProviderById,
+    );
+
+    router.patch(
+        '/service_providers/update_status/:id',
+        validateToken(CondominiumRepository),
+        updateStatus,
     );
 
     router.delete(
