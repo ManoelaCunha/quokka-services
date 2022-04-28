@@ -3,7 +3,7 @@
 📜 Serviço rápido e sem preocupação!
 
 <p align="center">
-<img src="https://i.imgur.com/cTHsx9q.png" alt="quokka-logo" border="0">
+<img src="https://i.imgur.com/XLiIFDJ.png" alt="quokka-logo" border="0">
 </p>
 
 <p>
