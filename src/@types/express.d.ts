@@ -4,6 +4,7 @@ import SuperAdmin from '../entities/SuperAdmin';
 import Resident from '../entities/Resident';
 import Condominium from '../entities/Condominium';
 import Service from '../entities/Service';
+
 type validatedTypes =
     | ServiceProvider
     | SuperAdmin
