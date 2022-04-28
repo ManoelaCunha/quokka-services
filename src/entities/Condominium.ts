@@ -1,14 +1,6 @@
-import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    OneToMany,
-    ManyToMany,
-    JoinTable,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 import Resident from './Resident';
-import Category from './Category';
 import CondominiumServiceProvider from './CondominiumServiceProviders';
 
 @Entity('condominiums')
@@ -43,13 +35,16 @@ export default class Condominium {
     @Column({ nullable: false })
     trusteePassword: string;
 
-    @OneToMany(() => Resident, (resident: Resident) => resident.condominium)
+    @OneToMany(() => Resident, (resident: Resident) => resident.condominium, {
+        eager: true,
+    })
     residents: Resident[];
 
     @OneToMany(
         () => CondominiumServiceProvider,
         (condominiumServiceProvider: CondominiumServiceProvider) =>
             condominiumServiceProvider.condominium,
+        { eager: true },
     )
     condominiumServiceProviders: CondominiumServiceProvider[];
 }

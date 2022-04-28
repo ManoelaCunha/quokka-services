@@ -1,8 +1,15 @@
 import * as yup from 'yup';
 
 const loginCondominium = yup.object().shape({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
+    trusteeEmail: yup
+        .string()
+        .email()
+        .required()
+        .min(2, 'must have at least 2 letters'),
+    trusteePassword: yup
+        .string()
+        .required()
+        .min(2, 'must have at least 2 letters'),
 });
 
 export default loginCondominium;

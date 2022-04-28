@@ -19,6 +19,8 @@ import {
     authToken,
     validateShape,
     validateToken,
+    verifyId,
+    verifyBody,
     verifySuperAdmin,
 } from '../../middlewares';
 
@@ -29,6 +31,7 @@ const router = Router();
 const superAdminRoutes = (app: Application) => {
     router.post(
         '/super_adm',
+        validateToken(SuperAdminRepository),
         validateShape(createSuperAdminShape),
         createSuperAdmin,
     );
@@ -49,14 +52,18 @@ const superAdminRoutes = (app: Application) => {
 
     router.get(
         '/super_adm/:id',
-        authToken(SuperAdminRepository),
+        validateToken(SuperAdminRepository),
+        verifySuperAdmin,
+        verifyId,
         retrieveSuperAdminById,
     );
 
     router.patch(
         '/super_adm/:id',
+        verifyBody,
         validateShape(updateSuperAdminShape),
         validateToken(SuperAdminRepository),
+        verifyId,
         updateSuperAdmin,
     );
 
@@ -64,6 +71,7 @@ const superAdminRoutes = (app: Application) => {
         '/super_adm/:id',
         validateToken(SuperAdminRepository),
         verifySuperAdmin,
+        verifyId,
         deleteSuperAdmin,
     );
 

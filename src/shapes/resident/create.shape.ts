@@ -6,29 +6,36 @@ const cpfRegex: RegExp = /([0-9]{11})/g;
 
 const createResidentShape = yup.object().shape({
     residentId: yup.string().default(() => v4()),
-    name: yup.string().required('Campo de name obrigatório'),
+    name: yup
+        .string()
+        .required('name is a required field')
+        .min(2, 'must have at least 2 letters'),
     email: yup
         .string()
         .email()
         .lowercase()
-        .required('Campo de email obrigatório'),
+        .required('email is a required field')
+        .min(2, 'must have at least 2 letters'),
     password: yup
         .string()
-        .required('Campo de password obrigatório')
-        .transform((pwd) => bcrypt.hashSync(pwd, 10)),
+        .required('password is a required field')
+        .transform((pwd) => bcrypt.hashSync(pwd, 10))
+        .min(2, 'must have at least 2 letters'),
     cpf: yup
         .string()
-        .required('Campo de cpf obrigatório')
+        .required('cpf is a required field')
         .matches(
             cpfRegex,
-            'Cpf com formato inválido, verifique o dado e tente novamente!',
-        ),
+            'invalid format on cpf field, verify and send again!',
+        )
+        .min(2, 'must have at least 2 letters'),
     apartmentBlock: yup
         .string()
-        .required('Campo de apartmentBlock obrigatório'),
+        .required('apartmentBlock is a required field')
+        .min(2, 'must have at least 2 letters'),
     apartmentNumber: yup
         .number()
-        .required('Campo de apartmentNumber obrigatório'),
+        .required('apartmentNumber is a required field'),
     isAuth: yup
         .boolean()
         .optional()

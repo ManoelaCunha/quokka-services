@@ -13,7 +13,7 @@ const verifySuperAdmin = async (
     const superAdmin = await new SuperAdminRepository().findByEmail(email);
 
     if (!superAdmin) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ error: 'Unauthorized' });
     }
 
     next();
