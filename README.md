@@ -7,9 +7,9 @@
 </p>
 
 <p>
-💡 O objetivo da nossa startaplicação é diminuir a dificuldade que moradores de condomínios encontram ao ir atrás de algum prestador de serviço. Nossa plataforma irá reunir condomínios e prestadores de serviço para conectá-los de maneira eficiente e precisa.
+💡 O objetivo da nossa aplicação é diminuir a dificuldade que moradores de condomínios encontram ao ir atrás de algum prestador de serviço. Nossa plataforma irá reunir condomínios e prestadores de serviço para conectá-los de maneira eficiente e precisa.
 
-</p>
+</p><br>
 
 ## 🛠 Instalação
 
