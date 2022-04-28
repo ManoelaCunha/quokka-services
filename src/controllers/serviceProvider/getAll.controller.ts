@@ -11,7 +11,11 @@ const getAllServiceProviders = async (
     const serviceProvidersWithoutPassword: Array<Partial<ServiceProvider>> = [];
 
     serviceProviders.forEach((serviceProvider: ServiceProvider) => {
-        const { password, ...serviceProtviderAttributes } = serviceProvider;
+        const {
+            password,
+            condominiumServiceProviders,
+            ...serviceProtviderAttributes
+        } = serviceProvider;
 
         serviceProvidersWithoutPassword.push(serviceProtviderAttributes);
     });

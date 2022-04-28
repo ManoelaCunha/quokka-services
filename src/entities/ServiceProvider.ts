@@ -36,6 +36,8 @@ export default class ServiceProvider {
     )
     condominiumServiceProviders: CondominiumServiceProvider[];
 
-    @OneToMany(() => Service, (services: Service) => services.serviceProvider)
+    @OneToMany(() => Service, (services: Service) => services.serviceProvider, {
+        lazy: true,
+    })
     services: Service[];
 }

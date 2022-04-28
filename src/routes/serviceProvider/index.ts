@@ -54,9 +54,10 @@ const serviceProvidersRoutes = (app: Application) => {
     router.get(
         '/service_providers/:id',
         validateToken(ServiceProviderRepository),
+        verifyId,
         getServiceProviderById,
     );
-    
+
     router.patch(
         '/service_providers/:id',
         verifyBody,

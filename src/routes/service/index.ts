@@ -9,15 +9,9 @@ import {
     updateServiceStatus,
 } from '../../controllers';
 
-import {
-    validateShape,
-    validateToken,
-    verifyBody,
-    verifyId,
-} from '../../middlewares';
+import { validateShape, validateToken, verifyBody } from '../../middlewares';
 
 import {
-    CondominiumRepository,
     ResidentRepository,
     ServiceProviderRepository,
 } from '../../repositories';

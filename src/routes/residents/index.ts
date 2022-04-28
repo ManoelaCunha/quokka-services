@@ -52,6 +52,7 @@ const residentsRoutes = (app: Application) => {
     router.get(
         '/residents/:id',
         validateToken(ResidentRepository),
+        verifyId,
         retrieveResidentById,
     );
 
