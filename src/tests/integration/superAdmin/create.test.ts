@@ -5,9 +5,9 @@ import { getConnection, QueryRunner } from 'typeorm';
 import request from 'supertest';
 import { v4 } from 'uuid';
 
-import app from './../../app';
-import connection from '../../database';
-import { generateSuperAdm } from '../utils/generateSuperAdmin';
+import app from './../../../app';
+import connection from './../../../database';
+import { generateSuperAdm } from './../../utils';
 
 const superadm = generateSuperAdm();
 
@@ -16,7 +16,7 @@ describe('Create Super Admin', () => {
         await connection();
     });
 
-    it.only('should be able to register a SUPER ADMIN', async () => {
+    it('should be able to register a SUPER ADMIN', async () => {
         const response = await request(app).post(`/super_adm`).send(superadm);
         const { body } = response;
 
@@ -27,6 +27,9 @@ describe('Create Super Admin', () => {
 
     afterAll(async () => {
         const defaultConnection = getConnection('default');
+        defaultConnection.query(
+            `DELETE FROM super_admin WHERE email = ${superadm.email}`,
+        );
         await defaultConnection.close();
     });
 });
