@@ -18,6 +18,12 @@ const getAllServices = async (req: Request, res: Response) => {
         ? await getRepository(Service).find({ where: { status } })
         : await new ServiceRepository().findServices();
 
+    services.forEach((service) => {
+        delete service.resident.password;
+        delete service.resident.cpf;
+        delete service.category.categoryId;
+    });
+
     return res.status(200).json(services);
 };
 
