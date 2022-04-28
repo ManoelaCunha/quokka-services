@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('super_admins')
 export default class SuperAdmin {
     @PrimaryGeneratedColumn('uuid')
-    superAdminId: string;
+    superAdminId?: string;
 
     @Column({ nullable: false })
     name: string;

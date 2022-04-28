@@ -36,12 +36,6 @@ const serviceRoutes = (app: Application) => {
 
     router.get('/services/:id', getServiceById);
 
-    router.delete(
-        '/services/:id',
-        validateToken(ResidentRepository),
-        deleteService,
-    );
-
     router.patch(
         '/services/:id',
         verifyBody,
@@ -54,6 +48,12 @@ const serviceRoutes = (app: Application) => {
         '/services/update_status/:id',
         validateToken(ServiceProviderRepository),
         updateServiceStatus,
+    );
+
+    router.delete(
+        '/services/:id',
+        validateToken(ResidentRepository),
+        deleteService,
     );
 
     app.use(router);
