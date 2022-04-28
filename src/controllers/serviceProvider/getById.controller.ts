@@ -1,5 +1,6 @@
-import { Request, Response } from 'express';
 import Service from '../../entities/Service';
+
+import { Request, Response } from 'express';
 import { ServiceProviderRepository } from '../../repositories';
 
 const getServiceProviderById = async (req: Request, res: Response) => {
@@ -9,7 +10,9 @@ const getServiceProviderById = async (req: Request, res: Response) => {
         const serviceProvider = await new ServiceProviderRepository().findById(
             params.id as string,
         );
+
         const data = [];
+
         serviceProvider.condominiumServiceProviders.map(async (item) => {
             const { isApproved } =
                 serviceProvider.condominiumServiceProviders[0];
@@ -38,6 +41,7 @@ const getServiceProviderById = async (req: Request, res: Response) => {
 
             data.push(dataToReturn);
         });
+
         const services = await serviceProvider.services;
 
         const servicesSchema: Partial<Service | {}>[] = [];
