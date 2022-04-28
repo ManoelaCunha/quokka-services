@@ -9,7 +9,12 @@ const retrieveCondominiumById = async (req: Request, res: Response) => {
 
     const { trusteePassword, ...condominiumWithouPasword } = condominium;
 
-    getCondominiumByIdService(condominiumWithouPasword);
+    const servicesProviders = await getCondominiumByIdService(
+        condominiumWithouPasword,
+    );
+
+    condominiumWithouPasword['servicesProviders'] = servicesProviders;
+    delete condominiumWithouPasword.condominiumServiceProviders;
 
     return res.status(200).json({ ...condominiumWithouPasword });
 };

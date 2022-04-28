@@ -1,8 +1,9 @@
 import Condominium from '../../entities/Condominium';
+import ServiceProvider from '../../entities/ServiceProvider';
 
 const getCondominiumByIdService = async (
     condominium: Partial<Condominium>,
-): Promise<Partial<Condominium>> => {
+): Promise<Partial<ServiceProvider[]>> => {
     let newResidents = [];
     condominium.residents.forEach((resident) => {
         const { password, ...residentInfo } = resident;
@@ -14,20 +15,17 @@ const getCondominiumByIdService = async (
     condominium.residents = newResidents;
 
     const servicesProviders = [];
-    condominium.condominiumServiceProviders.forEach(
-        (condominiumServiceProvider) => {
-            if (condominiumServiceProvider.isApproved) {
-                delete condominiumServiceProvider.serviceProvider.password;
-                servicesProviders.push(
-                    condominiumServiceProvider.serviceProvider,
-                );
-            }
-        },
+    await Promise.all(
+        condominium.condominiumServiceProviders.map(async (relation) => {
+            const { condominiumServiceProviders, password, ...rest } =
+                await relation.serviceProvider;
+
+            rest['isApproved'] = relation.isApproved;
+            servicesProviders.push(rest);
+        }),
     );
 
-    condominium.condominiumServiceProviders = servicesProviders;
-
-    return condominium;
+    return servicesProviders;
 };
 
 export default getCondominiumByIdService;
