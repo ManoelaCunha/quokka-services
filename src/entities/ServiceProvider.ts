@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    OneToMany,
+    JoinTable,
+} from 'typeorm';
 import CondominiumServiceProvider from './CondominiumServiceProviders';
 import Service from './Service';
 
@@ -32,9 +38,12 @@ export default class ServiceProvider {
         () => CondominiumServiceProvider,
         (condominiumServiceProviders: CondominiumServiceProvider) =>
             condominiumServiceProviders.serviceProvider,
+        { eager: true },
     )
     condominiumServiceProviders: CondominiumServiceProvider[];
 
-    @OneToMany(() => Service, (services: Service) => services.serviceProvider)
+    @OneToMany(() => Service, (services: Service) => services.serviceProvider, {
+        lazy: true,
+    })
     services: Service[];
 }

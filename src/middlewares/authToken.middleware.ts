@@ -24,13 +24,14 @@ const authToken =
                 key.includes('assword'),
             );
 
+            if (!existent) {
+                return res.status(404).json({ error: 'Email not found!' });
+            }
+
             if (
-                !existent ||
-                !compareSync(req.validated[passwordKey], existent.password)
+                !compareSync(req.validated[passwordKey], existent[passwordKey])
             ) {
-                return res
-                    .status(401)
-                    .json({ message: 'Wrong email/password' });
+                return res.status(401).json({ error: 'Wrong email/password' });
             }
 
             const token: string = sign({ existent }, config.secret, {
@@ -41,7 +42,7 @@ const authToken =
 
             return next();
         } catch (err) {
-            return res.status(400).json({ error: err.errors });
+            return res.status(400).json({ error: err });
         }
     };
 

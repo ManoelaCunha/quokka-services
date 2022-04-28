@@ -10,27 +10,35 @@ const createShape = yup.object().shape({
         .string()
         .matches(
             phoneRegex,
-            'Número de telefone inválido, coloque seu telefone com DDD, digite 9 e seu número sem traços!',
+            'phone invalid, the correct format is: (99)999999999!',
         )
-        .required('Campo de telefone obrigatório'),
-    social_media: yup.string().optional(),
-    name: yup.string().required('Campo de nome obrigatório'),
+        .required('phone is a required field')
+        .min(2, 'must have at least 2 letters'),
+    socialMedia: yup.string().optional().min(2, 'must have at least 2 letters'),
+    name: yup
+        .string()
+        .required('name is a required field')
+        .min(2, 'must have at least 2 letters'),
     email: yup
         .string()
         .email()
         .lowercase()
-        .required('Campo de email obrigatório'),
+        .required('email is a required field')
+        .min(2, 'must have at least 2 letters'),
     password: yup
         .string()
         .transform((pwd) => hashSync(pwd, 10))
-        .required('Campo de senha obrigatório'),
+        .required('password is a required field')
+        .min(2, 'must have at least 2 letters'),
     cpf: yup
         .string()
         .matches(
             cpfRegex,
-            'Cpf com formato inválido, verifique o dado e tente novamente!',
+            'invalid format on cpf field, verify and send again!!',
         )
-        .required('Campo de cpf obrigatório'),
+        .required('cpf is a required field')
+        .min(2, 'must have at least 2 letters'),
+    occupation: yup.string().required().min(2, 'must have at least 2 letters'),
 });
 
 export default createShape;

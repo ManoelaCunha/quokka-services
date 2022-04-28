@@ -3,8 +3,8 @@ import { UpdateResult, DeleteResult } from 'typeorm';
 
 interface ServiceProviderRepo {
     saveProvider: (provider: Provider) => Promise<Provider>;
-    findProvider: () => Promise<Provider[]>;
-    findProviderById: (uuid: string) => Promise<Provider>;
+    findAllProviders: () => Promise<Provider[]>;
+    findById: (uuid: string) => Promise<Provider>;
     findByEmail: (email: string) => Promise<Provider>;
     updateProvider: (
         uuid: string,

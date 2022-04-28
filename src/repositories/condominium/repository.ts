@@ -1,7 +1,7 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, UpdateResult } from 'typeorm';
 
 import Condominium from '../../entities/Condominium';
-import { ICondominium, ICondominiumRepository } from './interface';
+import { ICondominiumRepository } from './interface';
 
 class CondominiumRepository implements ICondominiumRepository {
     private ormRepository: Repository<Condominium>;
@@ -11,33 +11,30 @@ class CondominiumRepository implements ICondominiumRepository {
     }
 
     saveCondominium = async (
-        condominium: ICondominium,
-    ): Promise<ICondominium> => {
+        condominium: Condominium,
+    ): Promise<Condominium> => {
         return await this.ormRepository.save(condominium);
     };
 
-    findCondominium = async (): Promise<ICondominium[]> => {
+    findCondominiums = async (): Promise<Condominium[]> => {
         return await this.ormRepository.find();
     };
 
-    findCondominiumById = async (
-        condominium_id: string,
-    ): Promise<ICondominium> => {
+    findById = async (condominium_id: string): Promise<Condominium> => {
         return await this.ormRepository.findOne(condominium_id);
     };
 
-    findByEmail = async (condominium_email: string): Promise<ICondominium> => {
+    findByEmail = async (condominium_email: string): Promise<Condominium> => {
         return await this.ormRepository.findOne({
-            where: {
-                email: condominium_email,
-            },
+            where: { trusteeEmail: condominium_email },
         });
     };
 
     updateCondominium = async (
-        condominium: ICondominium,
-    ): Promise<ICondominium> => {
-        return await this.ormRepository.save(condominium);
+        uuid: string,
+        data: Partial<Condominium>,
+    ): Promise<UpdateResult> => {
+        return await this.ormRepository.update(uuid, data);
     };
 
     deleteCondominium = async (condominium_id: string): Promise<void> => {
@@ -45,4 +42,4 @@ class CondominiumRepository implements ICondominiumRepository {
     };
 }
 
-export { CondominiumRepository, ICondominiumRepository, ICondominium };
+export { CondominiumRepository, ICondominiumRepository };

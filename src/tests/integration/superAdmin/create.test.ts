@@ -1,13 +1,15 @@
 import 'reflect-metadata';
+import dotenv from 'dotenv';
 
 import { describe, it, expect } from '@jest/globals';
-import { getConnection, QueryRunner } from 'typeorm';
+import { getConnection } from 'typeorm';
 import request from 'supertest';
-import { v4 } from 'uuid';
 
-import app from './../../app';
-import connection from '../../database';
-import { generateSuperAdm } from '../utils/generateSuperAdmin';
+import app from './../../../app';
+import connection from './../../../database';
+import { generateSuperAdm } from './../../utils';
+
+dotenv.config();
 
 const superadm = generateSuperAdm();
 
@@ -25,8 +27,21 @@ describe('Create Super Admin', () => {
         expect(body.email).toBe(superadm.email);
     });
 
+    it('Should be able to login', async () => {
+        const response = await request(app).post(`/super_adm/login`).send({
+            email: process.env.SUPER_ADMIN_EMAIL,
+            password: process.env.SUPER_ADMIN_PASSWORD,
+        });
+        const { body } = response;
+
+        expect(body).toHaveProperty('token');
+    });
+
     afterAll(async () => {
         const defaultConnection = getConnection('default');
+        defaultConnection.query(
+            `DELETE FROM super_admin WHERE email = ${superadm.email}`,
+        );
         await defaultConnection.close();
     });
 });
