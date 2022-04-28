@@ -13,27 +13,7 @@ const getAllServiceProviders = async (
     const serviceProvidersWithoutPassword: Array<Partial<ServiceProvider>> = [];
 
     serviceProviders.forEach((serviceProvider: ServiceProvider) => {
-        const {
-            password,
-            //condominiumServiceProviders,
-            ...serviceProtviderAttributes
-        } = serviceProvider;
-
-        const teste = serviceProvider.condominiumServiceProviders.map(
-            async (obj, i) => {
-                console.log(obj);
-                console.log(i);
-                console.log(serviceProvider.condominiumServiceProviders[i]);
-                return await obj.condominium;
-
-                //const approved = await key.isApproved;
-
-                // serviceProvider.condominiumServiceProviders['condominiumName'] =
-                //     condoName.condominiumName;
-            },
-        );
-
-        //console.log(teste);
+        const { password, ...serviceProtviderAttributes } = serviceProvider;
 
         serviceProvidersWithoutPassword.push(serviceProtviderAttributes);
     });
