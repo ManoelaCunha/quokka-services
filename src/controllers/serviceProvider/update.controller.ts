@@ -17,7 +17,7 @@ const updateProvider = async (req: Request, res: Response) => {
         const updatedUser = await new ServiceProviderRepository().findById(
             req.params.id,
         );
-        return res.status(201).json(updatedUser);
+        return res.status(200).json(updatedUser);
     } catch (err) {
         if (err instanceof EntityColumnNotFound) {
             return res.status(400).json({ error: err.message });
