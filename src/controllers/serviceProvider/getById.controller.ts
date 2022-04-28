@@ -9,6 +9,35 @@ const getServiceProviderById = async (req: Request, res: Response) => {
         const serviceProvider = await new ServiceProviderRepository().findById(
             params.id as string,
         );
+        const data = [];
+        serviceProvider.condominiumServiceProviders.map(async (item) => {
+            const { isApproved } =
+                serviceProvider.condominiumServiceProviders[0];
+            const {
+                condominiumId,
+                condominiumName,
+                zipCode,
+                district,
+                street,
+                number,
+                trusteeName,
+                trusteeEmail,
+            } = await item.condominium;
+
+            const dataToReturn = {
+                isApproved: isApproved,
+                condominiumId: condominiumId,
+                condominiumName: condominiumName,
+                zipCode: zipCode,
+                district: district,
+                street: street,
+                number: number,
+                trusteeName: trusteeName,
+                trusteeEmail: trusteeEmail,
+            };
+
+            data.push(dataToReturn);
+        });
         const services = await serviceProvider.services;
 
         const servicesSchema: Partial<Service | {}>[] = [];
@@ -31,6 +60,7 @@ const getServiceProviderById = async (req: Request, res: Response) => {
 
         const resultSchema = {
             ...rest,
+            condominiums: data,
             services: servicesSchema,
         };
 
