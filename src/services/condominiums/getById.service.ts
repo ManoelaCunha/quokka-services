@@ -12,18 +12,20 @@ const getCondominiumByIdService = async (
     });
 
     condominium.residents = newResidents;
-
     const servicesProviders = [];
-    condominium.condominiumServiceProviders.forEach(
-        (condominiumServiceProvider) => {
-            if (condominiumServiceProvider.isApproved) {
-                delete condominiumServiceProvider.serviceProvider.password;
-                servicesProviders.push(
-                    condominiumServiceProvider.serviceProvider,
-                );
-            }
-        },
+
+    await condominium.condominiumServiceProviders;
+
+    await Promise.all(
+        condominium.condominiumServiceProviders.map(async (item) => {
+            const serviceProvider = await item.serviceProvider;
+            const { password, condominiumServiceProviders, ...rest } =
+                serviceProvider;
+            servicesProviders.push({ ...rest, isApproved: item.isApproved });
+        }),
     );
+
+    console.log(servicesProviders);
 
     condominium.condominiumServiceProviders = servicesProviders;
 
