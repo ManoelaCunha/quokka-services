@@ -7,7 +7,14 @@ import {
     updateCategory,
 } from '../../controllers';
 
-import { validateToken, verifyBody, verifySuperAdmin } from '../../middlewares';
+import {
+    validateShape,
+    validateToken,
+    verifyBody,
+    verifySuperAdmin,
+} from '../../middlewares';
+
+import { updateCategory as updateCategoryShape } from '../../shapes';
 
 import { SuperAdminRepository } from '../../repositories';
 
@@ -37,6 +44,7 @@ const categoryRoutes = (app: Application) => {
 
     router.patch(
         '/categories/:id',
+        validateShape(updateCategoryShape),
         verifyBody,
         validateToken(SuperAdminRepository),
         verifySuperAdmin,

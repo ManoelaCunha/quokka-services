@@ -1,0 +1,1663 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Quokka Services API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "BASE URL - Development mode"
+        },
+        {
+            "url": "https://quokka-services.herokuapp.com",
+            "description": "BASE URL - Production mode"
+        }
+    ],
+    "paths": {
+        "/super_adm": {
+            "post": {
+                "description": "Route responsible for super admin creation, for creating super admin user an admin token is required",
+                "tags": ["Super Admin"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateSuperAdmin"
+                            },
+                            "examples": {
+                                "CreateSuperAdmin": {
+                                    "$ref": "#/components/examples/CreateSuperAdmin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuperAdmin"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Should get all Super Admins",
+                "tags": ["Super Admin"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuperAdmin"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/super_adm/login": {
+            "post": {
+                "tags": ["Super Admin"],
+                "description": "Route to get JWT token by login request",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginSuperAdmin"
+                            },
+                            "examples": {
+                                "LoginSuperAdmin": {
+                                    "$ref": "#/components/examples/LoginSuperAdmin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JWTTokenSuperAdmin"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/super_adm/{id}": {
+            "get": {
+                "description": "Should get a Super Admin by your ID",
+                "tags": ["Super Admin"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Super Admin ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Should be update a Super Admin fields by your ID",
+                "tags": ["Super Admin"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Super Admin ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateSuperAdmin"
+                            },
+                            "examples": {
+                                "UpdateSuperAdmin": {
+                                    "$ref": "#/components/examples/UpdateSuperAdmin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Should delete a Super Admin by your ID",
+                "tags": ["Super Admin"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Super Admin ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/condominiums": {
+            "post": {
+                "description": "Should create a Condominium",
+                "tags": ["Condominiums"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCondominium"
+                            },
+                            "examples": {
+                                "Condominium": {
+                                    "$ref": "#/components/examples/Condominium"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Condominium"
+                                },
+                                "examples": {
+                                    "Condominium": {
+                                        "$ref": "#/components/examples/Condominium"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Should get all Condominiums",
+                "tags": ["Condominiums"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Condominium"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/condominiums/{id}": {
+            "get": {
+                "description": "Should get a Condominium by your ID",
+                "tags": ["Condominiums"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Condominium ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Should update a Condominium fields by your ID",
+                "tags": ["Condominiums"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Condominium ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCondomonium"
+                            },
+                            "examples": {
+                                "UpdateCondominium": {
+                                    "$ref": "#/components/examples/UpdateCondomonium"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Should delete a Condominium",
+                "tags": ["Condominiums"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Condominium ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/condominiums/login": {
+            "post": {
+                "description": "Should be able to create a condominium account",
+                "tags": ["Condominiums"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginCondominium"
+                            },
+                            "examples": {
+                                "LoginSuperAdmin": {
+                                    "$ref": "#/components/examples/LoginCondominium"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JWTTokenSuperAdmin"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "post": {
+                "description": "Should be able to register a category",
+                "tags": ["Categories"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            },
+                            "examples": {
+                                "Category": {
+                                    "$ref": "#/components/examples/Category"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Should get all categories",
+                "tags": ["Categories"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories/{id}": {
+            "get": {
+                "description": "Should get a category by your ID",
+                "tags": ["Categories"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Category ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Should update a category fields by your ID",
+                "tags": ["Categories"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Category ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            },
+                            "examples": {
+                                "UpdateCategory": {
+                                    "$ref": "#/components/examples/Category"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Should delete a category",
+                "tags": ["Categories"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Category ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/residents": {
+            "post": {
+                "description": "Should be create a resident user",
+                "tags": ["Residents"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateResident"
+                            },
+                            "examples": {
+                                "Resident": {
+                                    "$ref": "#/components/examples/CreatedResident"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateResident"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Should get all residents",
+                "tags": ["Residents"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AllResidents"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/residents/{id}": {
+            "get": {
+                "description": "Should get a resident by your ID",
+                "tags": ["Residents"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Resident ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Should update a resident fields by your ID",
+                "tags": ["Residents"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Resident ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateResident"
+                            },
+                            "examples": {
+                                "Resident": {
+                                    "$ref": "#/components/examples/ResidentUpdate"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Resident"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Should delete a resident",
+                "tags": ["Residents"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Resident ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/residents/login": {
+            "post": {
+                "description": "Should be login a resident",
+                "tags": ["Residents"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginResident"
+                            },
+                            "examples": {
+                                "LoginResident": {
+                                    "$ref": "#/components/examples/LoginResident"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResident"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/residents/update_status/{id}": {
+            "patch": {
+                "description": "Should update a resident status by your ID",
+                "tags": ["Residents"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Resident ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Resident"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service_providers": {
+            "post": {
+                "description": "Should be able to register a service provider user",
+                "tags": ["Service Providers"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateServiceProvider"
+                            },
+                            "examples": {
+                                "ServiceProvider": {
+                                    "$ref": "#/components/examples/CreateServiceProvider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateServiceProvider"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service_providers/{id}": {
+            "get": {
+                "description": "Should get a service provider by your ID",
+                "tags": ["Service Providers"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service Provider ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceProvider"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Should update a service provider fields by your ID",
+                "tags": ["Service Providers"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service Provider ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateServiceProvider"
+                            },
+                            "examples": {
+                                "ServiceProvider": {
+                                    "$ref": "#/components/examples/UpdateServiceProvider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceProvider"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Should delete a service provider",
+                "tags": ["Service Providers"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service Provider ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service_providers/update_status/{id}": {
+            "patch": {
+                "description": "Should update a service provider status by your ID",
+                "tags": ["Service Providers"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service Provider ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service_providers/condominium/{id}": {
+            "post": {
+                "description": "Should be able to insert a service provider in a condominium",
+                "tags": ["Service Providers"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service Provider ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/service_providers/login": {
+            "post": {
+                "description": "Should be able to login a service provider",
+                "tags": ["Service Providers"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginServiceProvider"
+                            },
+                            "examples": {
+                                "LoginServiceProvider": {
+                                    "$ref": "#/components/examples/LoginServiceProvider"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginServiceProvider"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/services/{id}": {
+            "post": {
+                "description": "Should be able to create a service",
+                "tags": ["Services"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Resident"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Should be able to get a service by id",
+                "tags": ["Services"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceById"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Should be able to update a service by id",
+                "tags": ["Services"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateService"
+                            },
+                            "examples": {
+                                "UpdateService": {
+                                    "$ref": "#/components/examples/UpdateService"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceById"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Should be able to delete a service by id",
+                "tags": ["Services"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/services": {
+            "get": {
+                "description": "Should be able to get all services",
+                "tags": ["Services"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Service"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/services/update_status/{id}": {
+            "patch": {
+                "description": "Should be able to update a service status",
+                "tags": ["Services"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Service ID",
+                        "example": "uuid v4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "SuperAdmin": {
+                "type": "object",
+                "properties": {
+                    "superAdminId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreateSuperAdmin": {
+                "type": "object",
+                "required": ["name", "email", "password"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "LoginSuperAdmin": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "JWTTokenSuperAdmin": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateSuperAdmin": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Condominium": {
+                "type": "object",
+                "properties": {
+                    "condominiumId": { "type": "string" },
+                    "condominiumName": { "type": "string" },
+                    "zipCode": { "type": "string" },
+                    "district": { "type": "string" },
+                    "street": { "type": "string" },
+                    "number": { "type": "integer" },
+                    "trusteeName": { "type": "string" },
+                    "trusteeEmail": { "type": "string" },
+                    "trusteeCpf": { "type": "string" }
+                }
+            },
+            "CreateCondominium": {
+                "type": "object",
+                "required": [
+                    "condominiumName",
+                    "zipCode",
+                    "district",
+                    "street",
+                    "number",
+                    "trusteeName",
+                    "trusteeEmail",
+                    "trusteeCpf",
+                    "trusteePassword"
+                ],
+                "properties": {
+                    "condominiumName": { "type": "string" },
+                    "zipCode": { "type": "string" },
+                    "district": { "type": "string" },
+                    "street": { "type": "string" },
+                    "number": { "type": "integer" },
+                    "trusteeName": { "type": "string" },
+                    "trusteeEmail": { "type": "string" },
+                    "trusteeCpf": { "type": "string" },
+                    "trusteePassword": { "type": "string" }
+                }
+            },
+            "UpdateCondomonium": {
+                "type": "object",
+                "properties": {
+                    "condominiumName": { "type": "string" },
+                    "zipCode": { "type": "string" },
+                    "district": { "type": "string" },
+                    "street": { "type": "string" },
+                    "number": { "type": "integer" },
+                    "trusteeName": { "type": "string" },
+                    "trusteeEmail": { "type": "string" },
+                    "trusteeCpf": { "type": "string" },
+                    "trusteePassword": { "type": "string" }
+                }
+            },
+            "LoginCondominium": {
+                "type": "object",
+                "properties": {
+                    "trusteeEmail": { "type": "string" },
+                    "trusteePassword": { "type": "string" }
+                }
+            },
+            "Category": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Resident": {
+                "type": "object",
+                "properties": {
+                    "residentId": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "password": { "type": "string" },
+                    "cpf": { "type": "string" },
+                    "apartmentBlock": { "type": "string" },
+                    "apartmentNumber": { "type": "number" },
+                    "isAuth": { "type": "boolean" }
+                }
+            },
+            "CreateResident": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "email",
+                    "password",
+                    "cpf",
+                    "apartmentBlock",
+                    "apartmentNumber"
+                ],
+                "properties": {
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "password": { "type": "string" },
+                    "cpf": { "type": "string" },
+                    "apartmentBlock": { "type": "string" },
+                    "apartmentNumber": { "type": "number" }
+                }
+            },
+            "AllResidents": {
+                "type": "object",
+                "properties": {
+                    "residentId": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "cpf": { "type": "string" },
+                    "apartmentBlock": { "type": "string" },
+                    "apartmentNumber": { "type": "number" },
+                    "isAuth": { "type": "boolean" }
+                }
+            },
+            "LoginResident": {
+                "type": "object",
+                "properties": {
+                    "email": { "type": "string" },
+                    "password": { "type": "string" }
+                }
+            },
+            "UpdateResident": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "cpf": { "type": "string" },
+                    "apartmentBlock": { "type": "string" },
+                    "apartmentNumber": { "type": "number" },
+                    "isAuth": { "type": "boolean" }
+                }
+            },
+            "ServiceProvider": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string" },
+                    "phone": { "type": "string" },
+                    "socialMedia": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "array" },
+                    "password": { "type": "array" },
+                    "cpf": { "type": "array" },
+                    "occupation": { "type": "array" }
+                }
+            },
+            "CreateServiceProvider": {
+                "type": "object",
+                "properties": {
+                    "phone": { "type": "string" },
+                    "socialMedia": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "array" },
+                    "password": { "type": "array" },
+                    "cpf": { "type": "array" },
+                    "occupation": { "type": "array" }
+                }
+            },
+            "LoginServiceProvider": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateServiceProvider": {
+                "type": "object",
+                "properties": {
+                    "socialMedia": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Service": {
+                "type": "object",
+                "properties": {
+                    "title": { "type": "string" },
+                    "description": { "type": "string" },
+                    "serviceId": { "type": "string" },
+                    "status": { "type": "string" },
+                    "category": { "type": "string" },
+                    "resident": { "type": "object" },
+                    "serviceProvider": { "type": "object" }
+                }
+            },
+            "ServiceById": {
+                "type": "object",
+                "properties": {
+                    "title": { "type": "string" },
+                    "description": { "type": "string" },
+                    "category": { "type": "string" },
+                    "serviceId": { "type": "string" },
+                    "status": { "type": "string" },
+                    "resident": { "type": "object" },
+                    "serviceProvider": { "type": "object" }
+                }
+            },
+            "UpdateService": {
+                "type": "object",
+                "properties": {
+                    "description": { "type": "string" }
+                }
+            }
+        },
+        "examples": {
+            "CreateSuperAdmin": {
+                "value": {
+                    "name": "quokkinha",
+                    "email": "newquokkar@superadm.com",
+                    "password": "Aa123456@"
+                }
+            },
+            "LoginSuperAdmin": {
+                "value": {
+                    "email": "newquokkar@superadm.com",
+                    "password": "Aa123456@"
+                }
+            },
+            "JWTTokenSuperAdmin": {
+                "value": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleGlzdGVudCI6eyJzdXBlckFkbWluSWQiOiJiMjQwYjIyNi1jNTU1LTQ5YzAtYTkwZi0yZDYxMmI2ZmIzMDIiLCJuYW1lIjoiU3VwZXIgUXVva2thIEFETSIsImVtYWlsIjoicXVva2thLnN1cGVyQGFkbS5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRFM0FRZWxMRWxvM1BRNHltUXlDRi4uRmNsUDN2SjhBdHg5TUY2cVNQdHl6RXE1eTdYLjJLNiJ9LCJpYXQiOjE2NTA2NjU2ODgsImV4cCI6MTY1MDY4MzY4OH0.OEpEh5a0YCec3YfL3IYxvYRwL83fpZ9aUaZzEu-vvLE"
+                }
+            },
+            "UpdateSuperAdmin": {
+                "value": {
+                    "email": "quokka12@gmail.com"
+                }
+            },
+            "Condominium": {
+                "value": {
+                    "condominiumName": "Quokka Darksaid",
+                    "zipCode": "88772222",
+                    "district": "Nova Quokka",
+                    "street": "Smily Quokka",
+                    "number": 616,
+                    "trusteeName": "Jhon Quokkautierri",
+                    "trusteeEmail": "jhonquokka@mail.com",
+                    "trusteeCpf": "12345678981",
+                    "trusteePassword": "1234",
+                    "condominiumId": "317aad0c-ade7-4fe2-871e-8a57f25ff1d2"
+                }
+            },
+            "LoginCondominium": {
+                "value": {
+                    "trusteeEmail": "jhonquokka@mail.com",
+                    "trusteePassword": "1234"
+                }
+            },
+            "UpdateCondomonium": {
+                "value": {
+                    "condominiumName": "Quokka Heaven",
+                    "trusteeName": "Sidney",
+                    "trusteeEmail": "sidney@quokkaheaven.com"
+                }
+            },
+            "Category": {
+                "value": {
+                    "name": "Carpintaria"
+                }
+            },
+            "CreatedResident": {
+                "value": {
+                    "isAuth": false,
+                    "apartmentNumber": 101,
+                    "apartmentBlock": "1A",
+                    "cpf": "04736250812",
+                    "email": "bob@quokhkaresident.is",
+                    "password": "1234",
+                    "name": "Bob",
+                    "residentId": "7d79ad3a-cccb-4574-ac42-279d4091a81f"
+                }
+            },
+            "LoginResident": {
+                "value": {
+                    "email": "bob@quokkaresident.is",
+                    "password": "1234"
+                }
+            },
+            "ResidentUpdate": {
+                "value": {
+                    "name": "Jorge"
+                }
+            },
+            "CreateServiceProvider": {
+                "value": {
+                    "phone": "11999999999",
+                    "socialMedia": "https://google.com",
+                    "name": "Edinaldo Pereira",
+                    "email": "ednaldo_perera@vcnaovalenada.com",
+                    "password": "vale_tudo",
+                    "cpf": "15978943215",
+                    "occupation": "Deus"
+                }
+            },
+            "LoginServiceProvider": {
+                "value": {
+                    "email": "ednaldo_perera@vcnaovalenada.com",
+                    "password": "vale_tudo"
+                }
+            },
+            "UpdateServiceProvider": {
+                "value": {
+                    "socialMedia": "https://instagram.com"
+                }
+            },
+            "ServiceById": {
+                "value": {
+                    "title": "Novo serviço",
+                    "description": "Serviço de qualidade",
+                    "category": "Assistência Técnica",
+                    "serviceId": "bea24870-f797-421b-b1d4-bfd5a9532c2b",
+                    "status": "available",
+                    "resident": {
+                        "residentId": "41b1141d-362f-4587-a326-4e92097379f1",
+                        "name": "Bob",
+                        "email": "bob@quokkaresident.is"
+                    },
+                    "serviceProvider": null
+                }
+            },
+            "UpdateService": {
+                "value": {
+                    "description": "Nova descrição do serviço de qualidade"
+                }
+            }
+        }
+    }
+}

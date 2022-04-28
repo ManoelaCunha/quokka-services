@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
 import { faker } from '@faker-js/faker';
 import bcrypt from 'bcrypt';
+import { Connection, getConnection } from 'typeorm';
 
 const generateSuperAdm = () => {
     const name = faker.name.firstName().toLowerCase();
@@ -16,4 +17,16 @@ const generateSuperAdm = () => {
     };
 };
 
-export { generateSuperAdm };
+const cleardata = (): Connection => {
+    const defaultConnection = getConnection('default');
+    const entities = defaultConnection.entityMetadatas;
+
+    entities.forEach(async (entity) => {
+        const repository = defaultConnection.getRepository(entity.name);
+        await repository.query(`DELETE FROM ${entity.tableName}`);
+    });
+
+    return defaultConnection;
+};
+
+export { generateSuperAdm, cleardata };
