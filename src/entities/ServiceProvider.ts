@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    OneToMany,
+    JoinTable,
+} from 'typeorm';
 import CondominiumServiceProvider from './CondominiumServiceProviders';
 import Service from './Service';
 
