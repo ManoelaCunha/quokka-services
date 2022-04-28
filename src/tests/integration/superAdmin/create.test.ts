@@ -1,9 +1,8 @@
 import 'reflect-metadata';
 
 import { describe, it, expect } from '@jest/globals';
-import { getConnection, QueryRunner } from 'typeorm';
+import { getConnection } from 'typeorm';
 import request from 'supertest';
-import { v4 } from 'uuid';
 
 import app from './../../../app';
 import connection from './../../../database';
