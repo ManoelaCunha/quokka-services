@@ -35,7 +35,7 @@ const updateStatus = async (req: Request, res: Response) => {
         const requestCondominiumServiceProvider =
             requestedProvider.condominiumServiceProviders.find(async (e) => {
                 await e.condominium;
-                return e.condominium === req.decoded;
+                return (await e.condominium) === req.decoded;
             });
 
         if (!requestCondominiumServiceProvider) {
