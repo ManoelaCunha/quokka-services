@@ -20,6 +20,10 @@ const retrieveResidentById = async (req: Request, res: Response) => {
         } = await resident.condominium;
 
         resultSchema['condominium'] = condominium;
+
+        const services = await resident.services;
+
+        resultSchema['services'] = services;
     }
 
     return res.status(200).json(resultSchema);
