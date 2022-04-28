@@ -11,18 +11,27 @@ const updateProviderShape = yup.object().shape({
         .matches(
             phoneRegex,
             'phone invalid, the correct format is: (99)999999999!',
-        ),
-    socialMedia: yup.string().optional(),
-    name: yup.string(),
-    email: yup.string().email().lowercase(),
-    password: yup.string().transform((pwd) => hashSync(pwd, 10)),
+        )
+        .min(2, 'must have at least 2 letters'),
+    socialMedia: yup.string().optional().min(2, 'must have at least 2 letters'),
+    name: yup.string().min(2, 'must have at least 2 letters'),
+    email: yup
+        .string()
+        .email()
+        .lowercase()
+        .min(2, 'must have at least 2 letters'),
+    password: yup
+        .string()
+        .transform((pwd) => hashSync(pwd, 10))
+        .min(2, 'must have at least 2 letters'),
     cpf: yup
         .string()
         .matches(
             cpfRegex,
             'invalid format on cpf field, verify and send again!',
-        ),
-    occupation: yup.string(),
+        )
+        .min(2, 'must have at least 2 letters'),
+    occupation: yup.string().min(2, 'must have at least 2 letters'),
 });
 
 export default updateProviderShape;
