@@ -41,6 +41,8 @@ export default class Resident {
     )
     condominium: Condominium;
 
-    @OneToMany(() => Service, (service: Service) => service.resident)
+    @OneToMany(() => Service, (service: Service) => service.resident, {
+        lazy: true,
+    })
     services: Service[];
 }

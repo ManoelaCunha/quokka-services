@@ -30,16 +30,16 @@ const router = Router();
 
 const residentsRoutes = (app: Application) => {
     router.post(
-        '/residents/:condominiumId',
-        validateShape(createResidentShape),
-        createResident,
-    );
-
-    router.post(
         '/residents/login',
         validateShape(loginResidentShape),
         authToken(ResidentRepository),
         loginResident,
+    );
+
+    router.post(
+        '/residents/:condominiumId',
+        validateShape(createResidentShape),
+        createResident,
     );
 
     router.get(
