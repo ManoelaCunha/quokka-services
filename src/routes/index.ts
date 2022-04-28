@@ -8,8 +8,11 @@ import categoryRoutes from './category';
 import residentsRoutes from './residents';
 import serviceRoutes from './service';
 import serviceProvidersRoutes from './serviceProvider';
+import cors from 'cors';
+import options from '../configs/cors.config';
 
 const routes = (app: Application) => {
+    app.use(cors(options));
     app.use(express.json());
     app.use(morgan('tiny'));
     app.use(

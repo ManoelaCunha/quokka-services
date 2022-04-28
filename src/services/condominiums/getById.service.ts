@@ -13,7 +13,6 @@ const getCondominiumByIdService = async (
     });
 
     condominium.residents = newResidents;
-
     const servicesProviders = [];
     await Promise.all(
         condominium.condominiumServiceProviders.map(async (relation) => {
