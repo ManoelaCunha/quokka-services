@@ -35,7 +35,10 @@ const updateStatus = async (req: Request, res: Response) => {
         const requestCondominiumServiceProvider =
             requestedProvider.condominiumServiceProviders.find(async (e) => {
                 await e.condominium;
-                return (await e.condominium) === req.decoded;
+                const { condominiumId } = await e.condominium;
+                if (condominiumId === req.decoded.condominiumId) {
+                    return e.condominium;
+                }
             });
 
         if (!requestCondominiumServiceProvider) {
@@ -43,10 +46,9 @@ const updateStatus = async (req: Request, res: Response) => {
                 error: 'Cannot update current service provider status. Please check if this provider currently exists in the requested condominium.',
             });
         }
-
         const stringToBoolean = queryParam.toLowerCase() === 'true';
-
         requestCondominiumServiceProvider.isApproved = stringToBoolean;
+        console.log(requestCondominiumServiceProvider);
 
         await getRepository(CondominiumServiceProvider).save(
             requestedProvider.condominiumServiceProviders,

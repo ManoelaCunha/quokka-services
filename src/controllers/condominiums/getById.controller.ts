@@ -5,7 +5,7 @@ import { getCondominiumByIdService } from '../../services';
 const retrieveCondominiumById = async (req: Request, res: Response) => {
     let condominium = await new CondominiumRepository().findById(req.params.id);
 
-    const { trusteePassword, ...condominiumWithouPasword } = condominium;
+    const { trusteePassword, ...condominiumWithouPasword } = await condominium;
     await getCondominiumByIdService(condominiumWithouPasword);
 
     return res.status(200).json(condominiumWithouPasword);
