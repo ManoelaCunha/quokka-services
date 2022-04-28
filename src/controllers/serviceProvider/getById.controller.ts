@@ -1,5 +1,6 @@
-import { Request, Response } from 'express';
 import Service from '../../entities/Service';
+
+import { Request, Response } from 'express';
 import { ServiceProviderRepository } from '../../repositories';
 
 const getServiceProviderById = async (req: Request, res: Response) => {
@@ -9,6 +10,7 @@ const getServiceProviderById = async (req: Request, res: Response) => {
         const serviceProvider = await new ServiceProviderRepository().findById(
             params.id as string,
         );
+
         const data = [];
         await Promise.all(
             serviceProvider.condominiumServiceProviders.map(async (item) => {

@@ -31,6 +31,7 @@ const router = Router();
 const superAdminRoutes = (app: Application) => {
     router.post(
         '/super_adm',
+        validateToken(SuperAdminRepository),
         validateShape(createSuperAdminShape),
         createSuperAdmin,
     );

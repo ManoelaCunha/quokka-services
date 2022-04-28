@@ -9,18 +9,11 @@ const getAllServiceProviders = async (
 ): Promise<Response> => {
     const serviceProviders =
         await new ServiceProviderRepository().findAllProviders();
+
     const serviceProvidersWithoutPassword: Array<Partial<ServiceProvider>> = [];
 
     serviceProviders.forEach((serviceProvider: ServiceProvider) => {
-        serviceProvider.condominiumServiceProviders.map((key) => {
-            serviceProvider['isApproved'] = key.isApproved;
-        });
-
-        const {
-            password,
-            condominiumServiceProviders,
-            ...serviceProtviderAttributes
-        } = serviceProvider;
+        const { password, ...serviceProtviderAttributes } = serviceProvider;
 
         serviceProvidersWithoutPassword.push(serviceProtviderAttributes);
     });

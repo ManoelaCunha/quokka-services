@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository, QueryFailedError } from 'typeorm';
-import { ServiceProviderRepository } from '../../repositories';
-
 import CondominiumServiceProvider from '../../entities/CondominiumServiceProviders';
+import { ServiceProviderRepository } from '../../repositories';
 
 const updateStatus = async (req: Request, res: Response) => {
     try {
@@ -11,7 +10,17 @@ const updateStatus = async (req: Request, res: Response) => {
         const requestedProvider =
             await new ServiceProviderRepository().findById(serviceProviderId);
 
+        console.log(requestedProvider);
+
         const queryParam: string = req.query.approved as string;
+        // console.log(requestedProvider.condominiumServiceProviders.length);
+        // console.log(requestedProvider.condominiumServiceProviders);
+
+        if (requestedProvider.condominiumServiceProviders.length > 1) {
+            return res.status(401).json({
+                error: 'Cannot work in more than 1 condominium at a time',
+            });
+        }
 
         if (!queryParam) {
             return res.status(400).json({ error: "Missing param 'approved'" });
@@ -36,9 +45,7 @@ const updateStatus = async (req: Request, res: Response) => {
             requestedProvider.condominiumServiceProviders.find(async (e) => {
                 await e.condominium;
                 const { condominiumId } = await e.condominium;
-                if (condominiumId === req.decoded.condominiumId) {
-                    return e.condominium;
-                }
+                return condominiumId === e.condominium.condominiumId;
             });
 
         if (!requestCondominiumServiceProvider) {
@@ -47,12 +54,11 @@ const updateStatus = async (req: Request, res: Response) => {
             });
         }
         const stringToBoolean = queryParam.toLowerCase() === 'true';
-        requestCondominiumServiceProvider.isApproved = stringToBoolean;
-        console.log(requestCondominiumServiceProvider);
-
-        await getRepository(CondominiumServiceProvider).save(
-            requestedProvider.condominiumServiceProviders,
+        await getRepository(CondominiumServiceProvider).update(
+            requestCondominiumServiceProvider.condoServiceProvidersId,
+            { isApproved: stringToBoolean },
         );
+
         if (stringToBoolean) {
             return res.status(200).json({
                 message: `Service provider ${requestedProvider.name} has been approved`,
