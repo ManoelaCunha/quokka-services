@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-import ServiceProvider from '../../entities/ServiceProvider';
 import { ServiceProviderRepository } from '../../repositories';
+
+import ServiceProvider from '../../entities/ServiceProvider';
 
 const getAllServiceProviders = async (
     _: Request,
@@ -11,6 +12,10 @@ const getAllServiceProviders = async (
     const serviceProvidersWithoutPassword: Array<Partial<ServiceProvider>> = [];
 
     serviceProviders.forEach((serviceProvider: ServiceProvider) => {
+        serviceProvider.condominiumServiceProviders.map((key) => {
+            serviceProvider['isApproved'] = key.isApproved;
+        });
+
         const {
             password,
             condominiumServiceProviders,

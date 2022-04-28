@@ -1,8 +1,9 @@
+import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
+import { CondominiumRepository } from '../../repositories';
+
 import ServiceProvider from '../../entities/ServiceProvider';
 import CondominiumServiceProvider from '../../entities/CondominiumServiceProviders';
-import { CondominiumRepository } from '../../repositories';
-import { getRepository } from 'typeorm';
 
 const postServiceProviderInCondominium = async (
     req: Request,
@@ -12,6 +13,10 @@ const postServiceProviderInCondominium = async (
         const condominium = await new CondominiumRepository().findById(
             req.params.id,
         );
+
+        if (!condominium) {
+            res.status(404).json({ error: 'condominium not found!' });
+        }
 
         const relation = await getRepository(
             CondominiumServiceProvider,
