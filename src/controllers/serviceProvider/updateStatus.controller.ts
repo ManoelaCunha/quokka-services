@@ -33,10 +33,16 @@ const updateStatus = async (req: Request, res: Response) => {
         }
 
         const requestCondominiumServiceProvider =
-            requestedProvider.condominiumServiceProviders.find(async (e) => {
-                await e.condominium;
-                return e.condominium === req.decoded;
-            });
+            await requestedProvider.condominiumServiceProviders.find(
+                async (e) => {
+                    await e.condominium;
+
+                    return (
+                        e.condominium.condominiumId ===
+                        req.decoded.condominiumId
+                    );
+                },
+            );
 
         if (!requestCondominiumServiceProvider) {
             return res.status(400).json({
@@ -46,18 +52,17 @@ const updateStatus = async (req: Request, res: Response) => {
 
         const stringToBoolean = queryParam.toLowerCase() === 'true';
 
-        requestCondominiumServiceProvider.isApproved = stringToBoolean;
-
-        await getRepository(CondominiumServiceProvider).save(
-            requestedProvider.condominiumServiceProviders,
+        await getRepository(CondominiumServiceProvider).update(
+            requestCondominiumServiceProvider.condoServiceProvidersId,
+            { isApproved: stringToBoolean },
         );
-        if (stringToBoolean) {
-            return res.status(200).json({
-                message: `Service provider ${requestedProvider.name} has been approved`,
-            });
-        }
+
+        const newRelation = await getRepository(
+            CondominiumServiceProvider,
+        ).findOne(requestCondominiumServiceProvider.condoServiceProvidersId);
+
         return res.status(200).json({
-            message: `Service Provider ${requestedProvider.name} has been removed from the condominium`,
+            message: `Service Provider '${requestedProvider.name}' status has been updated to '${stringToBoolean}'`,
         });
     } catch (err) {
         if (err instanceof QueryFailedError) {
@@ -65,6 +70,7 @@ const updateStatus = async (req: Request, res: Response) => {
                 error: 'Request failed, please check the parameters and try again. ',
             });
         }
+
         return res.status(400).json({ error: err });
     }
 };
