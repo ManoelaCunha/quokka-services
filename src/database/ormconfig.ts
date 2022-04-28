@@ -5,8 +5,6 @@ import { ConnectionOptions } from 'typeorm';
 
 dotenv.config();
 
-const environment = process.env.NODE_ENV;
-
 const devConfig = {
     type: 'postgres',
     host: 'localhost',
