@@ -12,36 +12,35 @@ const getServiceProviderById = async (req: Request, res: Response) => {
         );
 
         const data = [];
+        await Promise.all(
+            serviceProvider.condominiumServiceProviders.map(async (item) => {
+                const { isApproved } = item;
+                const {
+                    condominiumId,
+                    condominiumName,
+                    zipCode,
+                    district,
+                    street,
+                    number,
+                    trusteeName,
+                    trusteeEmail,
+                } = await item.condominium;
 
-        serviceProvider.condominiumServiceProviders.map(async (item) => {
-            const { isApproved } =
-                serviceProvider.condominiumServiceProviders[0];
-            const {
-                condominiumId,
-                condominiumName,
-                zipCode,
-                district,
-                street,
-                number,
-                trusteeName,
-                trusteeEmail,
-            } = await item.condominium;
+                const dataToReturn = {
+                    isApproved: isApproved,
+                    condominiumId: condominiumId,
+                    condominiumName: condominiumName,
+                    zipCode: zipCode,
+                    district: district,
+                    street: street,
+                    number: number,
+                    trusteeName: trusteeName,
+                    trusteeEmail: trusteeEmail,
+                };
 
-            const dataToReturn = {
-                isApproved: isApproved,
-                condominiumId: condominiumId,
-                condominiumName: condominiumName,
-                zipCode: zipCode,
-                district: district,
-                street: street,
-                number: number,
-                trusteeName: trusteeName,
-                trusteeEmail: trusteeEmail,
-            };
-
-            data.push(dataToReturn);
-        });
-
+                data.push(dataToReturn);
+            }),
+        );
         const services = await serviceProvider.services;
 
         const servicesSchema: Partial<Service | {}>[] = [];
