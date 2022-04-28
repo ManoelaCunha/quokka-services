@@ -17,7 +17,8 @@
     "paths": {
         "/super_adm": {
             "post": {
-                "description": "Route responsible for super admin creation, for creating super admin user an admin token is required",
+                "description": "Route responsible for super admin creation",
+                "summary": "For creating super admin user an admin token is required",
                 "tags": ["Super Admin"],
                 "security": [
                     {
@@ -53,6 +54,7 @@
             },
             "get": {
                 "description": "Should get all Super Admins",
+                "summary": "You must be a Super Admin and be logged in",
                 "tags": ["Super Admin"],
                 "security": [
                     {
@@ -108,6 +110,7 @@
         "/super_adm/{id}": {
             "get": {
                 "description": "Should get a Super Admin by your ID",
+                "summary": "You must be logged in as super admin",
                 "tags": ["Super Admin"],
                 "security": [
                     {
@@ -140,7 +143,8 @@
                 }
             },
             "patch": {
-                "description": "Should be update a Super Admin fields by your ID",
+                "description": "Should be update a Super Admin fields by your ID ",
+                "summary": "You must be logged in and be the owner of your account",
                 "tags": ["Super Admin"],
                 "security": [
                     {
@@ -188,6 +192,7 @@
             },
             "delete": {
                 "description": "Should delete a Super Admin by your ID",
+                "summary": "You must be logged in as Super Admin and be the owner of your account",
                 "tags": ["Super Admin"],
                 "security": [
                     {
@@ -223,6 +228,7 @@
         "/condominiums": {
             "post": {
                 "description": "Should create a Condominium",
+                "summary": "To create a Condominium you must be logged in as Super Admin",
                 "tags": ["Condominiums"],
                 "security": [
                     {
@@ -276,6 +282,7 @@
         "/condominiums/{id}": {
             "get": {
                 "description": "Should get a Condominium by your ID",
+                "summary": "You must be logged in as a trustee or be the owner of the condominium account",
                 "tags": ["Condominiums"],
                 "security": [
                     {
@@ -309,6 +316,7 @@
             },
             "patch": {
                 "description": "Should update a Condominium fields by your ID",
+                "summary": "You need to be a Super Admin to update a Condominium's fields",
                 "tags": ["Condominiums"],
                 "security": [
                     {
@@ -356,6 +364,7 @@
             },
             "delete": {
                 "description": "Should delete a Condominium",
+                "summary": "You need to be a Super Admin to delete a Condominium account",
                 "tags": ["Condominiums"],
                 "security": [
                     {
@@ -423,6 +432,7 @@
         "/categories": {
             "post": {
                 "description": "Should be able to register a category",
+                "summary": "You must be a Super Admin and be logged in to create a category",
                 "tags": ["Categories"],
                 "requestBody": {
                     "content": {
@@ -453,6 +463,7 @@
             },
             "get": {
                 "description": "Should get all categories",
+                "summary": "You must be a Super Admin and be logged in to get all categories",
                 "tags": ["Categories"],
                 "security": [
                     {
@@ -476,6 +487,7 @@
         "/categories/{id}": {
             "get": {
                 "description": "Should get a category by your ID",
+                "summary": "You must be a Super Admin and be logged in to get a category by id",
                 "tags": ["Categories"],
                 "security": [
                     {
@@ -509,6 +521,7 @@
             },
             "patch": {
                 "description": "Should update a category fields by your ID",
+                "summary": "You must be a Super Admin and be logged in to update a Category's fields",
                 "tags": ["Categories"],
                 "security": [
                     {
@@ -556,6 +569,7 @@
             },
             "delete": {
                 "description": "Should delete a category",
+                "summary": "You must be a Super Admin and be logged in to delete a Category",
                 "tags": ["Categories"],
                 "security": [
                     {
@@ -589,9 +603,46 @@
             }
         },
         "/residents": {
+            "get": {
+                "description": "Should get all residents",
+                "summary": "You need to be logged in as the owner of a condominium account",
+                "tags": ["Residents"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AllResidents"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/residents/{id}": {
             "post": {
                 "description": "Should be create a resident user",
+                "summary": "To create a resident account you must pass the id of a condominium as a query param",
                 "tags": ["Residents"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Resident ID",
+                        "example": "uuid v4"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -620,30 +671,8 @@
                 }
             },
             "get": {
-                "description": "Should get all residents",
-                "tags": ["Residents"],
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AllResidents"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/residents/{id}": {
-            "get": {
                 "description": "Should get a resident by your ID",
+                "summary": "You need to be logged in and be the owner of your account",
                 "tags": ["Residents"],
                 "security": [
                     {
@@ -677,6 +706,7 @@
             },
             "patch": {
                 "description": "Should update a resident fields by your ID",
+                "summary": "You need to be logged in and be the owner of your account",
                 "tags": ["Residents"],
                 "security": [
                     {
@@ -724,6 +754,7 @@
             },
             "delete": {
                 "description": "Should delete a resident",
+                "summary": "You need to be logged in and be the owner of your account",
                 "tags": ["Residents"],
                 "security": [
                     {
@@ -791,6 +822,7 @@
         "/residents/update_status/{id}": {
             "patch": {
                 "description": "Should update a resident status by your ID",
+                "summary": "You need to be logged in as the owner of a condominium account",
                 "tags": ["Residents"],
                 "security": [
                     {
@@ -853,11 +885,34 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "description": "Must return all service providers",
+                "summary": "You need to be logged in in a Super Admin account",
+                "tags": ["Service Providers"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServiceProvider"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/service_providers/{id}": {
             "get": {
                 "description": "Should get a service provider by your ID",
+                "summary": "You must be logged in as a Service Provider and be the owner of your account",
                 "tags": ["Service Providers"],
                 "security": [
                     {
@@ -891,6 +946,7 @@
             },
             "patch": {
                 "description": "Should update a service provider fields by your ID",
+                "summary": "You must be logged in as a Service Provider and be the owner of your account",
                 "tags": ["Service Providers"],
                 "security": [
                     {
@@ -938,6 +994,7 @@
             },
             "delete": {
                 "description": "Should delete a service provider",
+                "summary": "You must be logged in as a Service Provider and be the owner of your account",
                 "tags": ["Service Providers"],
                 "security": [
                     {
@@ -973,6 +1030,7 @@
         "/service_providers/update_status/{id}": {
             "patch": {
                 "description": "Should update a service provider status by your ID",
+                "summary": "You must be logged in with a Condominium account to approve the Service Provider",
                 "tags": ["Service Providers"],
                 "security": [
                     {
@@ -1008,6 +1066,7 @@
         "/service_providers/condominium/{id}": {
             "post": {
                 "description": "Should be able to insert a service provider in a condominium",
+                "summary": "You must be logged in as a Service Provider",
                 "tags": ["Service Providers"],
                 "parameters": [
                     {
@@ -1070,6 +1129,7 @@
         "/services/{id}": {
             "post": {
                 "description": "Should be able to create a service",
+                "summary": "You must be logged in as a Resident and pass the id of a Category in the query params",
                 "tags": ["Services"],
                 "parameters": [
                     {
@@ -1114,6 +1174,7 @@
             },
             "patch": {
                 "description": "Should be able to update a service by id",
+                "summary": "You must be logged in as a Resident to change data for a Service",
                 "tags": ["Services"],
                 "security": [
                     {
@@ -1161,6 +1222,7 @@
             },
             "delete": {
                 "description": "Should be able to delete a service by id",
+                "summary": "You must be logged in as a Resident to delete a Service",
                 "tags": ["Services"],
                 "security": [
                     {
@@ -1196,6 +1258,7 @@
         "/services": {
             "get": {
                 "description": "Should be able to get all services",
+                "summary": "You must be logged in as a Service Provider",
                 "tags": ["Services"],
                 "security": [
                     {
@@ -1219,6 +1282,7 @@
         "/services/update_status/{id}": {
             "patch": {
                 "description": "Should be able to update a service status",
+                "summary": "You must be logged in as a Service Provider",
                 "tags": ["Services"],
                 "security": [
                     {
