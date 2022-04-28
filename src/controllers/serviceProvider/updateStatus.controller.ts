@@ -40,8 +40,13 @@ const updateStatus = async (req: Request, res: Response) => {
         await getRepository(CondominiumServiceProvider).save(
             requestedProvider.condominiumServiceProviders,
         );
-        return res.status(201).json({
-            message: `Service provider ${requestedProvider.name} has been approved`,
+        if (stringToBoolean) {
+            return res.status(200).json({
+                message: `Service provider ${requestedProvider.name} has been approved`,
+            });
+        }
+        return res.status(200).json({
+            message: `Service Provider ${requestedProvider.name} has been removed from the condominium`,
         });
     } catch (err) {
         if (err instanceof QueryFailedError) {
