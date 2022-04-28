@@ -52,6 +52,8 @@ const superAdminRoutes = (app: Application) => {
     router.get(
         '/super_adm/:id',
         validateToken(SuperAdminRepository),
+        verifySuperAdmin,
+        verifyId,
         retrieveSuperAdminById,
     );
 

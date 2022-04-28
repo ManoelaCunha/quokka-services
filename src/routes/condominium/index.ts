@@ -15,6 +15,7 @@ import {
     validateShape,
     validateToken,
     verifyBody,
+    verifyId,
     verifySuperAdmin,
 } from '../../middlewares';
 
@@ -51,6 +52,7 @@ const condominiumRoutes = (app: Application) => {
     router.get(
         '/condominiums/:id',
         validateToken(CondominiumRepository),
+        verifyId,
         retrieveCondominiumById,
     );
 
