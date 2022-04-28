@@ -47,7 +47,7 @@ $ yarn dev
 
 <br>
 
-## 📧 Contato
+## 📪 Contato
 
 [Envie-nos uma mensagem](mailto:quokka.api@gmail.com) 😉
 
