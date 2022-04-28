@@ -3,11 +3,11 @@ import { CondominiumRepository } from '../../repositories';
 import { getCondominiumByIdService } from '../../services';
 
 const retrieveCondominiumById = async (req: Request, res: Response) => {
-    const condominiums = await new CondominiumRepository().findById(
+    const condominium = await new CondominiumRepository().findById(
         req.params.id,
     );
 
-    const { trusteePassword, ...condominiumWithouPasword } = condominiums;
+    const { trusteePassword, ...condominiumWithouPasword } = condominium;
 
     getCondominiumByIdService(condominiumWithouPasword);
 
