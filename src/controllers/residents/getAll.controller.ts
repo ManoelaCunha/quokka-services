@@ -1,8 +1,9 @@
-import { Request, Response } from 'express';
 import Resident from '../../entities/Resident';
+
+import { Request, Response } from 'express';
 import { ResidentRepository } from '../../repositories';
 
-const getAllResidents = async (req: Request, res: Response) => {
+const getAllResidents = async (_: Request, res: Response) => {
     const residents = await new ResidentRepository().findResident();
 
     const newResidents: Array<Partial<Resident>> = [];
