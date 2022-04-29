@@ -14,7 +14,8 @@
 ## 🛠 Instalação
 
 1. Baixe o repositório utilizando o Git com o commando:<br>
-   utilizando HTTPS
+
+utilizando HTTPS
 
 ```sh
 $ https://github.com/ManoelaCunha/quokka-services.git
@@ -38,6 +39,14 @@ $ yarn
 ```sh
 $ yarn dev
 ```
+
+<br>
+
+## 📈 Link API
+
+-   https://quokka-services.herokuapp.com
+
+<br>
 
 <br>
 
