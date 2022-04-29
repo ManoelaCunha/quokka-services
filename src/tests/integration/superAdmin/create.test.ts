@@ -7,7 +7,7 @@ import request from 'supertest';
 
 import app from './../../../app';
 import connection from './../../../database';
-import { generateSuperAdm } from './../../utils';
+import { generateSuperAdm, generateSuperAdminToken } from './../../utils';
 
 dotenv.config();
 
@@ -19,7 +19,10 @@ describe('Create Super Admin', () => {
     });
 
     it('should be able to register a SUPER ADMIN', async () => {
-        const response = await request(app).post(`/super_adm`).send(superadm);
+        const response = await request(app)
+            .post(`/super_adm`)
+            .set('Authorization', `Bearer ${generateSuperAdminToken()}`)
+            .send(superadm);
         const { body } = response;
 
         expect(response.statusCode).toBe(201);
