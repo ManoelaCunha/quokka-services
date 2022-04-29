@@ -29,7 +29,10 @@ const createResidentService = async (req: Request, res: Response) => {
 
         return newResident;
     } catch (error) {
-        return res.status(400).json({ error: error.driverError.detail });
+        if (error.driverError.detail) {
+            return res.status(400).json({ error: error.driverError.detail });
+        }
+        return res.status(404).json({ error: 'condominium not found!' });
     }
 };
 
