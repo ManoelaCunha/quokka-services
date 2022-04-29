@@ -3,7 +3,7 @@
 📜 Serviço rápido e sem preocupação!
 
 <p align="center">
-<img src="https://i.imgur.com/cTHsx9q.png" alt="quokka-logo" border="0">
+<img src="https://i.imgur.com/XLiIFDJ.png" alt="quokka-logo" border="0">
 </p>
 
 <p>
@@ -14,7 +14,8 @@
 ## 🛠 Instalação
 
 1. Baixe o repositório utilizando o Git com o commando:<br>
-   utilizando HTTPS
+
+utilizando HTTPS
 
 ```sh
 $ https://github.com/ManoelaCunha/quokka-services.git
@@ -38,6 +39,14 @@ $ yarn
 ```sh
 $ yarn dev
 ```
+
+<br>
+
+## 📈 Link API
+
+-   https://quokka-services.herokuapp.com
+
+<br>
 
 <br>
 

@@ -1,7 +1,12 @@
 import { v4 } from 'uuid';
 import { faker } from '@faker-js/faker';
-import bcrypt from 'bcrypt';
+import bcrypt, { hashSync } from 'bcrypt';
 import { Connection, getConnection } from 'typeorm';
+import jsonwebtoken from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import config from '../configs/jwt.config';
+
+dotenv.config();
 
 const generateSuperAdm = () => {
     const name = faker.name.firstName().toLowerCase();
@@ -17,6 +22,24 @@ const generateSuperAdm = () => {
     };
 };
 
+const generateSuperAdminToken = () => {
+    const token = jsonwebtoken.sign(
+        {
+            existent: {
+                superAdminId: v4(),
+                name: process.env.SUPER_ADMIN_NAME,
+                email: process.env.SUPER_ADMIN_EMAIL,
+                password: hashSync(process.env.SUPER_ADMIN_PASSWORD, 10),
+            },
+        },
+        config.secret,
+        {
+            expiresIn: config.expiresIn,
+        },
+    );
+    return token;
+};
+
 const cleardata = (): Connection => {
     const defaultConnection = getConnection('default');
     const entities = defaultConnection.entityMetadatas;
@@ -29,4 +52,4 @@ const cleardata = (): Connection => {
     return defaultConnection;
 };
 
-export { generateSuperAdm, cleardata };
+export { generateSuperAdm, cleardata, generateSuperAdminToken };
