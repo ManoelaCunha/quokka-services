@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { getRepository, QueryFailedError } from 'typeorm';
-import CondominiumServiceProvider from '../../entities/CondominiumServiceProviders';
 import { ServiceProviderRepository } from '../../repositories';
+
+import CondominiumServiceProvider from '../../entities/CondominiumServiceProviders';
 
 const updateStatus = async (req: Request, res: Response) => {
     try {
@@ -10,17 +11,7 @@ const updateStatus = async (req: Request, res: Response) => {
         const requestedProvider =
             await new ServiceProviderRepository().findById(serviceProviderId);
 
-        console.log(requestedProvider);
-
         const queryParam: string = req.query.approved as string;
-        // console.log(requestedProvider.condominiumServiceProviders.length);
-        // console.log(requestedProvider.condominiumServiceProviders);
-
-        if (requestedProvider.condominiumServiceProviders.length > 1) {
-            return res.status(401).json({
-                error: 'Cannot work in more than 1 condominium at a time',
-            });
-        }
 
         if (!queryParam) {
             return res.status(400).json({ error: "Missing param 'approved'" });
@@ -41,32 +32,26 @@ const updateStatus = async (req: Request, res: Response) => {
             });
         }
 
-        const requestCondominiumServiceProvider =
-            await requestedProvider.condominiumServiceProviders.find(
-                async (e) => {
-                    await e.condominium;
+        const condominiumServiceProviderId = [];
 
-                    return (
-                        e.condominium.condominiumId ===
-                        req.decoded.condominiumId
-                    );
-                },
-            );
+        await Promise.all(
+            requestedProvider.condominiumServiceProviders.map(async (e) => {
+                const { condominiumId } = await e.condominium;
 
-        if (!requestCondominiumServiceProvider) {
-            return res.status(400).json({
-                error: 'Cannot update current service provider status. Please check if this provider currently exists in the requested condominium.',
-            });
-        }
-        const stringToBoolean = queryParam.toLowerCase() === 'true';
-        await getRepository(CondominiumServiceProvider).update(
-            requestCondominiumServiceProvider.condoServiceProvidersId,
-            { isApproved: stringToBoolean },
+                if (condominiumId === req.decoded.condominiumId) {
+                    const { condoServiceProvidersId } = await e;
+
+                    condominiumServiceProviderId.push(condoServiceProvidersId);
+                }
+            }),
         );
 
-        const newRelation = await getRepository(
-            CondominiumServiceProvider,
-        ).findOne(requestCondominiumServiceProvider.condoServiceProvidersId);
+        const stringToBoolean = queryParam.toLowerCase() === 'true';
+
+        await getRepository(CondominiumServiceProvider).update(
+            condominiumServiceProviderId[0],
+            { isApproved: stringToBoolean },
+        );
 
         return res.status(200).json({
             message: `Service Provider '${requestedProvider.name}' status has been updated to '${stringToBoolean}'`,
@@ -78,7 +63,9 @@ const updateStatus = async (req: Request, res: Response) => {
             });
         }
 
-        return res.status(400).json({ error: err });
+        return res.status(400).json({
+            error: 'Cannot update current service provider status. Please check if this provider currently exists in the requested condominium.',
+        });
     }
 };
 
