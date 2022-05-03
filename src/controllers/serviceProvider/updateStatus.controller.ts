@@ -18,9 +18,9 @@ const updateStatus = async (req: Request, res: Response) => {
         }
 
         if (!requestedProvider) {
-            return res
-                .status(404)
-                .json({ error: `Requested user for the id ${req.params.id}` });
+            return res.status(404).json({
+                error: `serviceProviderId ${req.params.id} not found!`,
+            });
         }
 
         if (
