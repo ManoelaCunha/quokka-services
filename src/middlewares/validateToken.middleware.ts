@@ -11,7 +11,7 @@ const validateToken =
         if (!token) {
             return res
                 .status(401)
-                .json({ meserrorsage: 'Missing authorization headers' });
+                .json({ error: 'Missing authorization headers' });
         }
 
         jsonwebtoken.verify(
